@@ -12,17 +12,17 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
-import { Moon, ScanSearch, Sun } from "lucide-react"
-import { Switch } from "@/components/ui/switch"
+import { ScanSearch } from "lucide-react"
+import { ThemeSelect } from "./ThemeSelect"
 
 
 
 export default function NavigationMenuDemo() {
     return (
         <>
-            <div className="flex items-center justify- p-6 h-16">
+            <div className="flex items-center justify- p-6 h-16 !bg-transparent">
                 <div className="w-1/3">
-                    <Link href="/" className="flex gap-2 w-max" passHref>
+                    <Link href="/" className="flex gap-2 w-max text-black dark:text-white" passHref>
                         <ScanSearch />
                         <span>
                             FindMyBroker
@@ -33,18 +33,17 @@ export default function NavigationMenuDemo() {
                 <div className="flex justify-center items-center ">
                     <NavigationMenu>
                         <NavigationMenuList>
-
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
-                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white dark:hover:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:focus:bg-[#1F2937] dark:focus:text-white`}>
                                         Accueil
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="cursor-pointer">Trouver des brokers</NavigationMenuTrigger>
-                                <NavigationMenuContent>
+                                <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>Trouver des brokers</NavigationMenuTrigger>
+                                <NavigationMenuContent className="dark:bg-[#1F2937]! *:aria-hidden:border *:aria-hidden:border-red-500! ">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-3">
                                             <NavigationMenuLink asChild>
@@ -77,16 +76,16 @@ export default function NavigationMenuDemo() {
 
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
-                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                        Services
+                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                Services
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
-                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                        À propos
+                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                À propos
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
@@ -94,11 +93,8 @@ export default function NavigationMenuDemo() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="w-1/3 flex justify-end items-center gap-4">
-                    <Moon size={18} />
-                    <Switch />
-                    <Sun size={18} />
-                </div>
+                
+                <ThemeSelect/>
             </div>
 
         </>
