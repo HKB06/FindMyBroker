@@ -20,9 +20,10 @@ import { ThemeSelect } from "./ThemeSelect"
 export default function NavigationMenuDemo() {
     return (
         <>
-            <div className="flex items-center justify- p-6 h-16 !bg-transparent">
-                <div className="w-1/3">
-                    <Link href="/" className="flex gap-2 w-max text-black dark:text-white" passHref>
+            <div className="flex items-center px-6 h-16 bg-transparent  w-full *:h-full z-12">
+            {/* <div className="flex items-center px-6 h-16 bg-gray-200 dark:bg-[#111827]! fixed top-0 w-full *:h-full z-12"> */}
+                <div className="w-1/3 flex items-center">
+                    <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white" passHref>
                         <ScanSearch />
                         <span>
                             FindMyBroker
