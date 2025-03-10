@@ -28,7 +28,7 @@ const ResponsiveGridLines = () => {
 };
 const HeroBanner = () => {
   return (
-    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-34">
+    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-30">
       <ResponsiveGridLines />
       <div className="flex justify-center h-max w-10/12 items-center z-10 bg-white dark:bg-[#1F2937] py-12 md:py-24 border rounded-lg border-gray-300 dark:border-gray-700">
         <div className="flex flex-col gap-8 md:gap-16 w-10/12 h-full justify-center items-center">
@@ -49,7 +49,7 @@ const HeroBanner = () => {
                 </span>
                 de 2025 à portée de clic.&nbsp;
               </h1>
-              <MousePointerClick size={32} className='text-[#8B5CF6]'/>
+              <MousePointerClick size={32} className='text-[#8B5CF6] hidden md:block'/>
             </div>
 
             {/* <span className="md:text-2xl text-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text italic font-medium text-center">

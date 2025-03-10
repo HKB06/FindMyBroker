@@ -83,18 +83,22 @@ const MobileNav = () => {
       </div>
 
       <div
-        onClick={toggleOpen}
+        onClick={() =>
+          closeOnCurrent('/')
+        }
         className="z-100 cursor-pointer transition-transform duration-1000 dark:text-white"
       >
         {isOpen ? (
-          <X className="rotate-90 transition-transform duration-1000" />
+          <X className="rotate-90 transition-transform duration-1000 z-500" onClick={() =>
+            closeOnCurrent('/')
+          } />
         ) : (
           <Menu className="rotate-0 transition-transform duration-1000" />
         )}
         <div>
           {isOpen ? (
-            <div className={`fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-90 w-full h-screen`} onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-              <ul className="z-90 h-full absolute dark:bg-banger-blue bg-white dark:bg-[#111827] dark:text-white flex flex-col items-start w-full gap-8 px-8 mt-14 py-12">
+            <div className={`fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-90 w-full h-screen`}>
+              <ul className="z-90 h-full absolute dark:bg-banger-blue bg-white dark:bg-[#111827] dark:text-white flex flex-col items-start w-full gap-8 px-8 mt-14 py-12" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
                 <li>
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
@@ -127,38 +131,38 @@ const MobileNav = () => {
                   <div
                     className={`transition-opacity delay-700 ${isDropdownOpen ? "flex opacity-100" : "hidden opacity-0"}`}
                   >
-                    <ul className="pl-4 mt-2 space-y-2">
+                    <ul className="mt-2 space-y-2">
                       <li>
                         <Link
-                          href="/broker-1"
+                          href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
                           onClick={() =>
                             closeOnCurrent('/')
                           }
                         >
-                          Broker 1
+                          Lien 1
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/broker-2"
+                          href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
                           onClick={() =>
                             closeOnCurrent('/')
                           }
                         >
-                          Broker 2
+                          Lien 2
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/broker-3"
+                          href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
                           onClick={() =>
                             closeOnCurrent('/')
                           }
                         >
-                          Broker 3
+                          Lien 3
                         </Link>
                       </li>
                     </ul>
