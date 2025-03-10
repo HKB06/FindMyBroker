@@ -1,4 +1,4 @@
-import { useTheme } from "../providers/ThemeProvider";
+import { useTheme } from "../app/providers/ThemeProvider";
 import { Moon, Sun } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 export function ThemeSelect() {
@@ -8,13 +8,13 @@ export function ThemeSelect() {
     };
 
     return (
-        <div className="w-1/3 flex justify-end items-center gap-4 text-black dark:text-white">
-            <Sun size={18} />
+        <div className="md:w-1/3 flex justify-end items-center gap-4 text-black dark:text-white">
+            <Sun width={18} height={18} />
 
             <Switch
                 checked={theme === 'dark'} 
                 onCheckedChange={toggleTheme} 
-                className="cursor-pointer dark:bg-[#1F2937]!"
+                className="cursor-pointer dark:bg-[#D946EF]!"
             />
             
             <Moon size={18} />

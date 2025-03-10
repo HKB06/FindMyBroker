@@ -17,15 +17,15 @@ import { ThemeSelect } from "./ThemeSelect"
 
 
 
-export default function NavigationMenuDemo() {
+export default function Navbar() {
     return (
         <>
-            <div className="flex items-center px-6 h-16 bg-transparent  w-full *:h-full z-12">
-            {/* <div className="flex items-center px-6 h-16 bg-gray-200 dark:bg-[#111827]! fixed top-0 w-full *:h-full z-12"> */}
+            <nav className="hidden md:flex items-center px-6 h-16 w-full *:h-full z-12 border-b bg-white dark:bg-transparent dark:border-gray-700">
+                {/* <div className="flex items-center px-6 h-16 bg-gray-200 dark:bg-[#111827]! fixed top-0 w-full *:h-full z-12"> */}
                 <div className="w-1/3 flex items-center">
                     <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white" passHref>
-                        <ScanSearch />
-                        <span>
+                        <ScanSearch className="text-[#8B5CF6]" />
+                        <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
                             FindMyBroker
                             <span className="font-bold">.io</span>
                         </span>
@@ -43,7 +43,9 @@ export default function NavigationMenuDemo() {
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>Trouver des brokers</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
+                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">Trouver des brokers</span>
+                                </NavigationMenuTrigger>
                                 <NavigationMenuContent className="dark:bg-[#1F2937]! *:aria-hidden:border *:aria-hidden:border-red-500! ">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-3">
@@ -77,16 +79,25 @@ export default function NavigationMenuDemo() {
 
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
-                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
-                                Services
+                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                        Services
+                                    </NavigationMenuLink>
+                                </Link>
+                            </NavigationMenuItem>
+
+
+                            <NavigationMenuItem>
+                                <Link href="/" legacyBehavior passHref>
+                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                        Blog
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
-                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
-                                À propos
+                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                        À propos
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
@@ -94,9 +105,9 @@ export default function NavigationMenuDemo() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                
-                <ThemeSelect/>
-            </div>
+
+                <ThemeSelect />
+            </nav>
 
         </>
     )
