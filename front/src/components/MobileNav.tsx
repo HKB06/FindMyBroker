@@ -67,7 +67,7 @@ const MobileNav = () => {
 
   return (
     <nav
-      className="fixed flex md:hidden justify-between items-center px-6 h-16 w-full border-b bg-white dark:bg-[#111827] dark:border-gray-700 z-100">
+      className="fixed flex lg:hidden justify-between items-center px-6 h-16 w-full border-b bg-white dark:bg-[#111827] dark:border-gray-700 z-100">
       <div className="w-1/3 flex items-center z-200">
         <Link
           onClick={() =>
