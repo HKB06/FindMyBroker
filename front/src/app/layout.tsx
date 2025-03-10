@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import MobileNav from "@/components/MobileNav";
+import Footer from "@/components/Footer";
 
 
 const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Navbar/>
         <MobileNav/>
         {children}
+        <Footer/>
       </body>
     </html>
     </ThemeProvider>
