@@ -12,7 +12,7 @@ const HowItWorks = () => {
     ];
     return (
         <>
-            <div className='flex relative justify-center h-max w-screen md:py-44 md:mt-60'>
+            <div className='flex relative justify-center h-max w-screen mt-60 md:py-44 md:mt-60'>
                 <TriangleBackground triangles={triangles} opacity={0.1} />
                 <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-24 z-20">
                     <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
