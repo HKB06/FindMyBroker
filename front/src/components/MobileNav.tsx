@@ -201,6 +201,17 @@ const MobileNav = () => {
                     À propos
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
+                    href="/"
+                    onClick={() =>
+                      closeOnCurrent('/')
+                    }
+                  >
+                    Contact
+                  </Link>
+                </li>
                 <li
                   onClick={(e: React.MouseEvent) => e.stopPropagation()}
                   className="theme-select-container mt-8"

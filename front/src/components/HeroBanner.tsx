@@ -49,7 +49,7 @@ const HeroBanner = () => {
                 </span>
                 de 2025 à portée de clic.&nbsp;
               </h1>
-              <MousePointerClick size={32} className='text-[#8B5CF6] hidden md:block'/>
+              <MousePointerClick size={32} className='text-[#8B5CF6] hidden md:block' />
             </div>
 
             {/* <span className="md:text-2xl text-lg bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text italic font-medium text-center">
@@ -58,9 +58,8 @@ const HeroBanner = () => {
           </div>
           <div className="flex flex-col gap-8 md:w-9/12">
             <span className="md:text-center md:text-xl dark:text-white">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              <b> modi animi consequuntur</b> nulla, ducimus fugit incidunt nam voluptate
-              harum veniam.
+              En quelques questions, nous identifions les brokers qui correspondent à <b>vos attentes</b>.<br/>
+              Prêt à démarrer l'aventure ? 🚀
             </span>
           </div>
           <div className="flex md:flex-row flex-col justify-center gap-4 md:w-9/12 w-full">

@@ -54,8 +54,9 @@ export default function Navbar() {
                                                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
                                                     href="/"
                                                 >
+                                                    <span className="text-4xl">🧪</span>
                                                     <div className="mb-2 mt-4 text-lg font-bold text-white">
-                                                        Quiz
+                                                        Votre liste personnalisée
                                                     </div>
                                                     <p className="text-sm leading-tight text-gray-100">
                                                         Répondez à notre quiz et trouvez dès aujourd&apos;hui des brokers qui correspondent à vos besoins
@@ -63,13 +64,13 @@ export default function Navbar() {
                                                 </a>
                                             </NavigationMenuLink>
                                         </li>
-                                        <ListItem href="/" title="Introduction">
+                                        <ListItem href="/" title="Guide 2025 📋">
                                             Re-usable components built using Radix UI and Tailwind CSS. 
                                         </ListItem>
-                                        <ListItem href="/" title="Installation">
+                                        <ListItem href="/" title="Notre sélection 👍">
                                             How to install dependencies and structure your app.
                                         </ListItem>
-                                        <ListItem href="/" title="Typography">
+                                        <ListItem href="/" title="Vos favoris ⭐️">
                                             Styles for headings, paragraphs, lists...etc
                                         </ListItem>
                                     </ul>
@@ -97,6 +98,14 @@ export default function Navbar() {
                                 <Link href="/" legacyBehavior passHref>
                                     <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
                                         À propos
+                                    </NavigationMenuLink>
+                                </Link>
+                            </NavigationMenuItem>
+
+                            <NavigationMenuItem>
+                                <Link href="/" legacyBehavior passHref>
+                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
+                                        Contact
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
