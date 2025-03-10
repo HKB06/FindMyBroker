@@ -20,7 +20,7 @@ import { ThemeSelect } from "./ThemeSelect"
 export default function Navbar() {
     return (
         <>
-            <nav className="hidden md:flex items-center px-6 h-16 w-full *:h-full border-b bg-white dark:bg-transparent dark:border-gray-700 z-200 fixed">
+            <nav className="hidden md:flex items-center px-6 h-16 w-full *:h-full border-b bg-white dark:bg-[#111827] dark:border-gray-700 z-200 fixed">
                 {/* <div className="flex items-center px-6 h-16 bg-gray-200 dark:bg-[#111827]! fixed top-0 w-full *:h-full z-12"> */}
                 <div className="w-1/3 flex items-center">
                     <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white" passHref>
