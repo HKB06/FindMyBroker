@@ -35,7 +35,7 @@ const GridLines: React.FC<GridLinesProps> = ({
   return (
     <>
       <div
-        className="grid w-full h-full absolute z-10 pt-6"
+        className="grid w-full h-full absolute z-0 pt-6"
         style={{
           gridTemplateColumns: `repeat(${cols}, ${colWidthStyle})`,
           justifyItems: 'center',
@@ -45,7 +45,7 @@ const GridLines: React.FC<GridLinesProps> = ({
       </div>
 
       <div
-        className="grid w-full h-full absolute z-10 px-6"
+        className="grid w-full h-full absolute z-0 px-6"
         style={{
           gridTemplateRows: `repeat(${rows}, ${rowHeightStyle})`,
           alignItems: 'center',

@@ -7,14 +7,14 @@ const WhyUsBanner = () => {
             { size: 200, left: 10, top: 30 },
             { size: 150, left: 30, top: 50 },
             { size: 100, left: 80, top: 25 },
-            { size: 250, left: 80, top: 70 },
+            { size: 250, left: 90, top: 70 },
             { size: 120, left: 35, top: 85 },
         ];
         
 
         return (
             <>
-                <div className='flex relative justify-center h-max w-screen md:py-40'>
+                <div className='flex relative justify-center h-max w-screen md:pb-40 pt-60'>
                     <CircleBackground circles={circles} opacity={0.9} />
                     <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-12 z-20">
                         <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
@@ -29,7 +29,7 @@ const WhyUsBanner = () => {
                         </div>
                         <div className="grid lg:grid-cols-3 gap-8 w-full ">
                             <div
-                                className="bg-white dark:bg-[#1F2937]/50 border border-gray-300 dark:border-[#374151] rounded-xl p-6
+                                className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
                                 <div className='bg-[#8B5CF6]/20 rounded-lg flex items-center justify-center p-4'>
@@ -41,7 +41,7 @@ const WhyUsBanner = () => {
                                 </span>
                             </div>
                             <div
-                                className="bg-white dark:bg-[#1F2937]/50 border border-gray-300 dark:border-[#374151] rounded-xl p-6
+                                className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
                                 <div className='bg-[#D946EF]/20 rounded-lg flex items-center justify-center p-4'>
@@ -52,7 +52,7 @@ const WhyUsBanner = () => {
                                     All brokers are thoroughly vetted and verified to ensure the highest quality service.
                                 </span>
                             </div><div
-                                className="bg-white dark:bg-[#1F2937]/50 border border-gray-300 dark:border-[#374151] rounded-xl p-6
+                                className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
                                 <div className='bg-[#8B5CF6]/20 rounded-lg flex items-center justify-center p-4'>

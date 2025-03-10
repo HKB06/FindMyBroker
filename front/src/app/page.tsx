@@ -4,7 +4,7 @@ import WhyUsBanner from "../components/WhyUsBanner";
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col gap-24">
+      <main className="flex flex-col">
         <HeroBanner />
         <WhyUsBanner />
         <HowItWorks/>

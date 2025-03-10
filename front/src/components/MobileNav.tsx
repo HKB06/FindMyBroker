@@ -10,14 +10,13 @@ import { useEffect, useState } from "react";
 const MobileNav = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false); // État pour le dropdown
+  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   const toggleOpen = () => setOpen((prev) => !prev);
-  const toggleDropdown = () => setDropdownOpen((prev) => !prev); // Fonction pour basculer le dropdown
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   const pathname = usePathname();
 
-  // Bloquer le défilement lorsque le menu est ouvert
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
@@ -25,28 +24,56 @@ const MobileNav = () => {
       document.body.classList.remove("overflow-hidden");
     }
 
-    // Nettoyer l'effet lorsque le composant est démonté
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [isOpen]);
 
+  const closeOnCurrent = (href: string) => {
+    if (pathname === href) {
+      toggleOpen()
+    }
+  }
+
   useEffect(() => {
-    setIsMounted(true); // Set isMounted to true after the component mounts
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
     if (isOpen) toggleOpen();
   }, [pathname]);
 
+  useEffect(() => {
+    setDropdownOpen(false); // Fermer le dropdown lorsque la page change
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const dropdownElement = document.querySelector(".dropdown-container");
+      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   if (!isMounted) {
-    return null; // Render nothing on the server
+    return null;
   }
 
   return (
-    <nav className="fixed flex md:hidden justify-between items-center px-6 h-16 w-full z-12 border-b bg-white dark:bg-[#111827] dark:border-gray-700">
-      <div className="w-1/3 flex items-center z-100">
-        <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white" passHref>
+    <nav
+      className="fixed flex md:hidden justify-between items-center px-6 h-16 w-full border-b bg-white dark:bg-[#111827] dark:border-gray-700 z-100">
+      <div className="w-1/3 flex items-center z-200">
+        <Link
+          onClick={() =>
+            closeOnCurrent('/')
+          }
+          href="/" className="flex items-center gap-2 w-max text-black dark:text-white z-200" passHref>
           <ScanSearch className="text-[#8B5CF6]" />
           <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
             FindMyBroker
@@ -66,20 +93,26 @@ const MobileNav = () => {
         )}
         <div>
           {isOpen ? (
-            <div className={`fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-90 w-full h-screen`}>
+            <div className={`fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-90 w-full h-screen`} onClick={(e: React.MouseEvent) => e.stopPropagation()}>
               <ul className="z-90 h-full absolute dark:bg-banger-blue bg-white dark:bg-[#111827] dark:text-white flex flex-col items-start w-full gap-8 px-8 mt-14 py-12">
                 <li>
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
+                    onClick={() =>
+                      closeOnCurrent('/')
+                    }
                   >
                     Accueil
                   </Link>
                 </li>
-                <li onClick={(e: React.MouseEvent) => {
-                  e.stopPropagation();
-                  toggleDropdown();
-                }}>
+                <li
+                  className="dropdown-container"
+                  onClick={(e: React.MouseEvent) => {
+                    e.stopPropagation();
+                    toggleDropdown();
+                  }}
+                >
                   <div
                     className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold
                     bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container"
@@ -87,18 +120,21 @@ const MobileNav = () => {
                     Trouver des brokers
                     <ChevronDown
                       size={18}
-                      className={`text-black dark:text-white transition-transform ${isDropdownOpen ? "rotate-0" : "rotate-180"
+                      className={`text-black dark:text-white transition-transform ${isDropdownOpen ? "rotate-180" : "rotate-0"
                         }`}
                     />
                   </div>
                   <div
-                    className={`transition-opacity delay-700 ${isDropdownOpen ? "hidden opacity-0" : "flex opacity-100"}`}
+                    className={`transition-opacity delay-700 ${isDropdownOpen ? "flex opacity-100" : "hidden opacity-0"}`}
                   >
                     <ul className="pl-4 mt-2 space-y-2">
                       <li>
                         <Link
                           href="/broker-1"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() =>
+                            closeOnCurrent('/')
+                          }
                         >
                           Broker 1
                         </Link>
@@ -107,6 +143,9 @@ const MobileNav = () => {
                         <Link
                           href="/broker-2"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() =>
+                            closeOnCurrent('/')
+                          }
                         >
                           Broker 2
                         </Link>
@@ -115,6 +154,9 @@ const MobileNav = () => {
                         <Link
                           href="/broker-3"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() =>
+                            closeOnCurrent('/')
+                          }
                         >
                           Broker 3
                         </Link>
@@ -126,6 +168,9 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
+                    onClick={() =>
+                      closeOnCurrent('/')
+                    }
                   >
                     Services
                   </Link>
@@ -134,6 +179,9 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
+                    onClick={() =>
+                      closeOnCurrent('/')
+                    }
                   >
                     Blog
                   </Link>
@@ -142,6 +190,9 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
+                    onClick={() =>
+                      closeOnCurrent('/')
+                    }
                   >
                     À propos
                   </Link>
