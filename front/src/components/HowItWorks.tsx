@@ -5,10 +5,10 @@ import { Handshake, Settings2, UserPlus, WandSparkles } from 'lucide-react';
 const HowItWorks = () => {
     const triangles = [
         { size: 100, left: 5, top: 60, rotate: 15 },
-        { size: 150, left: 1, top: 5, rotate: 45 },
+        { size: 30, left: 1, top: 10, rotate: 45 },
         { size: 80, left: 95, top: 80, rotate: 75 },
         { size:40, left: 95, top: 10, rotate: 105 },
-        { size: 150, left: 50, top: 95, rotate: 135 },
+        { size: 150, left: 50, top: 80, rotate: 135 },
     ];
     return (
         <>

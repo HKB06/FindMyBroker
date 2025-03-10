@@ -31,11 +31,11 @@ const TriangleBackground: React.FC<TriangleBackgroundProps> = ({
         return (
           <svg
             key={`triangle-${index}`}
-            className="absolute"
+            className="absolute animate-[spin_15000ms_linear_infinite]"
             style={{
               left: `${triangle.left}%`,
               top: `${triangle.top}%`,
-              transform: `translate(-50%, -50%) rotate(${triangle.rotate}deg)`,
+              // transform: `rotate(${triangle.rotate}deg)`,
               width: `${triangle.size}px`,
               height: `${height}px`,
             }}

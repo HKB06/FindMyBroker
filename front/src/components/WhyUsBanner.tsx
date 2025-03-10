@@ -4,17 +4,17 @@ import CircleBackground from './CircleBackground'
 
 const WhyUsBanner = () => {
         const circles = [
-            { size: 200, left: 10, top: 30 },
+            { size: 200, left: 10, top: 10 },
             { size: 150, left: 30, top: 50 },
             { size: 100, left: 80, top: 25 },
-            { size: 250, left: 90, top: 70 },
-            { size: 120, left: 35, top: 85 },
+            { size: 250, left: 90, top: 60 },
+            { size: 120, left: 50, top: 75 },
         ];
         
 
         return (
             <>
-                <div className='flex relative justify-center h-max w-screen md:pb-40 md:mt-60'>
+                <div className='flex relative justify-center h-max w-screen md:pb-40 md:mb-40 md:mt-60'>
                     <CircleBackground circles={circles} opacity={1} />
                     <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-12 z-20">
                         <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">

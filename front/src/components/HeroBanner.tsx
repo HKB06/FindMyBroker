@@ -28,7 +28,7 @@ const ResponsiveGridLines = () => {
 };
 const HeroBanner = () => {
   return (
-    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-40">
+    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-60">
       <ResponsiveGridLines />
       <div className="flex justify-center h-max w-10/12 items-center z-10 bg-white dark:bg-[#1F2937] py-12 md:py-24 border rounded-lg border-gray-300 dark:border-gray-700">
         <div className="flex flex-col gap-8 md:gap-16 w-10/12 h-full justify-center items-center">

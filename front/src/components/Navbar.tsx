@@ -51,7 +51,7 @@ export default function Navbar() {
                                         <li className="row-span-3">
                                             <NavigationMenuLink asChild className="">
                                                 <a
-                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-[#D946EF] hover:to-[#8B5CF6] bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
                                                     href="/"
                                                 >
                                                     <span className="text-4xl">🧪</span>
