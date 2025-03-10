@@ -1,7 +1,6 @@
 import { Bot, CircleHelp, Clock } from 'lucide-react'
 import React from 'react'
 import CircleBackground from './CircleBackground'
-import TriangleBackground from './TriangleBackground';
 
 const WhyUsBanner = () => {
         const circles = [

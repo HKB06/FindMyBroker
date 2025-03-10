@@ -32,7 +32,7 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div className="flex justify-center items-center ">
-                    <NavigationMenu>
+                    <NavigationMenu className="**:dark:border-0!  **:dark:shadow-0 **:*:shadow-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <Link href="/" legacyBehavior passHref>
@@ -42,30 +42,29 @@ export default function Navbar() {
                                 </Link>
                             </NavigationMenuItem>
 
-                            <NavigationMenuItem>
+                            <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">
                                 <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
                                     <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">Trouver des brokers</span>
                                 </NavigationMenuTrigger>
-                                <NavigationMenuContent className="dark:bg-[#1F2937]! *:aria-hidden:border *:aria-hidden:border-red-500! ">
+                                <NavigationMenuContent className="dark:bg-[#1F2937]! border-0! ring-0!">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-3">
-                                            <NavigationMenuLink asChild>
+                                            <NavigationMenuLink asChild className="">
                                                 <a
-                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
                                                     href="/"
                                                 >
-                                                    <div className="mb-2 mt-4 text-lg font-medium">
-                                                        shadcn/ui
+                                                    <div className="mb-2 mt-4 text-lg font-bold text-white">
+                                                        Quiz
                                                     </div>
-                                                    <p className="text-sm leading-tight text-muted-foreground">
-                                                        Beautifully designed components built with Radix UI and
-                                                        Tailwind CSS.
+                                                    <p className="text-sm leading-tight text-gray-100">
+                                                        Répondez à notre quiz et trouvez dès aujourd&apos;hui des brokers qui correspondent à vos besoins
                                                     </p>
                                                 </a>
                                             </NavigationMenuLink>
                                         </li>
                                         <ListItem href="/" title="Introduction">
-                                            Re-usable components built using Radix UI and Tailwind CSS.
+                                            Re-usable components built using Radix UI and Tailwind CSS. 
                                         </ListItem>
                                         <ListItem href="/" title="Installation">
                                             How to install dependencies and structure your app.
@@ -123,13 +122,13 @@ const ListItem = React.forwardRef<
                 <a
                     ref={ref}
                     className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent dark:hover:bg-[#111827] hover:text-accent-foreground",
                         className
                     )}
                     {...props}
                 >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <div className="text-sm font-semibold leading-none dark:text-white">{title}</div>
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground dark:text-gray-100">
                         {children}
                     </p>
                 </a>

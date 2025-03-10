@@ -1,14 +1,14 @@
 import React from 'react';
 
 interface Circle {
-  size: number; // Taille du cercle en pixels
-  left: number; // Position horizontale en pourcentage
-  top: number; // Position verticale en pourcentage
+  size: number; 
+  left: number; 
+  top: number; 
 }
 
 interface CircleBackgroundProps {
-  circles: Circle[]; // Tableau de cercles avec leurs propriétés
-  opacity?: number; // Opacité des cercles
+  circles: Circle[]; 
+  opacity?: number; 
 }
 
 const CircleBackground: React.FC<CircleBackgroundProps> = ({
@@ -27,7 +27,7 @@ const CircleBackground: React.FC<CircleBackgroundProps> = ({
             left: `${circle.left}%`,
             top: `${circle.top}%`,
             opacity: opacity,
-            transform: `translate(-50%, -50%)`, // Centre le cercle
+            transform: `translate(-50%, -50%)`, 
           }}
         ></div>
       ))}

@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface Triangle {
-  size: number; // Taille du triangle (longueur d'un côté)
-  left: number; // Position horizontale en pourcentage
-  top: number; // Position verticale en pourcentage
-  rotate: number; // Rotation du triangle en degrés (toujours incliné)
+  size: number; 
+  left: number; 
+  top: number; 
+  rotate: number; 
 }
 
 interface TriangleBackgroundProps {
-  triangles: Triangle[]; // Tableau de triangles avec leurs propriétés
-  opacity?: number; // Opacité des triangles
+  triangles: Triangle[]; 
+  opacity?: number; 
 }
 
 const TriangleBackground: React.FC<TriangleBackgroundProps> = ({
@@ -19,7 +19,7 @@ const TriangleBackground: React.FC<TriangleBackgroundProps> = ({
   return (
     <div className="absolute inset-0 overflow-hidden z-0">
       {triangles.map((triangle, index) => {
-        const height = (Math.sqrt(3) / 2) * triangle.size; // Hauteur d'un triangle équilatéral
+        const height = (Math.sqrt(3) / 2) * triangle.size; 
 
         return (
           <div
@@ -30,9 +30,9 @@ const TriangleBackground: React.FC<TriangleBackgroundProps> = ({
               height: `${height}px`,
               left: `${triangle.left}%`,
               top: `${triangle.top}%`,
-              transform: `translate(-50%, -50%) rotate(${triangle.rotate}deg)`, // Centre et fait pivoter le triangle
-              clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', // Crée un triangle équilatéral
-              backgroundColor: `rgba(156, 163, 175, ${opacity})`, // Couleur du triangle
+              transform: `translate(-50%, -50%) rotate(${triangle.rotate}deg)`, 
+              clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', 
+              backgroundColor: `rgba(156, 163, 175, ${opacity})`,
             }}
           ></div>
         );

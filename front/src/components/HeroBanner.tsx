@@ -1,6 +1,4 @@
 "use client"
-import { ChevronsDown, LoaderCircle } from 'lucide-react';
-import Image from 'next/image';
 import React, {useEffect , useState} from 'react';
 import { Button } from './ui/button';
 import GridLines from './GridLines';
@@ -51,11 +49,11 @@ const HeroBanner = () => {
           <div className="flex md:flex-row flex-col justify-center gap-4 md:w-9/12 w-full">
             <Button
               variant="outline"
-              className="py-6 px-8! cursor-pointer text-md md:text-lg border-2 border-[#D946EF] text-[#D946EF] hover:text-[#5b0078] hover:border-[#5b0078] bg-transparent"
+              className="py-6 px-8! cursor-pointer text-md md:text-lg border-2 border-[#D946EF] text-[#D946EF] hover:text-[#C814E4] hover:border-[#C814E4] bg-transparent hover:bg-transparent"
             >
               En savoir plus
             </Button>
-            <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-[#D946EF] hover:bg-[#5b0078]">
+            <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-[#D946EF] hover:bg-[#C814E4]">
               Trouver mon broker
             </Button>
           </div>
