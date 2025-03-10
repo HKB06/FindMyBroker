@@ -6,8 +6,8 @@ export default function Home() {
     <>
       <main className="flex flex-col">
         <HeroBanner />
-        <WhyUsBanner />
         <HowItWorks/>
+        <WhyUsBanner />
       </main>
     </>
   );
