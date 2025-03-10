@@ -8,12 +8,12 @@ const HowItWorks = () => {
         { size: 150, left: 20, top: 10, rotate: 45 },
         { size: 80, left: 95, top: 80, rotate: 75 },
         { size: 120, left: 90, top: 10, rotate: 105 },
-        { size: 200, left: 50, top: 100, rotate: 135 },
+        { size: 200, left: 50, top: 90, rotate: 135 },
     ];
     return (
         <>
             <div className='flex relative justify-center h-max w-screen mt-60 md:py-44 md:mt-60'>
-                <TriangleBackground triangles={triangles} opacity={0.1} />
+                <TriangleBackground triangles={triangles} opacity={.5} />
                 <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-24 z-20">
                     <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
                         <h2 className="md:text-3xl text-2xl dark:text-white font-bold">

@@ -19,7 +19,7 @@ const GridLines: React.FC<GridLinesProps> = ({
   const columns = Array.from({ length: cols }, (_, index) => (
     <div
       key={`col-${index}`}
-      className="border-r-1 border-gray-300 dark:border-gray-700 h-full border-dashed"
+      className="md:border-r-2 border-r-1 border-gray-300 dark:border-gray-700 h-full border-dashed"
       style={{ width: colWidthStyle }}
     ></div>
   ));
@@ -27,7 +27,7 @@ const GridLines: React.FC<GridLinesProps> = ({
   const rowsElements = Array.from({ length: rows }, (_, index) => (
     <div
       key={`row-${index}`}
-      className="border-b-1 border-gray-300 dark:border-gray-700 w-full border-dashed"
+      className="md:border-b-2 border-b-1 border-gray-300 dark:border-gray-700 w-full border-dashed"
       style={{ height: rowHeightStyle }}
     ></div>
   ));

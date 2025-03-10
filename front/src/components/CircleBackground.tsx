@@ -20,13 +20,12 @@ const CircleBackground: React.FC<CircleBackgroundProps> = ({
       {circles.map((circle, index) => (
         <div
           key={`circle-${index}`}
-          className="absolute rounded-full border-1 border-dashed border-gray-300 dark:border-gray-700"
+          className="absolute rounded-full md:border-2 border-1  border-dashed border-gray-300 dark:border-gray-700"
           style={{
             width: `${circle.size}px`,
             height: `${circle.size}px`,
             left: `${circle.left}%`,
             top: `${circle.top}%`,
-            opacity: opacity,
             transform: `translate(-50%, -50%)`, 
           }}
         ></div>

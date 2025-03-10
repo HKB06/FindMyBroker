@@ -89,11 +89,11 @@ const MobileNav = () => {
         className="z-100 cursor-pointer transition-transform duration-1000 dark:text-white"
       >
         {isOpen ? (
-          <X className="rotate-90 transition-transform duration-1000 z-500" onClick={() =>
+          <X className="rotate-90 transition-transform duration-1000 z-500 text-[#D946EF]" onClick={() =>
             closeOnCurrent('/')
           } />
         ) : (
-          <Menu className="rotate-0 transition-transform duration-1000" />
+          <Menu className="rotate-0 transition-transform duration-1000 text-[#8B5CF6]" />
         )}
         <div>
           {isOpen ? (

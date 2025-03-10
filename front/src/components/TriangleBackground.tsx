@@ -19,22 +19,39 @@ const TriangleBackground: React.FC<TriangleBackgroundProps> = ({
   return (
     <div className="absolute inset-0 overflow-hidden z-0">
       {triangles.map((triangle, index) => {
-        const height = (Math.sqrt(3) / 2) * triangle.size; 
+        const height = (Math.sqrt(3) / 2) * triangle.size;
+
+        // Points du triangle équilatéral
+        const points = `
+          ${triangle.size / 2},0 
+          0,${height} 
+          ${triangle.size},${height}
+        `;
 
         return (
-          <div
+          <svg
             key={`triangle-${index}`}
             className="absolute"
             style={{
-              width: `${triangle.size}px`,
-              height: `${height}px`,
               left: `${triangle.left}%`,
               top: `${triangle.top}%`,
-              transform: `translate(-50%, -50%) rotate(${triangle.rotate}deg)`, 
-              clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', 
-              backgroundColor: `rgba(156, 163, 175, ${opacity})`,
+              transform: `translate(-50%, -50%) rotate(${triangle.rotate}deg)`,
+              width: `${triangle.size}px`,
+              height: `${height}px`,
             }}
-          ></div>
+            viewBox={`-1 -1 ${triangle.size + 2} ${height + 2}`} // Agrandir le viewBox
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <polygon
+              points={points}
+              fill="transparent" // Fond transparent
+              // stroke={`rgba(209, 213, 220, ${opacity})`} // Couleur du contour
+              className='stroke-gray-300 dark:stroke-gray-700'
+              strokeWidth="2" // Épaisseur du contour
+              strokeDasharray="3" // Contour en pointillé
+              strokeLinejoin="round" // Lisser les jointures
+            />
+          </svg>
         );
       })}
     </div>
