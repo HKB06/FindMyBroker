@@ -16,37 +16,44 @@ const Footer = () => {
                             </span>
                         </Link>
                     </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-16 sm:gap-16 sm:grid-cols-3">
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-                            <ul className="text-gray-600 dark:text-gray-400">
-                                <li className="mb-4">
-                                    <a href="https://flowbite.com" className="hover:underline">Flowbite</a>
+                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Brokers</h2>
+                            <ul className="text-gray-600 dark:text-gray-400 flex flex-col gap-4">
+                                <li className="">
+                                    <a href="/" className="hover:underline">Guide 2025</a>
                                 </li>
                                 <li>
-                                    <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                                    <a href="/" className="hover:underline">Notre sélection</a>
+                                </li>
+                                <li>
+                                    <a href="/" className="hover:underline">Vos favoris</a>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
-                            <ul className="text-gray-600 dark:text-gray-400">
-                                <li className="mb-4">
-                                    <a href="https://github.com/themesberg/flowbite" className="hover:underline ">Github</a>
+                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nos réseaux</h2>
+                            <ul className="text-gray-600 dark:text-gray-400 flex flex-col gap-4">
+
+                                <li>
+                                    <a href="/" className="hover:underline">Instagram</a>
                                 </li>
                                 <li>
-                                    <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
+                                    <a href="/" className="hover:underline">X</a>
+                                </li>
+                                <li className="">
+                                    <a href="/" className="hover:underline ">Blog</a>
                                 </li>
                             </ul>
                         </div>
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-                            <ul className="text-gray-600 dark:text-gray-400">
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Privacy Policy</a>
+                            <ul className="text-gray-600 dark:text-gray-400 flex flex-col gap-4">
+                                <li className="">
+                                    <a href="#" className="hover:underline">CGU</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:underline">Terms &amp; Conditions</a>
+                                    <a href="#" className="hover:underline">Mentions légales</a>
                                 </li>
                             </ul>
                         </div>

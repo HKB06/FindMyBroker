@@ -69,7 +69,7 @@ const HeroBanner = () => {
             >
               En savoir plus
             </Button>
-            <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-[#D946EF] hover:bg-[#C814E4]">
+            <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:bg-[#C814E4]">
               Trouver mon broker
             </Button>
           </div>

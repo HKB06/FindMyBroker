@@ -14,7 +14,7 @@ const WhyUsBanner = () => {
 
         return (
             <>
-                <div className='flex relative justify-center h-max w-screen md:pb-40 md:mb-40 md:mt-60'>
+                <div className='flex relative justify-center h-max w-screen md:pb-20 md:mb-40 md:mt-0'>
                     <CircleBackground circles={circles} opacity={1} />
                     <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-12 z-20">
                         <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
