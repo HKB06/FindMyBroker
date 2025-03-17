@@ -1,5 +1,5 @@
 import React from 'react'
-import TriangleBackground from './TriangleBackground';
+import TriangleBackground from '../graphics/TriangleBackground';
 import { Handshake, Settings2, UserPlus, WandSparkles } from 'lucide-react';
 
 const HowItWorks = () => {

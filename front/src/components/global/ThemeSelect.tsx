@@ -1,4 +1,4 @@
-import { useTheme } from "../app/providers/ThemeProvider";
+import { useTheme } from "../../app/providers/ThemeProvider";
 import { Moon, Sun } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 export function ThemeSelect() {
