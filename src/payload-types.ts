@@ -71,6 +71,7 @@ export interface Config {
     brokers: Broker;
     questions: Question;
     subscribers: Subscriber;
+    articles: Article;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -82,6 +83,7 @@ export interface Config {
     brokers: BrokersSelect<false> | BrokersSelect<true>;
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -225,6 +227,65 @@ export interface Subscriber {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  title: string;
+  /**
+   * URL unique de l'article (ex: meilleur-broker-2025)
+   */
+  slug: string;
+  category: 'trading-guide' | 'broker-analysis' | 'trading-news' | 'tutorials' | 'comparisons';
+  author: string | User;
+  featuredImage: string | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Bref résumé pour le SEO et les aperçus
+   */
+  excerpt: string;
+  /**
+   * Titre optimisé pour le SEO (si différent du titre principal)
+   */
+  seoTitle?: string | null;
+  /**
+   * Meta description pour le SEO
+   */
+  seoDescription?: string | null;
+  status?: ('draft' | 'review' | 'published') | null;
+  /**
+   * Date de publication de l'article
+   */
+  publishedAt?: string | null;
+  /**
+   * Brokers mentionnés dans l'article
+   */
+  relatedBrokers?: (string | Broker)[] | null;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -249,6 +310,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subscribers';
         value: string | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: string | Article;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -361,6 +426,32 @@ export interface SubscribersSelect<T extends boolean = true> {
   answers?: T;
   recommendedBrokers?: T;
   isSubscribedToNewsletter?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  author?: T;
+  featuredImage?: T;
+  content?: T;
+  excerpt?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  status?: T;
+  publishedAt?: T;
+  relatedBrokers?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
