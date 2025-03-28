@@ -87,7 +87,7 @@ export default function Navbar() {
 
 
                             <NavigationMenuItem>
-                                <Link href="/" legacyBehavior passHref>
+                                <Link href="/blog" legacyBehavior passHref>
                                     <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
                                         Blog
                                     </NavigationMenuLink>
