@@ -138,12 +138,6 @@ npm start
   - Catégories
   - Format
 
-## 📝 License
-
-| Type | Description | Fichier |
-|------|-------------|---------|
-| MIT License | Permission est accordée gratuitement à toute personne obtenant une copie de ce logiciel | [LICENSE.md](LICENSE.md) |
-
 ### 📜 Droits accordés
 - ✅ Utilisation commerciale
 - ✅ Modification
@@ -152,7 +146,7 @@ npm start
 
 ## 🙋‍♂️ Support & Contact
 
-### 📮 Pour toute question ou problème
+### 📮 Pour toute question ou problème (Soon)
 
 | Type de Support | Comment Procéder | Temps de Réponse |
 |----------------|------------------|------------------|
@@ -167,7 +161,7 @@ npm start
 - 🐦 [Twitter](https://twitter.com/findmybroker)
 - 💼 [LinkedIn](https://linkedin.com/company/findmybroker)
 
-### ⚡ Réponse Rapide
+### ⚡ Réponse Rapide (Soon)
 Pour une réponse rapide, assurez-vous d'inclure :
 - 📝 Description détaillée
 - 🔍 Étapes pour reproduire
