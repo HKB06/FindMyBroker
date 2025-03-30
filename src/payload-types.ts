@@ -73,6 +73,7 @@ export interface Config {
     questions: Question;
     subscribers: Subscriber;
     articles: Article;
+    'response-templates': ResponseTemplate;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +86,7 @@ export interface Config {
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    'response-templates': ResponseTemplatesSelect<false> | ResponseTemplatesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -189,14 +191,97 @@ export interface Broker {
   createdAt: string;
 }
 /**
+ * Questions du questionnaire de recommandation de brokers
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "questions".
  */
 export interface Question {
   id: string;
   question: string;
-  category: 'experience_level' | 'investment_amount' | 'trading_style' | 'preferred_assets';
-  order?: number | null;
+  category:
+    | 'experience_level'
+    | 'investment_amount'
+    | 'trading_style'
+    | 'preferred_assets'
+    | 'desired_features'
+    | 'support_education';
+  /**
+   * Ordre d'affichage de la question (1, 2, 3...)
+   */
+  order: number;
+  /**
+   * Sélectionnez un modèle de réponses ou créez les réponses manuellement ci-dessous
+   */
+  responseTemplate?: (string | null) | ResponseTemplate;
+  /**
+   * Les différentes réponses possibles et leurs impacts
+   */
+  choices: {
+    answerText: string;
+    impacts?:
+      | {
+          criterion:
+            | 'beginner_friendly'
+            | 'intermediate'
+            | 'advanced'
+            | 'day_trading'
+            | 'swing_trading'
+            | 'long_term'
+            | 'scalping'
+            | 'stocks'
+            | 'etf'
+            | 'crypto'
+            | 'forex'
+            | 'options'
+            | 'customer_support'
+            | 'education'
+            | 'advanced_tools'
+            | 'low_fees'
+            | 'simple_interface'
+            | 'mobile_trading'
+            | 'api_trading';
+          /**
+           * Impact en points (-10 à +10)
+           */
+          points: number;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  /**
+   * Influence le poids de cette question dans le calcul final
+   */
+  weight: 'high' | 'normal' | 'low';
+  /**
+   * Texte explicatif optionnel pour aider l'utilisateur
+   */
+  helpText?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Modèles de réponses pour les questions
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "response-templates".
+ */
+export interface ResponseTemplate {
+  id: string;
+  name: string;
+  /**
+   * Format: [{"answerText": "...", "impacts": [{"criterion": "...", "points": 5}]}]
+   */
+  responses:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -315,6 +400,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articles';
         value: string | Article;
+      } | null)
+    | ({
+        relationTo: 'response-templates';
+        value: string | ResponseTemplate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -415,6 +504,22 @@ export interface QuestionsSelect<T extends boolean = true> {
   question?: T;
   category?: T;
   order?: T;
+  responseTemplate?: T;
+  choices?:
+    | T
+    | {
+        answerText?: T;
+        impacts?:
+          | T
+          | {
+              criterion?: T;
+              points?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  weight?: T;
+  helpText?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -453,6 +558,16 @@ export interface ArticlesSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "response-templates_select".
+ */
+export interface ResponseTemplatesSelect<T extends boolean = true> {
+  name?: T;
+  responses?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -13,6 +13,7 @@ import { Brokers } from './collections/Brokers'
 import { Questions } from './collections/Questions'
 import { Subscribers } from './collections/Subscribers'
 import { Articles } from './collections/Articles'
+import { ResponseTemplates } from './collections/ResponseTemplates'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Brokers, Questions, Subscribers, Articles],
+  collections: [Users, Media, Brokers, Questions, Subscribers, Articles, ResponseTemplates],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
