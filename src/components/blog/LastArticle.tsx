@@ -2,6 +2,7 @@ import React from 'react'
 import { getPayloadInstance } from '@/lib/payload';
 import Link from 'next/link';
 import { ChevronRight, CornerDownLeft } from 'lucide-react';
+import { types } from '@/lib/types';
 import { categories } from '@/lib/categories';
 import { Button } from '../ui/button';
 
@@ -33,7 +34,8 @@ const LastArticle = async () => {
         <div className="w-screen h-full flex flex-col justify-center items-start gap-8 pt-30 pb-90 px-24">
             <h2 className="text-3xl font-bold dark:text-white">Notre dernier article</h2>
             {lastArticle.docs.map((article) => {
-                const category = categories.find(cat => cat.slug == article.category) || { name: article.category, color: 'bg-gray-500' };
+                const type = types.find(cat => cat.slug == article.type) || { name: article.type, color: 'bg-gray-500' };
+                const category = categories.find(cat => cat.slug == article.category) || { name: article.category, color: 'bg-gray-500' }
                 return (
                     <div key={article.id} className='flex relative w-full h-full'>
                         <div className="flex flex-col gap-4 absolute z-0 w-full rounded-3xl">
@@ -57,6 +59,7 @@ const LastArticle = async () => {
                                     }) : 'Date inconnue'}</p>
                                 </div>
                                 <div className='w-6/12 h-fit flex flex-wrap gap-1 gap-y-3 justify-end absolute right-0 top-0 p-4'>
+                                    <span className={`rounded-xl py-1 px-3 text-sm ${type.color || 'bg-gray-500'}`}>{type.name || article.type}</span>
                                     <span className={`rounded-xl py-1 px-3 text-sm ${category.color || 'bg-gray-500'}`}>{category.name || article.category}</span>
                                 </div>
                             </div>

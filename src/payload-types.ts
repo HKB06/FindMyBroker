@@ -322,7 +322,8 @@ export interface Article {
    * URL unique de l'article (ex: meilleur-broker-2025)
    */
   slug: string;
-  category: 'trading-guide' | 'broker-analysis' | 'trading-news' | 'tutorials' | 'comparisons';
+  type: 'trading-guide' | 'broker-analysis' | 'trading-news' | 'tutorials' | 'comparisons';
+  category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
   author: string | User;
   featuredImage: string | Media;
   content: {
@@ -542,6 +543,7 @@ export interface SubscribersSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  type?: T;
   category?: T;
   author?: T;
   featuredImage?: T;

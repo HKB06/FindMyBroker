@@ -23,7 +23,7 @@ export const Articles: CollectionConfig = {
       },
     },
     {
-      name: 'category',
+      name: 'type',
       type: 'select',
       required: true,
       options: [
@@ -32,6 +32,20 @@ export const Articles: CollectionConfig = {
         { label: 'Actualités Trading', value: 'trading-news' },
         { label: 'Tutoriels', value: 'tutorials' },
         { label: 'Comparatifs', value: 'comparisons' }
+      ],
+    },
+    {
+      name: 'category',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Assurance-vie', value: 'assurance-vie' },
+        { label: 'Bourse', value: 'bourse' },
+        { label: 'Crypto-monnaies', value: 'crypto-monnaies' },
+        { label: 'Immobilier', value: 'immobilier' },
+        { label: 'Retraite', value: 'retraite' },
+        { label: 'Trading', value: 'trading' },
+        { label: 'Autre', value: 'autre' }
       ],
     },
     {

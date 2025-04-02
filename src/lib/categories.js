@@ -1,27 +1,37 @@
 export const categories = [
     {
-        slug: 'brokers-analysis',
-        name: 'Analyse des brokers',
+        slug: 'assurance-vie',
+        name: 'Assurance-vie',
         color: 'bg-teal-500',
     },
     {
-        slug: 'trading-guide',
-        name: 'Guide de trading',
+        slug: 'bourse',
+        name: 'Bourse',
         color: 'bg-amber-500',
     },
     {
-        slug: 'trading-news',
-        name: 'Actualités du trading',
+        slug: 'crypto-monnaies',
+        name: 'Crypto-monnaies',
         color: 'bg-rose-500',
     },
     {
-        slug: 'tutorials',
-        name: 'Tutoriels',
+        slug: 'immobilier',
+        name: 'Immobilier',
         color: 'bg-violet-500',
     },
     {
-        slug: 'comparisons',
-        name: 'Comparatifs',
+        slug: 'retraite',
+        name: 'Retraite',
         color: 'bg-sky-500',
     },
+    {
+        slug: 'trading',
+        name: 'Trading',
+        color: 'bg-green-500',
+    },
+    {
+        slug: 'autre',
+        name: 'Autre',
+        color: 'bg-gray-500',
+    }
 ];
