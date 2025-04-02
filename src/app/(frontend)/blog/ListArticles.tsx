@@ -2,8 +2,7 @@ import { fetchArticles } from '@/lib/articles';
 import Link from 'next/link';
 
 export default async function ListArticles({ category }: { category: string | null }) {
-    // Définit une catégorie par défaut si category est null ou vide
-    const defaultCategory = 'general';  // Remplace par la catégorie souhaitée par défaut
+    const defaultCategory = 'general'; 
     const categoryToUse = category || defaultCategory;
 
     const articles = await fetchArticles(categoryToUse);

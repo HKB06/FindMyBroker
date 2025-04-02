@@ -1,8 +1,6 @@
 
-import CategoriesBand from "@/components/blog/CategoriesBand";
-import CategoryFilter from "@/components/blog/CategoryFilter";
+import ArticlesByCategories from "@/components/blog/ArticlesByCategories";
 import LastArticle from "@/components/blog/LastArticle";
-import ListArticles from './ListArticles';
 
 export default function Home({ searchParams }: { searchParams: { category?: string } }) {
 
@@ -10,7 +8,7 @@ export default function Home({ searchParams }: { searchParams: { category?: stri
         <>
             <main className="flex flex-col">
                 <LastArticle />
-                <CategoriesBand searchParams={searchParams} />
+                <ArticlesByCategories searchParams={searchParams} />
             </main>
         </>
     );

@@ -11,7 +11,7 @@ export const Articles: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
-      index: true, // Pour le SEO
+      index: true, 
     },
     {
       name: 'slug',
