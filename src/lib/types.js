@@ -1,27 +1,27 @@
 export const types = [
     {
-        slug: 'brokers-analysis',
+        slug: 'broker-analysis',
         name: 'Analyse des brokers',
-        color: 'bg-teal-500',
+        color: 'bg-violet-900',
     },
     {
         slug: 'trading-guide',
         name: 'Guide de trading',
-        color: 'bg-amber-500',
+        color: 'bg-violet-800',
     },
     {
         slug: 'trading-news',
         name: 'Actualités du trading',
-        color: 'bg-rose-500',
+        color: 'bg-violet-700',
     },
     {
         slug: 'tutorials',
         name: 'Tutoriels',
-        color: 'bg-violet-500',
+        color: 'bg-violet-600',
     },
     {
         slug: 'comparisons',
         name: 'Comparatifs',
-        color: 'bg-sky-500',
+        color: 'bg-violet-500',
     },
 ];

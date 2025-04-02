@@ -31,7 +31,7 @@ const LastArticle = async () => {
     }
 
     return (
-        <div className="w-screen h-full flex flex-col justify-center items-start gap-8 pt-30 pb-90 px-24">
+        <div className="w-screen h-full flex flex-col justify-center items-start gap-8 py-30 px-24">
             <h2 className="text-3xl font-bold dark:text-white">Notre dernier article</h2>
             {lastArticle.docs.map((article) => {
                 const type = types.find(cat => cat.slug == article.type) || { name: article.type, color: 'bg-gray-500' };
