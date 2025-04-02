@@ -4,7 +4,7 @@ import { ScanSearch } from 'lucide-react'
 
 const Footer = () => {
     return (
-        <footer className="md:py-24 p-8 pb-4 bg-white dark:bg-[#1F2937]">
+        <footer className="md:py-24 p-8 pb-4 bg-white dark:bg-[#1F2937] bottom-0 w-full">
             <div className="mx-auto max-w-screen-xl">
                 <div className="md:flex md:justify-between">
                     <div className="mb-12 md:mb-0">

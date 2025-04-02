@@ -1,10 +1,10 @@
 
-import ReadyCTA from "@/components/homepage/ReadyCTA";
+import LastArticle from "@/components/blog/LastArticle";
 export default function Home() {
     return (
         <>
             <main className="flex flex-col">
-                <ReadyCTA />
+                <LastArticle />
             </main>
         </>
     );
