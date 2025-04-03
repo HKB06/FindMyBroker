@@ -55,16 +55,6 @@ export default async function ListArticles({ category }: { category: string | nu
                             );
                         })}
                     </div>
-                    {articles.length > 6 && (
-                        <div className="mt-4 text-center">
-                            <Link
-                                href={`/blog/category/${categoryToUse}`}
-                                className="px-4 py-2 bg-blue-500 text-white rounded-full"
-                            >
-                                Voir plus d'articles
-                            </Link>
-                        </div>
-                    )}
                 </>
             ) : (
                 <p className="text-white text-lg">Aucun article trouvé 🤕.</p>
