@@ -25,7 +25,7 @@ export const Subscribers: CollectionConfig = {
       relationTo: ['brokers'], // Mettre dans un tableau pour hasMany
       hasMany: true,
       admin: {
-        isSortable: true, // Optionnel : permet de réorganiser les relations par drag & drop
+        isSortable: true, // Permet de réorganiser les relations par drag & drop
       }
     },
     {

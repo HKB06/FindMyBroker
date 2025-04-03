@@ -16,6 +16,7 @@ export const Questions: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Question',
+      // Suppression de la validation qui causait l'erreur
     },
     {
       name: 'category',
@@ -65,7 +66,7 @@ export const Questions: CollectionConfig = {
       hasMany: false,
       label: 'Modèle de réponses',
       admin: {
-        description: 'Sélectionnez un modèle de réponses ou créez les réponses manuellement ci-dessous'
+        description: 'Sélectionnez un modèle de réponses ou créez les réponses manuellement'
       }
     },
     {
@@ -121,7 +122,7 @@ export const Questions: CollectionConfig = {
                 // Plateforme
                 { label: 'Interface Simple', value: 'simple_interface' },
                 { label: 'Mobile Trading', value: 'mobile_trading' },
-                { label: 'API Trading', value: 'api_trading' },
+                { label: 'API Trading', value: 'api_trading' }
               ]
             },
             {
@@ -175,11 +176,10 @@ export const Questions: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ data, req }) => {
-        // Si un modèle est sélectionné, récupérer ses réponses
         if (data.responseTemplate) {
           const template = await req.payload.findByID({
             collection: 'response-templates',
-            id: data.responseTemplate
+            id: data.responseTemplate as string
           });
           if (template && template.responses) {
             data.choices = template.responses;

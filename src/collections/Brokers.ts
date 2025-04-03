@@ -8,54 +8,125 @@ export const Brokers: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'rating', 'minimumDeposit', 'isActive'],
+    description: 'Gestion des brokers et leurs caractéristiques'
   },
   fields: [
     {
       name: 'name',
       type: 'text',
       required: true,
+      label: 'Nom du broker',
+      admin: {
+        description: 'Nom officiel du broker'
+      }
     },
     {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
+      label: 'Logo du broker',
+      admin: {
+        description: 'Logo officiel du broker (format recommandé : PNG)'
+      }
     },
     {
       name: 'description',
       type: 'richText',
+      label: 'Description du broker',
+      admin: {
+        description: 'Description détaillée du broker et ses avantages'
+      }
     },
     {
       name: 'rating',
       type: 'number',
       min: 0,
       max: 5,
+      label: 'Note globale',
+      admin: {
+        description: 'Note générale du broker (de 0 à 5)'
+      }
     },
     {
       name: 'minimumDeposit',
       type: 'number',
+      label: 'Dépôt minimum',
+      admin: {
+        description: 'Montant minimum requis pour ouvrir un compte (en €)'
+      }
     },
     {
       name: 'tradingFees',
       type: 'number',
+      label: 'Frais de trading',
+      admin: {
+        description: 'Frais de trading moyens par transaction (en %)'
+      }
     },
     {
       name: 'tradingInstruments',
       type: 'select',
       hasMany: true,
+      label: 'Instruments de trading',
       options: [
-        'Stocks',
+        'Actions',
         'Forex',
         'Crypto',
         'CFDs',
         'ETFs',
         'Options',
         'Futures'
-      ]
+      ],
+      admin: {
+        description: 'Types d\'instruments financiers disponibles'
+      }
+    },
+    {
+      name: 'features',
+      type: 'select',
+      hasMany: true,
+      label: 'Fonctionnalités',
+      options: [
+        'Interface Simple',
+        'Trading Mobile',
+        'Copy Trading',
+        'Formation',
+        'Support 24/7',
+        'Trading API'
+      ],
+      admin: {
+        description: 'Fonctionnalités principales offertes par le broker'
+      }
+    },
+    {
+      name: 'experienceLevel',
+      type: 'select',
+      label: 'Niveau d\'expérience',
+      options: [
+        'Débutant',
+        'Intermédiaire',
+        'Expert'
+      ],
+      admin: {
+        description: 'Niveau d\'expérience recommandé pour ce broker'
+      }
+    },
+    {
+      name: 'affiliateLink',
+      type: 'text',
+      label: 'Lien d\'affiliation',
+      admin: {
+        description: 'Lien de parrainage pour le suivi des inscriptions'
+      }
     },
     {
       name: 'isActive',
       type: 'checkbox',
       defaultValue: true,
+      label: 'Broker actif',
+      admin: {
+        description: 'Activer/désactiver l\'affichage du broker sur le site'
+      }
     }
   ]
 }

@@ -160,13 +160,24 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Gestion des brokers et leurs caractéristiques
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "brokers".
  */
 export interface Broker {
   id: string;
+  /**
+   * Nom officiel du broker
+   */
   name: string;
+  /**
+   * Logo officiel du broker (format recommandé : PNG)
+   */
   logo?: (string | null) | Media;
+  /**
+   * Description détaillée du broker et ses avantages
+   */
   description?: {
     root: {
       type: string;
@@ -182,10 +193,39 @@ export interface Broker {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Note générale du broker (de 0 à 5)
+   */
   rating?: number | null;
+  /**
+   * Montant minimum requis pour ouvrir un compte (en €)
+   */
   minimumDeposit?: number | null;
+  /**
+   * Frais de trading moyens par transaction (en %)
+   */
   tradingFees?: number | null;
-  tradingInstruments?: ('Stocks' | 'Forex' | 'Crypto' | 'CFDs' | 'ETFs' | 'Options' | 'Futures')[] | null;
+  /**
+   * Types d'instruments financiers disponibles
+   */
+  tradingInstruments?: ('Actions' | 'Forex' | 'Crypto' | 'CFDs' | 'ETFs' | 'Options' | 'Futures')[] | null;
+  /**
+   * Fonctionnalités principales offertes par le broker
+   */
+  features?:
+    | ('Interface Simple' | 'Trading Mobile' | 'Copy Trading' | 'Formation' | 'Support 24/7' | 'Trading API')[]
+    | null;
+  /**
+   * Niveau d'expérience recommandé pour ce broker
+   */
+  experienceLevel?: ('Débutant' | 'Intermédiaire' | 'Expert') | null;
+  /**
+   * Lien de parrainage pour le suivi des inscriptions
+   */
+  affiliateLink?: string | null;
+  /**
+   * Activer/désactiver l'affichage du broker sur le site
+   */
   isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -211,7 +251,7 @@ export interface Question {
    */
   order: number;
   /**
-   * Sélectionnez un modèle de réponses ou créez les réponses manuellement ci-dessous
+   * Sélectionnez un modèle de réponses ou créez les réponses manuellement
    */
   responseTemplate?: (string | null) | ResponseTemplate;
   /**
@@ -271,7 +311,32 @@ export interface ResponseTemplate {
   id: string;
   name: string;
   /**
-   * Format: [{"answerText": "...", "impacts": [{"criterion": "...", "points": 5}]}]
+   * Catégorie du modèle pour un meilleur classement
+   */
+  category:
+    | 'experience_level'
+    | 'investment_amount'
+    | 'trading_style'
+    | 'preferred_assets'
+    | 'desired_features'
+    | 'support_education';
+  /**
+   * Description détaillée du modèle et de son utilisation
+   */
+  description?: string | null;
+  /**
+   * Format attendu:
+   * [
+   *   {
+   *     "answerText": "Texte de la réponse",
+   *     "impacts": [
+   *       {
+   *         "criterion": "beginner_friendly",
+   *         "points": 5
+   *       }
+   *     ]
+   *   }
+   * ]
    */
   responses:
     | {
@@ -282,6 +347,10 @@ export interface ResponseTemplate {
     | number
     | boolean
     | null;
+  /**
+   * Désactiver temporairement ce modèle
+   */
+  isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -493,6 +562,9 @@ export interface BrokersSelect<T extends boolean = true> {
   minimumDeposit?: T;
   tradingFees?: T;
   tradingInstruments?: T;
+  features?: T;
+  experienceLevel?: T;
+  affiliateLink?: T;
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -569,7 +641,10 @@ export interface ArticlesSelect<T extends boolean = true> {
  */
 export interface ResponseTemplatesSelect<T extends boolean = true> {
   name?: T;
+  category?: T;
+  description?: T;
   responses?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }
