@@ -52,7 +52,7 @@ const CategoryPage = async ({
             </div>
             <div className='w-screen h-full flex flex-col justify-center gap-8 bg-gray-100 px-24 py-20'>
                 <h2 className="text-4xl font-bold text-black pb-3">Nos articles {category?.name}</h2>
-                <ListArticles category={slug} numberPerPage={9} paginate={true} />
+                <ListArticles category={slug} numberPerPage={9} page={page} paginate={true} />
             </div>
         </div>
     )
