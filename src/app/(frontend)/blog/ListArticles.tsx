@@ -1,4 +1,4 @@
-import { fetchArticles } from '@/lib/articles';
+import { fetchArticles } from '@/lib/articlesByCategory';
 import Link from 'next/link';
 import { types } from '@/lib/types';
 import { categories } from '@/lib/categories';

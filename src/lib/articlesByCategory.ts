@@ -1,4 +1,5 @@
 import { getPayloadInstance } from './payload';
+
 export async function fetchArticles(category: string | null, numberPerPage: number, page: number) {
     const payload = await getPayloadInstance();
     

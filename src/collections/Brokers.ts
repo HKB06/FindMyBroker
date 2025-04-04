@@ -30,6 +30,39 @@ export const Brokers: CollectionConfig = {
       }
     },
     {
+      name:"referralLink",
+      type:"text",
+      label:"Lien d\'affiliation",
+      admin: {
+        description: "Lien d'affiliation pour le suivi des inscriptions"
+      }
+    },
+    {
+      name: "color",
+      type: "text",
+      label: "Couleur du broker",
+      admin: {
+        description: "Couleur principale du broker (format tailwind, ex: bg-[#6AAE22])"
+      }
+    },
+    {
+      name: 'category',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Assurance-vie', value: 'assurance-vie' },
+        { label: 'Bourse', value: 'bourse' },
+        { label: 'Crypto-monnaies', value: 'crypto-monnaies' },
+        { label: 'Immobilier', value: 'immobilier' },
+        { label: 'Retraite', value: 'retraite' },
+        { label: 'Trading', value: 'trading' },
+        { label: 'Autre', value: 'autre' }
+      ],
+      admin: {
+        description: 'Catégorie principale du broker'
+      }
+    },
+    {
       name: 'description',
       type: 'richText',
       label: 'Description du broker',

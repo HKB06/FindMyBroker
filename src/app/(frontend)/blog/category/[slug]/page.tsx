@@ -3,6 +3,7 @@ import { getPayloadInstance } from '@/lib/payload';
 import ListArticles from '../../ListArticles';
 import Link from 'next/link';
 import { categories } from '@/lib/categories';
+import BrokerRecommandationByCategory from '@/components/blog/BrokerRecommandationByCategory';
 
 interface Params {
     slug: string;
@@ -45,7 +46,7 @@ const CategoryPage = async ({
     // }
 
     return (
-        <div className={`w-screen h-full flex flex-col justify-center ${category?.color} hover:`}>
+        <div className={`w-screen h-full flex flex-col justify-center ${category?.color}`}>
             <div className={`w-screen h-screen flex flex-col justify-center items-center gap-8 px-24`}>
                 <h2 className="text-5xl font-black text-white pt-12 pb-3">{category?.name}</h2>
                 <p className='text-white w-1/2 text-center'>{category?.desc}</p>
@@ -53,6 +54,10 @@ const CategoryPage = async ({
             <div className='w-screen h-full flex flex-col justify-center gap-8 bg-gray-100 px-24 py-20'>
                 <h2 className="text-4xl font-bold text-black pb-3">Nos articles sur <span className='lowercase'>{category?.pres}</span></h2>
                 <ListArticles category={slug} numberPerPage={9} page={page} paginate={true} />
+            </div>
+            <div className={`w-screen h-full flex flex-col justify-center gap-8 px-24 py-20 ${category?.color}`}>
+                <h2 className="text-4xl font-bold text-white pb-3">Nos recommandations de brokers pour <span className='lowercase'>{category?.pres}</span></h2>
+                <BrokerRecommandationByCategory category={slug} />
             </div>
         </div>
     )

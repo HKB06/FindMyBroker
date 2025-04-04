@@ -176,6 +176,18 @@ export interface Broker {
    */
   logo?: (string | null) | Media;
   /**
+   * Lien d'affiliation pour le suivi des inscriptions
+   */
+  referralLink?: string | null;
+  /**
+   * Couleur principale du broker (format tailwind, ex: bg-[#6AAE22])
+   */
+  color?: string | null;
+  /**
+   * Catégorie principale du broker
+   */
+  category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
+  /**
    * Description détaillée du broker et ses avantages
    */
   description?: {
@@ -557,6 +569,9 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BrokersSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
+  referralLink?: T;
+  color?: T;
+  category?: T;
   description?: T;
   rating?: T;
   minimumDeposit?: T;
