@@ -5,6 +5,7 @@ export const categories = [
         color: 'bg-violet-900',
         desc: 'L\'assurance-vie est un produit d\'épargne qui permet de constituer un capital ou de garantir un revenu en cas de décès.',
         pres: 'les assurances-vie',
+        emoji: '🧑‍🧑‍🧒',
     },
     {
         slug: 'bourse',
@@ -12,6 +13,7 @@ export const categories = [
         color: 'bg-violet-800',
         desc: 'La bourse est un marché où s\'échangent des actions, des obligations et d\'autres titres financiers.',
         pres: 'la bourse',
+        emoji: '📈',
     },
     {
         slug: 'crypto-monnaies',
@@ -19,6 +21,7 @@ export const categories = [
         color: 'bg-violet-700',
         desc: 'Les crypto-monnaies sont des monnaies numériques qui utilisent la cryptographie pour sécuriser les transactions et contrôler la création de nouvelles unités.',
         pres: 'les crypto-monnaies',
+        emoji: '💰',
     },
     {
         slug: 'immobilier',
@@ -26,6 +29,7 @@ export const categories = [
         color: 'bg-violet-600',
         desc: 'L\'immobilier est un secteur économique qui concerne la construction, la vente et la location de biens immobiliers.',
         pres: 'l\'immobilier',
+        emoji: '🏠',
     },
     {
         slug: 'retraite',
@@ -33,6 +37,7 @@ export const categories = [
         color: 'bg-violet-700',
         desc: 'La retraite est une période de la vie où une personne cesse de travailler et reçoit une pension.',
         pres: 'la retraite',
+        emoji: '👴',
     },
     {
         slug: 'trading',
@@ -40,6 +45,7 @@ export const categories = [
         color: 'bg-violet-800',
         desc: 'Le trading est l\'activité d\'acheter et de vendre des actifs financiers sur les marchés.',
         pres: 'le trading',
+        emoji: '📊',
     },
     {
         slug: 'autre',
@@ -47,5 +53,6 @@ export const categories = [
         color: 'bg-violet-900',
         desc: 'Autres sujets liés à la finance personnelle qui ne rentrent pas dans les catégories précédentes.',
         pres: 'd\'autres sujets',
+        emoji: '💬',
     }
 ];

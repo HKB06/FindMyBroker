@@ -12,8 +12,10 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
-import { ScanSearch } from "lucide-react"
+import { ArrowLeft, ArrowRight, ScanSearch } from "lucide-react"
 import { ThemeSelect } from "./ThemeSelect"
+import { Button } from "../ui/button"
+import { buttonVariants } from "@/components/ui/button"
 
 
 
@@ -44,7 +46,7 @@ export default function Navbar() {
 
                             <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">
                                 <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
-                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">Trouver des brokers</span>
+                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold">Trouver des brokers</span>
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent className="dark:bg-[#1F2937]! border-0! ring-0!">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -65,7 +67,7 @@ export default function Navbar() {
                                             </NavigationMenuLink>
                                         </li>
                                         <ListItem href="/" title="Guide 2025 📋">
-                                            Re-usable components built using Radix UI and Tailwind CSS. 
+                                            Re-usable components built using Radix UI and Tailwind CSS.
                                         </ListItem>
                                         <ListItem href="/" title="Notre sélection 👍">
                                             How to install dependencies and structure your app.
@@ -86,12 +88,38 @@ export default function Navbar() {
                             </NavigationMenuItem>
 
 
-                            <NavigationMenuItem>
-                                <Link href="/blog" legacyBehavior passHref>
-                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
-                                        Blog
-                                    </NavigationMenuLink>
-                                </Link>
+                            <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">
+                                <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
+                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold">Blog</span>
+                                </NavigationMenuTrigger>
+                                <NavigationMenuContent className="dark:bg-[#1F2937]! border-0! ring-0!">
+                                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                                        <li className="row-span-5">
+                                            <NavigationMenuLink asChild className="">
+                                                <a
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-[#D946EF] hover:to-[#8B5CF6] bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
+                                                    href="/blog"
+                                                >
+                                                    <span className="text-4xl">📰</span>
+                                                    <div className="mb-2 mt-4 text-lg font-bold text-white">
+                                                        Nos derniers articles
+                                                    </div>
+                                                    <p className="text-sm leading-tight text-gray-100">
+                                                        Découvrez nos derniers articles sur les brokers et les investissements
+                                                    </p>
+                                                </a>
+                                            </NavigationMenuLink>
+                                        </li>
+                                        <h3 className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold ml-2">Nos catégories phares</h3>
+                                        <ListItem href="/blog/category/assurance-vie" title="Assurance vie 🧑‍🧑‍🧒">Nos conseils blablabla</ListItem>
+                                        <ListItem href="/blog/category/immobilier" title="Immobilier 🏢">Nos conseils blablabla</ListItem>
+                                        <ListItem href="/blog/category/retraite" title="Retraite 👴">Nos conseils blablabla</ListItem>
+                                        <Link href="/blog/categories" className={`${buttonVariants({ variant: 'default' })} cursor-pointer bg-[#D946EF]! hover:bg-[#C814E4]! flex gap-2`}>
+                                            Voir toutes nos catégories
+                                            <ArrowRight />
+                                        </Link>
+                                    </ul>
+                                </NavigationMenuContent>
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>

@@ -45,7 +45,7 @@ const CategoryPage = async ({
     // }
 
     return (
-        <div className={`w-screen h-full flex flex-col justify-center ${category?.color}`}>
+        <div className={`w-screen h-full flex flex-col justify-center ${category?.color} hover:`}>
             <div className={`w-screen h-screen flex flex-col justify-center items-center gap-8 px-24`}>
                 <h2 className="text-5xl font-black text-white pt-12 pb-3">{category?.name}</h2>
                 <p className='text-white w-1/2 text-center'>{category?.desc}</p>

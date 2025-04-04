@@ -105,7 +105,7 @@ export default async function ListArticles({
                     )}
                 </>
             ) : (
-                <p className="text-white text-lg">Aucun article trouvé 🤕.</p>
+                <p className="text-white text-lg">Aucun article trouvé dans cette catégorie. 🤕</p>
             )}
         </div>
     );
