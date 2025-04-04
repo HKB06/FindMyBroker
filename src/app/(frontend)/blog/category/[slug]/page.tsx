@@ -8,8 +8,19 @@ interface Params {
     slug: string;
 }
 
-const CategoryPage = async ({ params }: { params: Params }) => {
-    const { slug } = await params;
+interface SearchParams {
+    page?: string;
+}
+
+const CategoryPage = async ({
+    params,
+    searchParams
+}: {
+    params: Params,
+    searchParams: SearchParams
+}) => {
+    const { slug } = params;
+    const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
     const payload = await getPayloadInstance();
     const category = categories.find(cat => cat.slug === slug);
@@ -39,11 +50,10 @@ const CategoryPage = async ({ params }: { params: Params }) => {
                 <h2 className="text-5xl font-black text-white pt-12 pb-3">{category?.name}</h2>
                 <p className='text-white w-1/2 text-center'>{category?.desc}</p>
             </div>
-            <div className='w-screen h-screen flex flex-col justify-center gap-8 bg-gray-100 px-24'>
+            <div className='w-screen h-full flex flex-col justify-center gap-8 bg-gray-100 px-24 py-20'>
                 <h2 className="text-4xl font-bold text-black pb-3">Nos articles {category?.name}</h2>
-                <ListArticles category={slug} />
+                <ListArticles category={slug} numberPerPage={9} paginate={true} />
             </div>
-
         </div>
     )
 }

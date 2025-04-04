@@ -13,7 +13,7 @@ export default function ArticlesByCategories({ searchParams }: { searchParams: {
 
             {category ? (
                 <>
-                    <ListArticles category={category} />
+                    <ListArticles category={category} numberPerPage={6} />
 
                     <div className="flex items-center gap-4">
                         <Link href={`blog/category/${category}`} className={`text-white text-lg ${categoryData?.color} rounded-lg px-4 py-2`}>
@@ -23,7 +23,7 @@ export default function ArticlesByCategories({ searchParams }: { searchParams: {
                 </>
             ) : (
                 <>
-                    <ListArticles category="assurance-vie" />
+                    <ListArticles category="assurance-vie" numberPerPage={6} />
                     <div className="flex items-center gap-4">
                         <Link href={`blog/category/assurance-vie`} className={`text-white text-lg bg-violet-900 rounded-lg px-4 py-2`}>
                             En voir plus
