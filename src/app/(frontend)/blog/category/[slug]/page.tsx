@@ -35,14 +35,14 @@ const CategoryPage = async ({
     });
     console.log('articles', articles);
 
-    if (!articles || articles.docs.length === 0) {
-        return (
-            <div className="w-screen h- flex flex-col justify-center items-center gap-8 px-24 py-40">
-                <h2 className="text-3xl font-bold">Aucun article trouvé 🤕.</h2>
-                <p className="text-md text-gray-500">Aucun article trouvé dans cette catégorie.</p>
-            </div>
-        );
-    }
+    // if (!articles || articles.docs.length === 0) {
+    //     return (
+    //         <div className="w-screen h- flex flex-col justify-center items-center gap-8 px-24 py-40">
+    //             <h2 className="text-3xl font-bold">Aucun article trouvé 🤕.</h2>
+    //             <p className="text-md text-gray-500">Aucun article trouvé dans cette catégorie.</p>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div className={`w-screen h-full flex flex-col justify-center ${category?.color}`}>
@@ -51,7 +51,7 @@ const CategoryPage = async ({
                 <p className='text-white w-1/2 text-center'>{category?.desc}</p>
             </div>
             <div className='w-screen h-full flex flex-col justify-center gap-8 bg-gray-100 px-24 py-20'>
-                <h2 className="text-4xl font-bold text-black pb-3">Nos articles {category?.name}</h2>
+                <h2 className="text-4xl font-bold text-black pb-3">Nos articles sur <span className='lowercase'>{category?.pres}</span></h2>
                 <ListArticles category={slug} numberPerPage={9} page={page} paginate={true} />
             </div>
         </div>
