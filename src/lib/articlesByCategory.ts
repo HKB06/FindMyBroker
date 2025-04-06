@@ -14,6 +14,7 @@ export async function fetchArticles(category: string | null, numberPerPage: numb
           equals: categoryToUse,
         },
       },
+      sort: '-publishedAt',
     });
   
     return response;

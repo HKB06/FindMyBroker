@@ -1,5 +1,5 @@
 import { fetchBrokers } from '@/lib/brokersByCategory';
-import { RichText } from '../global/RichText';
+// import { RichText } from '../global/RichText';
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { categories } from '@/lib/categories';
@@ -111,9 +111,9 @@ const BrokerRecommandationByCategory = async ({
                                         )}
                                     </div>
 
-                                    <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
+                                    {/* <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
                                         {broker.description && <RichText data={broker.description} />}
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 {broker.referralLink && (

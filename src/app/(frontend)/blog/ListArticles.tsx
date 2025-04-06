@@ -77,7 +77,7 @@ export default async function ListArticles({
                                         </div>
 
                                         <Link
-                                            href={`/blog/${article.slug}`}
+                                            href={`/blog/category/${article.category}/article/${article.slug}`}
                                             className="flex bg-teal-500 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl px-4 py-3"
                                         >
                                             <span>Lire l'article</span>
