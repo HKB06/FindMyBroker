@@ -1,9 +1,9 @@
 import React from 'react'
 import { getPayloadInstance } from '@/lib/payload';
 import ListArticles from '../../ListArticles';
-import Link from 'next/link';
 import { categories } from '@/lib/categories';
 import BrokerRecommandationByCategory from '@/components/blog/BrokerRecommandationByCategory';
+import { notFound } from 'next/navigation';
 
 interface Params {
     category: string;
@@ -44,6 +44,10 @@ const CategoryPage = async ({
     //         </div>
     //     );
     // }
+
+    if (!categoryData) {
+        notFound();
+    }
 
     return (
         <div className={`w-screen h-full flex flex-col justify-center ${categoryData?.color}`}>

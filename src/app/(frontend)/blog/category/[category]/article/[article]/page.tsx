@@ -1,6 +1,6 @@
 import React from 'react';
 import { getPayloadInstance } from '@/lib/payload';
-// import { RichText } from '@/components/global/RichText';
+import { notFound } from 'next/navigation';
 import { types } from '@/lib/types';
 import { categories } from '@/lib/categories';
 
@@ -29,12 +29,7 @@ const ArticlePage = async ({
     console.log('articleData', articleData);
 
     if (!articleData) {
-        return (
-            <div className="w-screen h-full flex flex-col justify-center items-center">
-                <h1 className="text-2xl font-bold">Article introuvable</h1>
-                <p className="text-gray-500">L'article demandé n'existe pas ou a été supprimé.</p>
-            </div>
-        );
+        notFound();
     }
     const type = types.find(cat => cat.slug == articleData.type) || { name: articleData.type, color: 'bg-gray-500' };
     const category = categories.find(cat => cat.slug == articleData.category) || { name: articleData.category, color: 'bg-gray-500' }
