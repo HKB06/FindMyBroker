@@ -1,9 +1,9 @@
 import { fetchBrokers } from '@/lib/brokersByCategory';
-// import { RichText } from '../global/RichText';
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { categories } from '@/lib/categories';
 import { Star } from 'lucide-react';
+import { RichText } from '@/components/blog/RichText';
 
 interface Broker {
     id: string;
@@ -43,9 +43,17 @@ const BrokerRecommandationByCategory = async ({
     const brokers = data?.docs || [];
     console.log('brokers', brokers);
 
+    if (!brokers || brokers.length === 0) {
+        return (
+            <div className="flex flex-col gap-8">
+                <p className="text-md text-white">Aucun broker trouvé dans cette catégorie. 🤕</p>
+            </div>
+        );
+    }
+
     return (
         <div>
-            <ul className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <ul className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 {brokers.map((broker) => {
                     const categoryInfo = categories.find(cat => cat.slug === broker.category) || {
                         name: broker.category,
@@ -56,7 +64,7 @@ const BrokerRecommandationByCategory = async ({
                         <li key={broker.id} className='flex'>
                             <div className='flex flex-col justify-between bg-white p-6 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow'>
                                 <div>
-                                    <div className='flex items-center gap-4 mb-4'>
+                                    <div className='flex items-center gap-12 mb-4'>
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_SERVER_URL ?? ''}${typeof broker.logo === 'object' && broker.logo !== null
                                                 ? broker.logo.url
@@ -76,7 +84,7 @@ const BrokerRecommandationByCategory = async ({
                                                     <span>{broker.name}</span>
                                                 )}
                                             </h3>
-                                            
+
 
                                             <div className='flex items-center mb-2'>
                                                 {broker.rating ? (
@@ -93,27 +101,27 @@ const BrokerRecommandationByCategory = async ({
                                                 )}
                                             </div>
 
-                                            <span className={`text-xs font-medium ${categoryInfo.color} text-white px-3 py-1 rounded-full`}>
+                                            <span className={`text-xs font-medium ${categoryInfo.color} text-white px-3 py-1 rounded-full w-max`}>
                                                 {categoryInfo.name}
                                             </span>
 
+                                            <div className='text-sm text-gray-600 my-3 font-bold'>
+                                                {broker.minimumDeposit ? (
+                                                    <p>💰 Dépôt min. : {broker.minimumDeposit}</p>
+                                                ) : (
+                                                    <p>💰 Pas de dépôt minimum</p>
+                                                )}
+                                            </div>
                                         </div>
 
+
                                     </div>
 
 
 
-                                    <div className='text-sm text-gray-600 my-3'>
-                                        {broker.minimumDeposit ? (
-                                            <p>💰 Dépôt min. : {broker.minimumDeposit}</p>
-                                        ) : (
-                                            <p>💰 Pas de dépôt minimum</p>
-                                        )}
-                                    </div>
-
-                                    {/* <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
+                                    <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
                                         {broker.description && <RichText data={broker.description} />}
-                                    </div> */}
+                                    </div>
                                 </div>
 
                                 {broker.referralLink && (

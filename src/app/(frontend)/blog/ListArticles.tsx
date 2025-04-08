@@ -28,7 +28,7 @@ export default async function ListArticles({
         <div className="h-max w-full">
             {articles.length > 0 ? (
                 <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
                         {articles.map((article) => {
                             const type = types.find((cat) => cat.slug == article.type) || {
                                 name: article.type,
@@ -105,7 +105,7 @@ export default async function ListArticles({
                     )}
                 </>
             ) : (
-                <p className="text-white text-lg">Aucun article trouvé dans cette catégorie. 🤕</p>
+                <p className="text-black text-lg">Aucun article trouvé dans cette catégorie. 🤕</p>
             )}
         </div>
     );

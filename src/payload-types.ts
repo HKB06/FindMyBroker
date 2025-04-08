@@ -407,7 +407,7 @@ export interface Article {
   category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
   author: string | User;
   featuredImage: string | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -421,7 +421,7 @@ export interface Article {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   /**
    * Bref résumé pour le SEO et les aperçus
    */

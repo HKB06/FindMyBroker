@@ -11,9 +11,11 @@ const MobileNav = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [isBlogDropdownOpen, setBlogDropdownOpen] = useState<boolean>(false); // État pour le dropdown "Blog"
 
   const toggleOpen = () => setOpen((prev) => !prev);
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+  const toggleBlogDropdown = () => setBlogDropdownOpen((prev) => !prev); // Toggle pour le dropdown "Blog"
 
   const pathname = usePathname();
 
@@ -31,9 +33,9 @@ const MobileNav = () => {
 
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
-      toggleOpen()
+      toggleOpen();
     }
-  }
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -44,14 +46,22 @@ const MobileNav = () => {
   }, [pathname]);
 
   useEffect(() => {
-    setDropdownOpen(false); // Fermer le dropdown lorsque la page change
+    setDropdownOpen(false); // Fermer le premier dropdown lorsque la page change
+    setBlogDropdownOpen(false); // Fermer le dropdown "Blog" lorsque la page change
   }, [pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const dropdownElement = document.querySelector(".dropdown-container");
-      if (dropdownElement && !dropdownElement.contains(event.target as Node)) {
+      const blogDropdownElement = document.querySelector(".blog-dropdown-container");
+      if (
+        dropdownElement &&
+        !dropdownElement.contains(event.target as Node) &&
+        blogDropdownElement &&
+        !blogDropdownElement.contains(event.target as Node)
+      ) {
         setDropdownOpen(false);
+        setBlogDropdownOpen(false);
       }
     };
 
@@ -66,14 +76,14 @@ const MobileNav = () => {
   }
 
   return (
-    <nav
-      className="fixed flex lg:hidden justify-between items-center px-6 h-16 w-full border-b bg-white dark:bg-[#1F2937] dark:border-gray-700 z-100">
+    <nav className="fixed flex lg:hidden justify-between items-center px-6 h-16 w-full border-b bg-white dark:bg-[#1F2937] dark:border-gray-700 z-100">
       <div className="w-1/3 flex items-center z-200">
         <Link
-          onClick={() =>
-            closeOnCurrent('/')
-          }
-          href="/" className="flex items-center gap-2 w-max text-black dark:text-white z-200" passHref>
+          onClick={() => closeOnCurrent("/")}
+          href="/"
+          className="flex items-center gap-2 w-max text-black dark:text-white z-200"
+          passHref
+        >
           <ScanSearch className="text-[#8B5CF6]" />
           <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
             FindMyBroker
@@ -83,29 +93,29 @@ const MobileNav = () => {
       </div>
 
       <div
-        onClick={() =>
-          closeOnCurrent('/')
-        }
+        onClick={() => closeOnCurrent("/")}
         className="z-100 cursor-pointer transition-transform duration-1000 dark:text-white"
       >
         {isOpen ? (
-          <X className="rotate-90 transition-transform duration-1000 z-500 text-[#D946EF]" onClick={() =>
-            closeOnCurrent('/')
-          } />
+          <X
+            className="rotate-90 transition-transform duration-1000 z-500 text-[#D946EF]"
+            onClick={() => closeOnCurrent("/")}
+          />
         ) : (
           <Menu className="rotate-0 transition-transform duration-1000 text-[#8B5CF6]" />
         )}
         <div>
           {isOpen ? (
             <div className={`fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-90 w-full h-screen`}>
-              <ul className="z-90 h-full absolute dark:bg-banger-blue bg-white dark:bg-[#111827] dark:text-white flex flex-col items-start w-full gap-8 px-8 mt-14 py-12" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+              <ul
+                className="z-90 h-full absolute dark:bg-banger-blue bg-white dark:bg-[#111827] dark:text-white flex flex-col items-start w-full gap-8 px-8 mt-14 py-12"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
                 <li>
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
-                    onClick={() =>
-                      closeOnCurrent('/')
-                    }
+                    onClick={() => closeOnCurrent("/")}
                   >
                     Accueil
                   </Link>
@@ -117,28 +127,26 @@ const MobileNav = () => {
                     toggleDropdown();
                   }}
                 >
-                  <div
-                    className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold
-                    bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container"
-                  >
+                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container">
                     Trouver des brokers
                     <ChevronDown
                       size={18}
-                      className={`text-black dark:text-white transition-transform ${isDropdownOpen ? "rotate-180" : "rotate-0"
-                        }`}
+                      className={`text-black dark:text-white transition-transform ${
+                        isDropdownOpen ? "rotate-180" : "rotate-0"
+                      }`}
                     />
                   </div>
                   <div
-                    className={`transition-opacity delay-700 ${isDropdownOpen ? "flex opacity-100" : "hidden opacity-0"}`}
+                    className={`transition-opacity delay-700 ${
+                      isDropdownOpen ? "flex opacity-100" : "hidden opacity-0"
+                    }`}
                   >
                     <ul className="mt-2 space-y-2">
                       <li>
                         <Link
                           href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
-                          onClick={() =>
-                            closeOnCurrent('/')
-                          }
+                          onClick={() => closeOnCurrent("/")}
                         >
                           Lien 1
                         </Link>
@@ -147,9 +155,7 @@ const MobileNav = () => {
                         <Link
                           href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
-                          onClick={() =>
-                            closeOnCurrent('/')
-                          }
+                          onClick={() => closeOnCurrent("/")}
                         >
                           Lien 2
                         </Link>
@@ -158,11 +164,61 @@ const MobileNav = () => {
                         <Link
                           href="/"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
-                          onClick={() =>
-                            closeOnCurrent('/')
-                          }
+                          onClick={() => closeOnCurrent("/")}
                         >
                           Lien 3
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li
+                  className="blog-dropdown-container"
+                  onClick={(e: React.MouseEvent) => {
+                    e.stopPropagation();
+                    toggleBlogDropdown();
+                  }}
+                >
+                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container">
+                    Blog
+                    <ChevronDown
+                      size={18}
+                      className={`text-black dark:text-white transition-transform ${
+                        isBlogDropdownOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
+                  </div>
+                  <div
+                    className={`transition-opacity delay-700 ${
+                      isBlogDropdownOpen ? "flex opacity-100" : "hidden opacity-0"
+                    }`}
+                  >
+                    <ul className="mt-2 space-y-2">
+                      <li>
+                        <Link
+                          href="/blog/category/assurance-vie"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() => closeOnCurrent("/blog/category/assurance-vie")}
+                        >
+                          Assurance vie
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/blog/category/immobilier"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() => closeOnCurrent("/blog/category/immobilier")}
+                        >
+                          Immobilier
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/blog/category/retraite"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          onClick={() => closeOnCurrent("/blog/category/retraite")}
+                        >
+                          Retraite
                         </Link>
                       </li>
                     </ul>
@@ -172,9 +228,7 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
-                    onClick={() =>
-                      closeOnCurrent('/')
-                    }
+                    onClick={() => closeOnCurrent("/")}
                   >
                     Services
                   </Link>
@@ -183,20 +237,7 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
-                    onClick={() =>
-                      closeOnCurrent('/')
-                    }
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
-                    href="/"
-                    onClick={() =>
-                      closeOnCurrent('/')
-                    }
+                    onClick={() => closeOnCurrent("/")}
                   >
                     À propos
                   </Link>
@@ -205,9 +246,7 @@ const MobileNav = () => {
                   <Link
                     className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
                     href="/"
-                    onClick={() =>
-                      closeOnCurrent('/')
-                    }
+                    onClick={() => closeOnCurrent("/")}
                   >
                     Contact
                   </Link>

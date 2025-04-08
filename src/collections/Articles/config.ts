@@ -1,17 +1,30 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload';
+import { 
+    FixedToolbarFeature, 
+    lexicalEditor, 
+    BoldFeature, 
+    ItalicFeature, 
+    UnderlineFeature, 
+    LinkFeature, 
+    ParagraphFeature, 
+    InlineToolbarFeature, 
+    HorizontalRuleFeature
+} from '@payloadcms/richtext-lexical';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
-  admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'author', 'status', 'publishedAt'],
+
+  access: {
+    read: () => true,
+    update: () => true,
+    create: () => true,
   },
   fields: [
     {
       name: 'title',
       type: 'text',
       required: true,
-      index: true, 
+      index: true,
     },
     {
       name: 'slug',
@@ -31,7 +44,7 @@ export const Articles: CollectionConfig = {
         { label: 'Analyse Brokers', value: 'broker-analysis' },
         { label: 'Actualités Trading', value: 'trading-news' },
         { label: 'Tutoriels', value: 'tutorials' },
-        { label: 'Comparatifs', value: 'comparisons' }
+        { label: 'Comparatifs', value: 'comparisons' },
       ],
     },
     {
@@ -45,7 +58,7 @@ export const Articles: CollectionConfig = {
         { label: 'Immobilier', value: 'immobilier' },
         { label: 'Retraite', value: 'retraite' },
         { label: 'Trading', value: 'trading' },
-        { label: 'Autre', value: 'autre' }
+        { label: 'Autre', value: 'autre' },
       ],
     },
     {
@@ -61,10 +74,25 @@ export const Articles: CollectionConfig = {
       required: true,
     },
     {
-      name: 'content',
-      type: 'richText',
-      required: true,
-    },
+        name: 'content',
+        type: 'richText',
+        editor: lexicalEditor({
+          features: ({defaultFeatures}) => [
+            ...defaultFeatures,
+            // BlocksFeature({
+            //   blocks: [ContentWithMedia, TableOfContents],
+            // }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+            BoldFeature(),
+            ItalicFeature(),
+            UnderlineFeature(),
+            LinkFeature(),
+            ParagraphFeature(),
+            HorizontalRuleFeature(),
+          ]
+        })
+      },
     {
       name: 'excerpt',
       type: 'textarea',
@@ -95,7 +123,7 @@ export const Articles: CollectionConfig = {
       options: [
         { label: 'Brouillon', value: 'draft' },
         { label: 'En révision', value: 'review' },
-        { label: 'Publié', value: 'published' }
+        { label: 'Publié', value: 'published' },
       ],
     },
     {
@@ -121,18 +149,8 @@ export const Articles: CollectionConfig = {
         {
           name: 'tag',
           type: 'text',
-        }
+        },
       ],
-    }
+    },
   ],
-  hooks: {
-    beforeChange: [
-      ({ data }) => {
-        if (data.status === 'published' && !data.publishedAt) {
-          data.publishedAt = new Date().toISOString()
-        }
-        return data
-      }
-    ]
-  }
-}
+};

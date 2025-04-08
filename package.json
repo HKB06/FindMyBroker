@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@lexical/react": "^0.29.0",
-    "@lexical/rich-text": "^0.29.0",
+    "@lexical/rich-text": "^0.28.0",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
