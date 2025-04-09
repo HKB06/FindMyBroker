@@ -58,10 +58,10 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
     // }
 
     return (
-        <div className="relative!">
+        <div className="relative! w-full">
             <div className="flex! flex-col! w-full! justify-center! gap-8">
                 {content && tableOfContents.length > 0 && (
-                    <div className='flex! gap-8! w-full! justify-center!'>
+                    <div className='flex! md:gap-8! w-full! justify-center! flex-col md:flex-row'>
                         <aside className="md:w-1/3! w-full!">
                             <div className="top-20 left-24 mb-10 w-full! max-w-xs rounded-3xl border bg-white px-6 py-6 shadow-md lg:sticky lg:w-full">
                                 <div className="pb-2 text-xl font-medium text-[#8B5CF6]">Table des matières</div>
@@ -87,17 +87,17 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
                             </div>
                         </aside>
                         <div className="flex flex-col gap-8 w-full! h-full!">
-                            <div className="bg-white! rounded-3xl! border! px-8! py-8! shadow-md">
+                            <div className="bg-white! rounded-3xl! border! md:p-8! p-6 shadow-md">
                                 <RichText
                                     data={content}
-                                    className="article-page flex! flex-col! justify-center! items-center!"
+                                    className="article-page flex! flex-col! justify-center! items-center! text-justify!"
                                 />
                                 <div className='flex flex-col gap-2'>
                                     <h4 className='italic'>Tags :</h4>
                                     <div className="flex gap-2">
                                         {tags && (
                                             tags.map((tag) =>
-                                                <span key={tag.id} className="px-4 py-1 bg-gray-700 rounded-full text-white">{tag.tag}</span>
+                                                <span key={tag.id} className="md:px-4 px-2 md:py-1 bg-gray-700 rounded-full text-white">{tag.tag}</span>
                                             )
                                         )}
                                     </div>
@@ -109,21 +109,23 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
 
                 {category !== "autre" && (
                     <div className='flex flex-col gap-8'>
-                        <div className={`${categoryInfo.color} p-12 rounded-3xl shadow-md`}>
-                            <h2 className="text-3xl font-bold text-white pb-8" id="recommandations-brokers">Nos recommandations de brokers pour cette catégorie</h2>
+                        <div className={`${categoryInfo.color} p-6 md:p-12 rounded-3xl shadow-md`}>
+                            <h2 className="text-2xl md:text-3xl font-bold text-white pb-8" id="recommandations-brokers">Nos recommandations de brokers pour cette catégorie</h2>
                             <BrokerRecommandationByCategory category={category} />
                         </div>
-                        <div className={`bg-white border p-12 rounded-3xl shadow-md flex flex-col gap-8 items-center`}>
-                            <h2 className="text-3xl font-bold text-black w-full" id="recommandations-brokers">Sur le même sujet</h2>
-                            <ListArticles category={category} numberPerPage={2} />
-                            <Link href={`/blog/category/${category}`} className={`text-white text-md bg-violet-900 rounded-lg px-4 py-2 text-center`}>Voir tous les articles sur {categoryInfo.pres}</Link>
+                        <div className={`bg-white border p-6 md:p-12 rounded-3xl shadow-md`}>
+                            <h2 className="text-2xl md:text-3xl font-bold text-black w-full pb-4" id="recommandations-brokers">Sur le même sujet</h2>
+                            <div className='flex flex-col justify-center gap-8 items-start'>
+                                <ListArticles category={category} numberPerPage={2} />
+                                <Link href={`/blog/category/${category}`} className={`text-white text-md bg-violet-900 rounded-lg px-4 py-2 text-center w-full md:w-fit`}>Voir tous les articles sur {categoryInfo.pres}</Link>
+                            </div>
                         </div>
                     </div>
                 )}
 
                 <div className="mt-8 text-gray-500 text-sm w-full max-w-2xl">
-                    <h2 className='text-3xl font-bold text-black w-full'>Découvrez nos autres catégories :</h2>
-                    <div className="flex flex-wrap justify-center gap-2 mt-3">
+                    <h2 className='text-2xl md:text-3xl font-bold text-black w-full pb-4'>Découvrez nos autres catégories :</h2>
+                    <div className="flex flex-wrap justify-start md:justify-center gap-2 mt-3">
                         {categories.map((category) => (
                             <Link
                                 key={category.slug}

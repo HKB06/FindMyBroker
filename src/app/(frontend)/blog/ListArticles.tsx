@@ -40,48 +40,36 @@ export default async function ListArticles({
                             };
 
                             return (
-                                <div key={article.id} className="flex relative w-full h-full">
+                                <div key={article.id} className='flex relative w-full h-full'>
                                     <div className="flex flex-col gap-4 absolute z-0 w-full rounded-3xl">
                                         {typeof article.featuredImage === 'object' && article.featuredImage !== null ? (
-                                            <img
-                                                src={`${process.env.NEXT_PUBLIC_SERVER_URL ?? ''}${article.featuredImage.url}`}
-                                                alt={article.title}
-                                                className="h-96 object-cover rounded-3xl"
-                                            />
+                                            <img src={`${(process.env.NEXT_PUBLIC_SERVER_URL ?? '') + article.featuredImage.url}`} alt={article.title} className="h-96 object-cover rounded-3xl" />
                                         ) : null}
-                                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm rounded-3xl"></div>
+                                        <div className='absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm rounded-3xl'></div>
                                     </div>
 
-                                    <div className="flex flex-col gap-4 z-20 relative h-96 w-full pt-8 pb-4 px-6 text-white">
-                                        <div className="flex justify-between gap-4 h-full w-full">
-                                            <div className="flex flex-col justify-between w-full">
-                                                <div className="flex flex-col gap-8 justify-center h-full">
-                                                    <h3 className="text-xl font-bold">{article.title}</h3>
-                                                    <p className="text-xl text-gray-300">{article.excerpt}</p>
+                                    <div className="flex flex-col gap-4 z-20 relative h-96 w-full pt-8 pb-3 px-4 md:px-8 text-white">
+                                        <div className='flex justify-between gap-4 h-full w-full'>
+                                            <div className='flex flex-col justify-between w-full'>
+                                                <div className='flex flex-col gap-2 md:gap-8 justify-center h-full w-full'>
+                                                    <h3 className="text-xl md:text-3xl font-bold w-full">{article.title}</h3>
+                                                    <p className="text-md md:text-xl text-gray-300 w-full">{article.excerpt}</p>
                                                 </div>
-                                                <p className="text-sm text-gray-300">
-                                                    Publié le{' '}
-                                                    {article.publishedAt
-                                                        ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
-                                                            year: 'numeric',
-                                                            month: 'long',
-                                                            day: 'numeric',
-                                                        })
-                                                        : 'Date inconnue'}
-                                                </p>
+                                                <p className="md:block hidden">Publié le {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
+                                                    year: 'numeric',
+                                                    month: 'long',
+                                                    day: 'numeric',
+                                                }) : 'Date inconnue'}</p>
                                             </div>
-                                            <div className="w-/12 h-fit flex gap-1 gap-y-3 justify-end absolute right-0 top-0 p-4">
-                                                <span className={`rounded-xl py-1 px-3 text-sm ${type.color}`}>{type.name}</span>
-                                                <span className={`rounded-xl py-1 px-3 text-sm ${cat.color}`}>{cat.name}</span>
+                                            <div className='w-full h-fit flex flex-wrap items-center gap-1 gap-y-3 justify-end absolute right-0 top-0 p-4'>
+                                                <span className={`rounded-xl py-1 px-3 text-sm ${type.color || 'bg-gray-500'}`}>{type.name || article.type}</span>
+                                                <span className={`rounded-xl py-1 px-3 text-sm ${cat.color || 'bg-gray-500'}`}>{cat.name || article.category}</span>
                                             </div>
                                         </div>
 
-                                        <Link
-                                            href={`/blog/category/${article.category}/article/${article.slug}`}
-                                            className="flex bg-teal-500 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl px-4 py-3"
-                                        >
-                                            <span>Lire l'article</span>
-                                            <ChevronRight className="ml-2" />
+                                        <Link href={`/blog/category/${article.category}/article/${article.slug}`} className="flex items-center justify-center bg-teal-500 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl md:px-4 md:py-3 px-3 py-2 md:text-base text-sm">
+                                            <span className=''>Lire l'article</span>
+                                            <ChevronRight className="ml-2 md:block hidden" />
                                         </Link>
                                     </div>
                                 </div>

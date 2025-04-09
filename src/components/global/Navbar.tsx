@@ -79,13 +79,7 @@ export default function Navbar() {
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
 
-                            <NavigationMenuItem>
-                                <Link href="/" legacyBehavior passHref>
-                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
-                                        Services
-                                    </NavigationMenuLink>
-                                </Link>
-                            </NavigationMenuItem>
+                          
 
 
                             <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">

@@ -15,6 +15,7 @@ import {
 import './article.css';
 import ArticleContent from '@/components/blog/ArticleContent';
 import { Warehouse } from 'lucide-react';
+import Link from 'next/link';
 
 interface Params {
     article: string;
@@ -35,7 +36,7 @@ function extractTableOfContents(content: any): TableOfContentsItem[] {
                 toc.push({
                     id: node.attributes.id,
                     title: headingText,
-                    level: parseInt(node.tag.charAt(1)), 
+                    level: parseInt(node.tag.charAt(1)),
                 });
             }
         }
@@ -91,34 +92,35 @@ const ArticlePage = async ({
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>{articleData.title}</BreadcrumbPage>
+                        <BreadcrumbPage className='font-bold'>{articleData.title}</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="flex! relative! w-full! h-full!">
-                <div className="flex! flex-col! gap-4! absolute! z-0! w-full! rounded-3xl! h-full!">
+            <div className='flex relative w-full h-full'>
+                <div className="flex flex-col gap-4 absolute z-0 w-full rounded-3xl">
                     {typeof articleData.featuredImage === 'object' && articleData.featuredImage !== null ? (
-                        <img src={`${(process.env.NEXT_PUBLIC_SERVER_URL ?? '') + articleData.featuredImage.url}`} alt={articleData.title} className="h-full! object-cover! rounded-3xl!" />
+                        <img src={`${(process.env.NEXT_PUBLIC_SERVER_URL ?? '') + articleData.featuredImage.url}`} alt={articleData.title} className="h-96 object-cover rounded-3xl" />
                     ) : null}
-                    <div className="absolute! top-0! left-0! w-full! h-full! bg-black/50! backdrop-blur-sm! rounded-3xl!"></div>
+                    <div className='absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm rounded-3xl'></div>
                 </div>
-                <div className="flex! flex-col! gap-4! z-20! relative! h-96! w-full! pt-8! pb-6! px-12! text-white!">
-                    <div className="flex! justify-between! gap-4! h-full! w-full!">
-                        <div className="flex! flex-col! justify-between! w-full! pr-12!">
-                            <div className="flex! flex-col! gap-8! justify-center! h-full!">
-                                <h3 className="md:text-3xl! font-bold! text-white!">{articleData.title}</h3>
-                                <p className="md:text-xl! text-gray-300!">{articleData.excerpt}</p>
+
+                <div className="flex flex-col gap-4 z-20 relative h-96 w-full pt-8 pb-6 px-4 md:px-12 text-white">
+                    <div className='flex justify-between gap-4 h-full w-full'>
+                        <div className='flex flex-col justify-between w-full'>
+                            <div className='flex flex-col gap-2 md:gap-8 justify-center h-full'>
+                                <h3 className="text-xl md:text-3xl font-bold">{articleData.title}</h3>
+                                <p className="text-md md:text-xl text-gray-300">{articleData.excerpt}</p>
                             </div>
-                            <p className="md:text-md! text-gray-300!">Publié le {articleData.publishedAt ? new Date(articleData.publishedAt).toLocaleDateString('fr-FR', {
+                            <p className="text-sm md:text-base">Publié le {articleData.publishedAt ? new Date(articleData.publishedAt).toLocaleDateString('fr-FR', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric',
                             }) : 'Date inconnue'}</p>
                         </div>
-                        <div className="w-6/12! h-fit! flex! flex-wrap! gap-1! gap-y-3! justify-end! absolute! right-0! top-0! p-4!">
-                            <span className={`rounded-xl! py-1! px-3! md:text-sm! text-xs! ${type.color || 'bg-gray-500!'}`}>{type.name || articleData.type}</span>
-                            <span className={`rounded-xl! py-1! px-3! md:text-sm! text-xs! ${category.color || 'bg-gray-500!'}`}>{category.name || articleData.category}</span>
+                        <div className='w-full md:w-6/12 h-fit flex items-center gap-1 gap-y-3 justify-end absolute right-0 top-0 p-4'>
+                            <span className={`rounded-xl py-1 px-3 text-sm ${type.color || 'bg-gray-500'}`}>{type.name || articleData.type}</span>
+                            <span className={`rounded-xl py-1 px-3 text-sm ${category.color || 'bg-gray-500'}`}>{category.name || articleData.category}</span>
                         </div>
                     </div>
                 </div>

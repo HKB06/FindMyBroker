@@ -74,6 +74,8 @@
 /* General container */
 .article-page > * {
     width: 100%;
+    word-break: break-word; /* Permet de couper les mots uniquement si nécessaire */
+    hyphens: auto;
 }
 
 /* Scroll margin for headings */
@@ -93,4 +95,134 @@
 
 html {
     scroll-behavior: smooth; /* Ajoute un effet de défilement fluide */
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .article-page > h1 {
+        font-size: 2rem;
+    }
+
+    .article-page > h2 {
+        font-size: 1.6rem;
+    }
+
+    .article-page > h3 {
+        font-size: 1.4rem;
+    }
+
+    .article-page > h4 {
+        font-size: 1.2rem;
+    }
+
+    .article-page > * > p {
+        font-size: 0.95rem;
+    }
+
+    .article-page > * > img {
+        max-width: 70%;
+    }
+
+    .article-page > img {
+        max-width: 50%;
+    }
+    .article-page > * {
+        width: 100%;
+        word-break: break-word; /* Permet de couper les mots uniquement si nécessaire */
+        hyphens: auto;
+    }
+    .article-page h1,
+    .article-page h2,
+    .article-page h3,
+    .article-page h4,
+    .article-page h5,
+    .article-page h6 {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .article-page > h1 {
+        font-size: 1.8rem;
+    }
+
+    .article-page > h2 {
+        font-size: 1.4rem;
+    }
+
+    .article-page > h3 {
+        font-size: 1.2rem;
+    }
+
+    .article-page > h4 {
+        font-size: 1rem;
+    }
+
+    .article-page > * > p {
+        font-size: 0.9rem;
+    }
+
+    .article-page > * > img {
+        max-width: 90%;
+    }
+
+    .article-page > img {
+        max-width: 70%;
+    }
+    .article-page > * {
+        width: 100%;
+        word-break: break-word; /* Permet de couper les mots uniquement si nécessaire */
+        hyphens: auto;
+    }
+    .article-page h1,
+    .article-page h2,
+    .article-page h3,
+    .article-page h4,
+    .article-page h5,
+    .article-page h6 {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-page > h1 {
+        font-size: 1.5rem;
+    }
+
+    .article-page > h2 {
+        font-size: 1.2rem;
+    }
+
+    .article-page > h3 {
+        font-size: 1rem;
+    }
+
+    .article-page > h4 {
+        font-size: 0.9rem;
+    }
+
+    .article-page > * > p {
+        font-size: 0.85rem;
+    }
+
+    .article-page > * > img {
+        max-width: 100%;
+    }
+
+    .article-page > img {
+        max-width: 90%;
+    }
+    .article-page > * {
+        width: 100%;
+        word-break: break-word; /* Permet de couper les mots uniquement si nécessaire */
+        hyphens: auto;
+    }
+    .article-page h1,
+    .article-page h2,
+    .article-page h3,
+    .article-page h4,
+    .article-page h5,
+    .article-page h6 {
+        margin-top: 30px;
+    }
 }
