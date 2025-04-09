@@ -129,6 +129,10 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  /**
+   * Rôle de l’utilisateur (admin ou user)
+   */
+  role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -141,12 +145,21 @@ export interface User {
   password?: string | null;
 }
 /**
+ * Gestion des images (logos, illustrations, etc.)
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: string;
+  /**
+   * Description de l'image pour l'accessibilité
+   */
   alt: string;
+  /**
+   * Type d'image
+   */
+  category?: ('broker-logo' | 'illustration' | 'other') | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -158,6 +171,24 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * Gestion des brokers et leurs caractéristiques
@@ -367,28 +398,36 @@ export interface ResponseTemplate {
   createdAt: string;
 }
 /**
+ * Utilisateurs ayant demandé le rapport détaillé
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscribers".
  */
 export interface Subscriber {
   id: string;
   email: string;
-  answers?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  recommendedBrokers?:
-    | {
-        relationTo: 'brokers';
-        value: string | Broker;
-      }[]
-    | null;
-  isSubscribedToNewsletter?: boolean | null;
+  quizProfile: {
+    date: string;
+    answers?:
+      | {
+          question: string | Question;
+          selectedAnswer: string;
+          id?: string | null;
+        }[]
+      | null;
+    scores?:
+      | {
+          criterion?: string | null;
+          score?: number | null;
+          id?: string | null;
+        }[]
+      | null;
+    topBrokers?: (string | Broker)[] | null;
+    extendedBrokers?: (string | Broker)[] | null;
+    profileSummary?: string | null;
+  };
+  hasDetailedReport?: boolean | null;
+  newsletterOptIn?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -534,6 +573,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -550,6 +590,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -561,6 +602,30 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -617,9 +682,30 @@ export interface QuestionsSelect<T extends boolean = true> {
  */
 export interface SubscribersSelect<T extends boolean = true> {
   email?: T;
-  answers?: T;
-  recommendedBrokers?: T;
-  isSubscribedToNewsletter?: T;
+  quizProfile?:
+    | T
+    | {
+        date?: T;
+        answers?:
+          | T
+          | {
+              question?: T;
+              selectedAnswer?: T;
+              id?: T;
+            };
+        scores?:
+          | T
+          | {
+              criterion?: T;
+              score?: T;
+              id?: T;
+            };
+        topBrokers?: T;
+        extendedBrokers?: T;
+        profileSummary?: T;
+      };
+  hasDetailedReport?: T;
+  newsletterOptIn?: T;
   updatedAt?: T;
   createdAt?: T;
 }

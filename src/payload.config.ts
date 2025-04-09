@@ -1,22 +1,31 @@
-// storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Brokers } from './collections/Brokers'
-import { Questions } from './collections/Questions'
-import { Subscribers } from './collections/Subscribers'
-import { Articles } from './collections/Articles/config'
-import { ResponseTemplates } from './collections/ResponseTemplates'
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+dotenv.config({
+  path: path.resolve(dirname, '../.env'),
+});
+
+import { buildConfig } from 'payload';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
+import sharp from 'sharp';
+
+
+import { Users } from './collections/Users';
+import { Media } from './collections/Media';
+import { Brokers } from './collections/Brokers';
+import { Questions } from './collections/Questions';
+import { Subscribers } from './collections/Subscribers';
+import { Articles } from './collections/Articles/config'; 
+import { ResponseTemplates } from './collections/ResponseTemplates';
+
+
+import quizEndpoints from './endpoints/quiz';
 
 export default buildConfig({
   admin: {
@@ -25,9 +34,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Brokers, Questions, Subscribers, Articles, ResponseTemplates],
+  collections: [
+    Users,
+    Media,
+    Brokers,
+    Questions,
+    Subscribers,
+    Articles,
+    ResponseTemplates,
+  ],
+  endpoints: quizEndpoints, 
   editor: lexicalEditor({}),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || 'development-secret', 
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -39,4 +57,4 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
-})
+});

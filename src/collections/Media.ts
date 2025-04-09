@@ -5,12 +5,59 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'alt',
+    description: 'Gestion des images (logos, illustrations, etc.)'
+  },
+  upload: {
+    staticDir: 'media',
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 200,
+        height: 200,
+        position: 'center'
+      },
+      {
+        name: 'logo',
+        width: 400,
+        height: 400,
+        position: 'center'
+      }
+    ],
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/png', 'image/jpeg', 'image/svg+xml']
+  },
   fields: [
     {
       name: 'alt',
       type: 'text',
       required: true,
+      label: 'Texte alternatif',
+      admin: {
+        description: 'Description de l\'image pour l\'accessibilité'
+      }
     },
-  ],
-  upload: true,
+    {
+      name: 'category',
+      type: 'select',
+      options: [
+        {
+          label: 'Logo Broker',
+          value: 'broker-logo'
+        },
+        {
+          label: 'Illustration',
+          value: 'illustration'
+        },
+        {
+          label: 'Autre',
+          value: 'other'
+        }
+      ],
+      admin: {
+        description: 'Type d\'image'
+      }
+    }
+  ]
 }
