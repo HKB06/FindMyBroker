@@ -28,7 +28,7 @@ export default async function ListArticles({
         <div className="h-max w-full">
             {articles.length > 0 ? (
                 <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
                         {articles.map((article) => {
                             const type = types.find((cat) => cat.slug == article.type) || {
                                 name: article.type,
@@ -52,7 +52,7 @@ export default async function ListArticles({
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm rounded-3xl"></div>
                                     </div>
 
-                                    <div className="flex flex-col gap-4 z-20 relative h-96 w-full pt-8 pb-6 px-12 text-white">
+                                    <div className="flex flex-col gap-4 z-20 relative h-96 w-full pt-8 pb-4 px-6 text-white">
                                         <div className="flex justify-between gap-4 h-full w-full">
                                             <div className="flex flex-col justify-between w-full">
                                                 <div className="flex flex-col gap-8 justify-center h-full">

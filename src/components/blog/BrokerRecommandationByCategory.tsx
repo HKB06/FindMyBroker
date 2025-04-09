@@ -53,7 +53,7 @@ const BrokerRecommandationByCategory = async ({
 
     return (
         <div>
-            <ul className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <ul className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {brokers.map((broker) => {
                     const categoryInfo = categories.find(cat => cat.slug === broker.category) || {
                         name: broker.category,
