@@ -2,8 +2,7 @@ import { fetchBrokers } from '@/lib/brokersByCategory';
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { categories } from '@/lib/categories';
-import { Star } from 'lucide-react';
-import { RichText } from '@/components/blog/RichText';
+import { Lightbulb, Rocket, Star } from 'lucide-react';
 
 interface Broker {
     id: string;
@@ -64,7 +63,7 @@ const BrokerRecommandationByCategory = async ({
                         <li key={broker.id} className='flex'>
                             <div className='flex flex-col justify-between bg-white p-6 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow'>
                                 <div>
-                                    <div className='flex items-center gap-12 mb-4'>
+                                    <div className='flex items-center gap-8 mb-4 justify-center'>
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_SERVER_URL ?? ''}${typeof broker.logo === 'object' && broker.logo !== null
                                                 ? broker.logo.url
@@ -119,21 +118,37 @@ const BrokerRecommandationByCategory = async ({
 
 
 
-                                    <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
+                                    {/* <div className='prose prose-sm max-w-none text-gray-600 mb-4'>
                                         {broker.description && <RichText data={broker.description} />}
-                                    </div>
+                                    </div> */}
                                 </div>
 
-                                {broker.referralLink && (
+                                <div className='flex flex-col gap-3'>
+
                                     <Link
-                                        href={broker.referralLink}
+                                        href={`/brokers/${broker.name}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`w-full mt-auto ${buttonVariants({ variant: 'default' })} ${broker.color || 'bg-[#8B5CF6]'}! text-white flex items-center justify-center py-2 rounded-lg`}
+                                        className={`mt-auto ${buttonVariants({ variant: 'default' })} ${broker.color || 'bg-[#8B5CF6]'}! text-white flex items-center justify-center py-2 rounded-lg`}
                                     >
-                                        Commencer avec {broker.name}
+                                        <Lightbulb />
+                                        En savoir plus sur {broker.name}
                                     </Link>
-                                )}
+
+                                    {broker.referralLink && (
+                                        <Link
+                                            href={broker.referralLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`mt-auto ${buttonVariants({ variant: 'default' })} ${broker.color || 'bg-[#8B5CF6]'}! text-white flex items-center justify-center py-2 rounded-lg`}
+                                        >
+                                            <Rocket />
+                                            Commencer avec {broker.name}
+                                        </Link>
+                                    )}
+
+                                </div>
+
                             </div>
                         </li>
                     );

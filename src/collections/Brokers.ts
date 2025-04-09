@@ -1,3 +1,4 @@
+import { options } from './../../node_modules/.pnpm/tsconfig-paths@3.15.0/node_modules/tsconfig-paths/src/options';
 import type { CollectionConfig } from 'payload'
 
 export const Brokers: CollectionConfig = {
@@ -62,6 +63,7 @@ export const Brokers: CollectionConfig = {
         description: 'Catégorie principale du broker'
       }
     },
+    
     {
       name: 'description',
       type: 'richText',
