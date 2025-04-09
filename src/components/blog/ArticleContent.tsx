@@ -59,9 +59,9 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
 
     return (
         <div className="relative!">
-            <div className="flex! flex-col! w-full! justify-center! gap-12">
+            <div className="flex! flex-col! w-full! justify-center! gap-8">
                 {content && tableOfContents.length > 0 && (
-                    <div className='flex! gap-12! w-full! justify-center!'>
+                    <div className='flex! gap-8! w-full! justify-center!'>
                         <aside className="md:w-1/3! w-full!">
                             <div className="top-20 left-24 mb-10 w-full! max-w-xs rounded-3xl border bg-white px-6 py-6 shadow-md lg:sticky lg:w-full">
                                 <div className="pb-2 text-xl font-medium text-[#8B5CF6]">Table des matières</div>
@@ -86,7 +86,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
                                 </div>
                             </div>
                         </aside>
-                        <div className="flex flex-col gap-12 w-full! h-full!">
+                        <div className="flex flex-col gap-8 w-full! h-full!">
                             <div className="bg-white! rounded-3xl! border! px-8! py-8! shadow-md">
                                 <RichText
                                     data={content}
@@ -108,12 +108,12 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
                 )}
 
                 {category !== "autre" && (
-                    <div className='flex flex-col gap-12'>
+                    <div className='flex flex-col gap-8'>
                         <div className={`${categoryInfo.color} p-12 rounded-3xl shadow-md`}>
                             <h2 className="text-3xl font-bold text-white pb-8" id="recommandations-brokers">Nos recommandations de brokers pour cette catégorie</h2>
                             <BrokerRecommandationByCategory category={category} />
                         </div>
-                        <div className={`bg-white border p-12 rounded-3xl shadow-md flex flex-col gap-12 items-center`}>
+                        <div className={`bg-white border p-12 rounded-3xl shadow-md flex flex-col gap-8 items-center`}>
                             <h2 className="text-3xl font-bold text-black w-full" id="recommandations-brokers">Sur le même sujet</h2>
                             <ListArticles category={category} numberPerPage={2} />
                             <Link href={`/blog/category/${category}`} className={`text-white text-md bg-violet-900 rounded-lg px-4 py-2 text-center`}>Voir tous les articles sur {categoryInfo.pres}</Link>

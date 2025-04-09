@@ -3,9 +3,18 @@ import { getPayloadInstance } from '@/lib/payload';
 import { notFound } from 'next/navigation';
 import { types } from '@/lib/types';
 import { categories } from '@/lib/categories';
-import { RichText } from '@/components/blog/RichText';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
 import './article.css';
 import ArticleContent from '@/components/blog/ArticleContent';
+import { Warehouse } from 'lucide-react';
 
 interface Params {
     article: string;
@@ -26,7 +35,7 @@ function extractTableOfContents(content: any): TableOfContentsItem[] {
                 toc.push({
                     id: node.attributes.id,
                     title: headingText,
-                    level: parseInt(node.tag.charAt(1)), // h2 -> 2, h3 -> 3, etc.
+                    level: parseInt(node.tag.charAt(1)), 
                 });
             }
         }
@@ -36,10 +45,6 @@ function extractTableOfContents(content: any): TableOfContentsItem[] {
     };
     traverse(content.root);
     return toc;
-}
-
-function formatSlug(text: string): string {
-    return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 
 const ArticlePage = async ({
@@ -67,10 +72,30 @@ const ArticlePage = async ({
 
     const type = types.find(cat => cat.slug == articleData.type) || { name: articleData.type, color: 'bg-gray-500!' };
     const category = categories.find(cat => cat.slug == articleData.category) || { name: articleData.category, color: 'bg-gray-500!' };
-    const tableOfContents = articleData.content ? extractTableOfContents(articleData.content) : [];
 
     return (
-        <div className="w-screen! h-full! flex! flex-col! justify-center! items-start! py-30! md:px-24! px-8! gap-12!">
+        <div className="w-screen! h-full! flex! flex-col! justify-center! items-start! py-30! md:px-24! px-8! gap-8!">
+
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href={`/blog/category/${articleData.category}`} className='first-letter:uppercase'>{articleData.category}</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{articleData.title}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+
             <div className="flex! relative! w-full! h-full!">
                 <div className="flex! flex-col! gap-4! absolute! z-0! w-full! rounded-3xl! h-full!">
                     {typeof articleData.featuredImage === 'object' && articleData.featuredImage !== null ? (
