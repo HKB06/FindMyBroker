@@ -1,3 +1,4 @@
+
 import payload from 'payload';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -7,23 +8,12 @@ import config from '../payload.config';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-const envPath = path.resolve(__dirname, '../../.env');
-console.log('[DEBUG] Chemin vers .env :', envPath);
-
-
-dotenv.config({ path: envPath });
-
-
-console.log('DATABASE_URI (stringified) =>', JSON.stringify(process.env.DATABASE_URI));
-console.log('[DEBUG] DATABASE_URI :', process.env.DATABASE_URI);
-console.log('[DEBUG] NEXT_PUBLIC_SERVER_URL :', process.env.NEXT_PUBLIC_SERVER_URL);
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const seed = async () => {
   try {
     console.log('Démarrage du script seed...');
 
-    
     await (payload as any).init({
       config,
       secret: process.env.PAYLOAD_SECRET,
@@ -32,25 +22,29 @@ const seed = async () => {
 
     console.log('✅ Payload initialisé avec succès');
 
-    
-    console.log('Suppression de tous les brokers et questions existants...');
     await payload.delete({ collection: 'brokers', where: {} });
     await payload.delete({ collection: 'questions', where: {} });
     console.log('✅ Collections brokers et questions nettoyées');
 
-    
     const brokers: {
       name: string;
       category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
       rating: number;
     }[] = [
-      { name: 'Broker A', category: 'bourse', rating: 5 },
-      { name: 'Broker B', category: 'crypto-monnaies', rating: 4 },
-      { name: 'Broker C', category: 'trading', rating: 3 },
+      { name: 'Moneta Markets', category: 'trading', rating: 4 },
+      { name: 'Vantage', category: 'trading', rating: 4 },
+      { name: 'Exness', category: 'trading', rating: 5 },
+      { name: 'IC Markets', category: 'trading', rating: 5 },
+      { name: 'Pepperstone', category: 'trading', rating: 4 },
+      { name: 'XTB', category: 'bourse', rating: 4 },
+      { name: 'FXTM', category: 'trading', rating: 3 },
+      { name: 'Axi', category: 'trading', rating: 3 },
+      { name: 'AvaTrade', category: 'bourse', rating: 4 },
+      { name: 'Plus500', category: 'trading', rating: 4 },
     ];
+    
 
     for (const broker of brokers) {
-      console.log('Création du broker :', broker.name);
       await payload.create({
         collection: 'brokers',
         data: {
@@ -59,10 +53,8 @@ const seed = async () => {
         },
       });
     }
-    console.log('✅ Brokers créés');
+    console.log('✅ 10 Brokers créés');
 
-    
-    console.log('Création de la question d’exemple...');
     await payload.create({
       collection: 'questions',
       data: {
@@ -86,9 +78,8 @@ const seed = async () => {
         ],
       },
     });
-    console.log('✅ Données seed insérées avec succès');
 
-    
+    console.log('✅ Données seed insérées avec succès');
     process.exit(0);
   } catch (err) {
     console.error('❌ Erreur pendant le seed :', err);
