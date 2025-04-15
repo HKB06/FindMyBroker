@@ -84,8 +84,8 @@ const MobileNav = () => {
           className="flex items-center gap-2 w-max text-black dark:text-white z-200"
           passHref
         >
-          <ScanSearch className="text-[#8B5CF6]" />
-          <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
+          <ScanSearch className="text-green-dark" />
+          <span className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text">
             FindMyBroker
             <span className="font-bold">.io</span>
           </span>
@@ -98,11 +98,11 @@ const MobileNav = () => {
       >
         {isOpen ? (
           <X
-            className="rotate-90 transition-transform duration-1000 z-500 text-[#D946EF]"
+            className="rotate-90 transition-transform duration-1000 z-500 text-green-light"
             onClick={() => closeOnCurrent("/")}
           />
         ) : (
-          <Menu className="rotate-0 transition-transform duration-1000 text-[#8B5CF6]" />
+          <Menu className="rotate-0 transition-transform duration-1000 text-green-dark" />
         )}
         <div>
           {isOpen ? (
@@ -127,7 +127,7 @@ const MobileNav = () => {
                     toggleDropdown();
                   }}
                 >
-                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container">
+                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text theme-select-container">
                     Trouver des brokers
                     <ChevronDown
                       size={18}
@@ -145,7 +145,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
                           Lien 1
@@ -154,7 +154,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
                           Lien 2
@@ -163,7 +163,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
                           Lien 3
@@ -179,7 +179,7 @@ const MobileNav = () => {
                     toggleBlogDropdown();
                   }}
                 >
-                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text theme-select-container">
+                  <div className="flex gap-3 items-center w-full font-regular text-pBrown font-title text-2xl font-semibold bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text theme-select-container">
                     Blog
                     <ChevronDown
                       size={18}
@@ -197,7 +197,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/blog/category/assurance-vie"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/blog/category/assurance-vie")}
                         >
                           Assurance vie
@@ -206,7 +206,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/blog/category/immobilier"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/blog/category/immobilier")}
                         >
                           Immobilier
@@ -215,7 +215,7 @@ const MobileNav = () => {
                       <li>
                         <Link
                           href="/blog/category/retraite"
-                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-[#8B5CF6] dark:hover:text-[#D946EF]"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/blog/category/retraite")}
                         >
                           Retraite

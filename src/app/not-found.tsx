@@ -13,9 +13,9 @@ export default function NotFound() {
             <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-16 bg-gray-100">
                 <div className="max-w-md w-full bg-white border border-[#e9d5ff] rounded-xl shadow-lg overflow-hidden p-8 text-center">
                     <div className="mb-6">
-                        <div className='flex gap-1 text-lg items-center justify-center text-[#D946EF]'>
+                        <div className='flex gap-1 text-lg items-center justify-center text-green-light'>
                             <span className='text-4xl'>4</span>
-                            <Compass className="w-14 h-14 text-[#D946EF]" />
+                            <Compass className="w-14 h-14 text-green-light" />
                             <span className='text-4xl'>4</span>
                         </div>
                     </div>
@@ -29,7 +29,7 @@ export default function NotFound() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <button
                             onClick={() => router.back()}
-                            className="flex items-center justify-center gap-2 px-6 py-2 bg-[#D946EF] text-white hover:border-[#D946EF] hover:border hover:bg-transparent hover:text-[#D946EF] rounded-lg transition duration-200 cursor-pointer"
+                            className="flex items-center justify-center gap-2 px-6 py-2 bg-green-light text-white hover:border-green-light hover:border hover:bg-transparent hover:text-green-light rounded-lg transition duration-200 cursor-pointer"
                         >
                             <ArrowLeft className="w-4 h-4" />
                             Retour
@@ -37,7 +37,7 @@ export default function NotFound() {
 
                         <Link
                             href="/"
-                            className="flex items-center justify-center gap-2 px-6 py-2 border border-[#D946EF] hover:bg-[#D946EF] hover:text-white text-[#D946EF] rounded-lg transition duration-200 cursor-pointer"
+                            className="flex items-center justify-center gap-2 px-6 py-2 border border-green-light hover:bg-green-light hover:text-white text-green-light rounded-lg transition duration-200 cursor-pointer"
                         >
                             <Home className="w-4 h-4" />
                             Accueil

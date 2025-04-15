@@ -14,7 +14,7 @@ export function ThemeSelect() {
             <Switch
                 checked={theme === 'dark'} 
                 onCheckedChange={toggleTheme} 
-                className="cursor-pointer dark:bg-[#D946EF]!"
+                className="cursor-pointer dark:bg-green-light!"
             />
             
             <Moon size={18} />

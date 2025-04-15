@@ -20,7 +20,7 @@ const LastArticle = async () => {
         return (
             <div className="w-screen h- flex flex-col justify-center items-center gap-8 md:px-24 py-40">
                 <h2 className="text-3xl font-bold">Aucun article trouvé 🤕.</h2>
-                <Button className="p-6 cursor-pointer text-md md:text-lg text-white bg-[#8B5CF6] hover:bg-[#743cf4]">
+                <Button className="p-6 cursor-pointer text-md md:text-lg text-white bg-green-dark hover:bg-green-dark/70">
                     <Link href="/" className="flex items-center gap-5">
                         <span>Retourner à l'accueil</span>
                         <CornerDownLeft/>
@@ -64,7 +64,7 @@ const LastArticle = async () => {
                                 </div>
                             </div>
 
-                            <Link href={`/blog/category/${article.category}/article/${article.slug}`} className="flex items-center justify-center bg-teal-500 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl md:px-4 md:py-3 px-3 py-2 md:text-base text-sm">
+                            <Link href={`/blog/category/${article.category}/article/${article.slug}`} className="flex items-center justify-center bg-green-light/80 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl md:px-4 md:py-3 px-3 py-2 md:text-base text-sm">
                                 <span className=''>Lire l'article</span>
                                 <ChevronRight className="ml-2 md:block hidden" />
                             </Link>

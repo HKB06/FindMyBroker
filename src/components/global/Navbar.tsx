@@ -23,11 +23,10 @@ export default function Navbar() {
     return (
         <>
             <nav className="hidden lg:flex items-center px-6 h-16 w-full *:h-full border-b bg-white dark:bg-[#1F2937] dark:border-gray-700 z-200 fixed">
-                {/* <div className="flex items-center px-6 h-16 bg-gray-200 dark:bg-[#111827]! fixed top-0 w-full *:h-full z-12"> */}
                 <div className="w-1/3 flex items-center">
                     <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white" passHref>
-                        <ScanSearch className="text-[#8B5CF6]" />
-                        <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
+                        <ScanSearch className="text-green-dark" />
+                        <span className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text">
                             FindMyBroker
                             <span className="font-bold">.io</span>
                         </span>
@@ -46,14 +45,14 @@ export default function Navbar() {
 
                             <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">
                                 <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
-                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold">Trouver des brokers</span>
+                                    <span className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text font-bold">Trouver des brokers</span>
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent className="dark:bg-[#1F2937]! border-0! ring-0!">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-3">
                                             <NavigationMenuLink asChild className="">
                                                 <a
-                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-[#D946EF] hover:to-[#8B5CF6] bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-green-light hover:to-green-dark bg-gradient-to-b from-green-dark to-green-light p-6 no-underline outline-none focus:shadow-md"
                                                     href="/"
                                                 >
                                                     <span className="text-4xl">🧪</span>
@@ -84,14 +83,14 @@ export default function Navbar() {
 
                             <NavigationMenuItem className="ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0">
                                 <NavigationMenuTrigger className={`text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:focus:bg-[#1F2937] dark:focus:text-white dark:hover:bg-[#1F2937] dark:hover:text-white cursor-pointer dark:data-[state=open]:focus:bg-[#1F2937]! dark:data-[state=open]:bg-[#1F2937]! dark:data-[state=open]:text-white!`}>
-                                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold">Blog</span>
+                                    <span className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text font-bold">Blog</span>
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent className="dark:bg-[#1F2937]! border-0! ring-0!">
                                     <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-5">
                                             <NavigationMenuLink asChild className="">
                                                 <a
-                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-[#D946EF] hover:to-[#8B5CF6] bg-gradient-to-b from-[#8B5CF6] to-[#D946EF] p-6 no-underline outline-none focus:shadow-md"
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-green-light hover:to-green-dark bg-gradient-to-b from-green-dark to-green-light p-6 no-underline outline-none focus:shadow-md"
                                                     href="/blog"
                                                 >
                                                     <span className="text-4xl">📰</span>
@@ -104,11 +103,11 @@ export default function Navbar() {
                                                 </a>
                                             </NavigationMenuLink>
                                         </li>
-                                        <h3 className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-bold ml-2">Nos catégories phares</h3>
+                                        <h3 className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text font-bold ml-2">Nos catégories phares</h3>
                                         <ListItem href="/blog/category/assurance-vie" title="Assurance vie 🧑‍🧑‍🧒">Nos conseils blablabla</ListItem>
                                         <ListItem href="/blog/category/immobilier" title="Immobilier 🏢">Nos conseils blablabla</ListItem>
                                         <ListItem href="/blog/category/retraite" title="Retraite 👴">Nos conseils blablabla</ListItem>
-                                        <Link href="/blog/categories" className={`${buttonVariants({ variant: 'default' })} cursor-pointer bg-[#D946EF]! hover:bg-[#C814E4]! flex gap-2`}>
+                                        <Link href="/blog/categories" className={`${buttonVariants({ variant: 'default' })} cursor-pointer bg-green-light! hover:bg-[#C814E4]! flex gap-2`}>
                                             Voir toutes nos catégories
                                             <ArrowRight />
                                         </Link>

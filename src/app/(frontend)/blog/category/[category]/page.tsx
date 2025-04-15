@@ -57,7 +57,7 @@ const CategoryPage = async ({
             </div>
             <div className='w-screen h-full flex flex-col justify-center gap-8 bg-gray-100 px-12 md:px-24 py-20'>
                 <h2 className="text-2xl md:text-3xl font-bold text-black pb-3">Nos articles sur <span className='lowercase'>{categoryData?.pres}</span></h2>
-                <ListArticles category={category} numberPerPage={9} page={page} paginate={true} />
+                <ListArticles category={category} numberPerPage={6} page={page} paginate={true} />
             </div>
             <div className={`w-screen h-full flex flex-col justify-center gap-8 px-12 md:px-24 py-20 ${categoryData?.color}`}>
                 <h2 className="text-2xl md:text-3xl font-bold text-white pb-3">Nos recommandations de brokers pour <span className='lowercase'>{categoryData?.pres}</span></h2>

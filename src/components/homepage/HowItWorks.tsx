@@ -16,17 +16,17 @@ const HowItWorks = () => {
                 <TriangleBackground triangles={triangles} opacity={.5} />
                 <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 py-24 gap-24 z-20">
                     <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
-                        <h2 className="md:text-3xl text-2xl dark:text-white font-bold underline underline-offset-4 decoration-[#8B5CF6]">
+                        <h2 className="md:text-3xl text-2xl dark:text-white font-bold underline underline-offset-4 decoration-green-light">
                             Comment ça marche ?
                         </h2>
                         <p className="text-base dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                     </div>
-                    <div className="grid lg:grid-cols-4 gap-8 w-full ">
+                    <div className="grid lg:grid-cols-4 lg:grid-rows-1 gap-8 w-full ">
                         <div className='flex flex-col justify-center items-center gap-4 bg-white dark:bg-[#1F2937] p-8 rounded-lg border border-gray-300 dark:border-gray-700'>
-                            <div className='bg-[#8B5CF6]/20 rounded-full w-max flex items-center justify-center p-4'>
-                                <UserPlus size={24} className='text-[#8B5CF6]' />
+                            <div className='bg-green-light/20 rounded-full w-max flex items-center justify-center p-4'>
+                                <UserPlus size={24} className='text-green-light' />
                             </div>
-                            <h3 className='font-semibold dark:text-white'>
+                            <h3 className='font-semibold dark:text-white text-green-dark'>
                                 Create profile
                             </h3>
                             <span className='dark:text-gray-200 text-center'>
@@ -35,10 +35,10 @@ const HowItWorks = () => {
                         </div>
 
                         <div className='flex flex-col justify-center items-center gap-4 bg-white dark:bg-[#1F2937] p-8 rounded-lg border border-gray-300 dark:border-gray-700'>
-                            <div className='bg-[#D946EF]/20 rounded-full w-max flex items-center justify-center p-4'>
-                                <Settings2 size={24} className='text-[#D946EF]' />
+                            <div className='bg-green-light/20 rounded-full w-max flex items-center justify-center p-4'>
+                                <Settings2 size={24} className='text-green-light' />
                             </div>
-                            <h3 className='font-semibold dark:text-white'>
+                            <h3 className='font-semibold dark:text-white text-green-dark'>
                                 Set preferences
                             </h3>
                             <span className='dark:text-gray-200 text-center'>
@@ -47,10 +47,10 @@ const HowItWorks = () => {
                         </div>
 
                         <div className='flex flex-col justify-center items-center gap-4 bg-white dark:bg-[#1F2937] p-8 rounded-lg border border-gray-300 dark:border-gray-700'>
-                            <div className='bg-[#8B5CF6]/20 rounded-full w-max flex items-center justify-center p-4'>
-                                <WandSparkles size={24} className='text-[#8B5CF6]' />
+                            <div className='bg-green-light/20 rounded-full w-max flex items-center justify-center p-4'>
+                                <WandSparkles size={24} className='text-green-light' />
                             </div>
-                            <h3 className='font-semibold dark:text-white'>
+                            <h3 className='font-semibold dark:text-white text-green-dark'>
                                 Get Matches
                             </h3>
                             <span className='dark:text-gray-200 text-center'>
@@ -59,16 +59,18 @@ const HowItWorks = () => {
                         </div>
 
                         <div className='flex flex-col justify-center items-center gap-4 bg-white dark:bg-[#1F2937] p-8 rounded-lg border border-gray-300 dark:border-gray-700'>
-                            <div className='bg-[#D946EF]/20 rounded-full w-max flex items-center justify-center p-4'>
-                                <Handshake size={24} className='text-[#D946EF]' />
+                            <div className='bg-green-light/20 rounded-full w-max flex items-center justify-center p-4'>
+                                <Handshake size={24} className='text-green-light' />
                             </div>
-                            <h3 className='font-semibold dark:text-white'>
-                                Connect
+                            <h3 className='font-semibold dark:text-white text-green-dark'>
+                            Connect
                             </h3>
                             <span className='dark:text-gray-200 text-center'>
-                                Start working with your chosen broker
+                            Start working with broker and watch your investments
                             </span>
                         </div>
+
+                        
                     </div>
                 </div>
             </div>

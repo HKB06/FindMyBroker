@@ -33,12 +33,12 @@
 
 /* Links */
 .article-page > * > a {
-    color: #8B5CF6; /* Couleur principale */
+    color: #14532D; /* Couleur principale */
     text-decoration: none;
 }
 
 .article-page > * > a:hover {
-    color: #D946EF; /* Couleur secondaire au survol */
+    color: #4ADE80; /* Couleur secondaire au survol */
     text-decoration: underline;
 }
 
@@ -48,7 +48,7 @@
     height: auto;
     margin: 20px 0;
     border-radius: 5px;
-    border: 2px solid #8B5CF6; /* Bordure avec couleur principale */
+    border: 2px solid #14532D; /* Bordure avec couleur principale */
 }
 
 /* Lists */

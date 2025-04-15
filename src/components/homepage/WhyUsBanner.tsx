@@ -20,7 +20,7 @@ const WhyUsBanner = () => {
                         <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
                             <h2 className="md:text-3xl text-2xl dark:text-white font-bold">
                                 Pourquoi choisir&nbsp;
-                                <span className='font-black bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text'>
+                                <span className='font-black bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text'>
                                     FindMyBroker.io&nbsp;
                                 </span>
                                 ?
@@ -32,10 +32,10 @@ const WhyUsBanner = () => {
                                 className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
-                                <div className='bg-[#8B5CF6]/20 rounded-lg flex items-center justify-center p-4'>
-                                    <Bot size={24} className='text-[#8B5CF6]' />
+                                <div className='bg-green-mint rounded-lg flex items-center justify-center p-4'>
+                                    <Bot size={24} className='text-green-dark' />
                                 </div>
-                                <h3 className='text-lg dark:text-white'>AI-Powered Matching</h3>
+                                <h3 className='text-lg dark:text-white text-green-light'>AI-Powered Matching</h3>
                                 <span className='dark:text-gray-400 text-md'>
                                     Advanced algorithms ensure perfect broker matches based on your specific needs and preferences.
                                 </span>
@@ -44,10 +44,10 @@ const WhyUsBanner = () => {
                                 className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
-                                <div className='bg-[#D946EF]/20 rounded-lg flex items-center justify-center p-4'>
-                                    <CircleHelp size={24} className='text-[#D946EF]' />
+                                <div className='bg-green-mint rounded-lg flex items-center justify-center p-4'>
+                                    <CircleHelp size={24} className='text-green-dark' />
                                 </div>
-                                <h3 className='text-lg dark:text-white'>Verified Professionals</h3>
+                                <h3 className='text-lg dark:text-white text-green-light'>Verified Professionals</h3>
                                 <span className='dark:text-gray-400 text-md'>
                                     All brokers are thoroughly vetted and verified to ensure the highest quality service.
                                 </span>
@@ -55,10 +55,10 @@ const WhyUsBanner = () => {
                                 className="bg-white dark:bg-[#1F2937] border border-gray-300 dark:border-[#374151] rounded-xl p-6
                         flex flex-col justify-start items-start gap-5"
                             >
-                                <div className='bg-[#8B5CF6]/20 rounded-lg flex items-center justify-center p-4'>
-                                    <Clock size={24} className='text-[#8B5CF6]' />
+                                <div className='bg-green-mint rounded-lg flex items-center justify-center p-4'>
+                                    <Clock size={24} className='text-green-dark' />
                                 </div>
-                                <h3 className='text-lg dark:text-white'>Quick Matching</h3>
+                                <h3 className='text-lg dark:text-white text-green-light'>Quick Matching</h3>
                                 <span className='dark:text-gray-400 text-md'>
                                     Get matched with suitable brokers within minutes and start your investment journey.
                                 </span>

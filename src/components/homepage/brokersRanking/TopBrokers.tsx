@@ -6,7 +6,7 @@ export default function TopBrokers() {
       <div className="flex flex-col items-center justify-center w-full md:w-10/12 px-12 gap-24 z-20">
         <div className="flex flex-col items-center justify-center gap-6 md:w-1/2 w-full">
           <h2 className="md:text-3xl text-2xl dark:text-white font-bold">
-            Nos meilleurs <span className='font-black bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text '>brokers</span>
+            Nos meilleurs <span className='font-black bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text '>brokers</span>
           </h2>
         </div>
         <div>

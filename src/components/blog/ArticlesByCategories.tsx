@@ -6,7 +6,7 @@ export default function ArticlesByCategories({ searchParams }: { searchParams: {
     const category = searchParams?.category || null;
     const categoryData = categories.find(cat => cat.slug === category);
     return (
-        <div className="w-screen h-full flex flex-col justify-center gap-8 pb-30 md:px-24 px-12 bg-[#8B5CF6]">
+        <div className="w-screen h-full flex flex-col justify-center gap-8 pb-30 md:px-24 px-12 bg-green-dark">
             <h2 className="text-2xl md:text-3xl font-bold text-white pt-12 pb-3">Nos derniers articles par catégorie</h2>
 
             <CategoryFilter />

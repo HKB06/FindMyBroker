@@ -14,9 +14,9 @@ export default function NotFound() {
         <div className="max-w-md w-full bg-white border rounded-xl overflow-hidden p-8 text-center">
           <div className="mb-6">
             
-            <div className='flex gap-1 text-lg items-center justify-center text-[#D946EF]'>
+            <div className='flex gap-1 text-lg items-center justify-center text-green-light'>
               <span className='text-4xl'>4</span>
-              <Frown className="w-16 h-16 text-[#D946EF]" />
+              <Frown className="w-16 h-16 text-green-light" />
               <span className='text-4xl'>4</span>
             </div>
 
@@ -32,13 +32,13 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => router.back()}
-              className="px-6 py-2 bg-[#D946EF] text-white hover:border-[#D946EF] hover:border hover:bg-transparent hover:text-[#D946EF] rounded-lg transition duration-200 cursor-pointer"
+              className="px-6 py-2 bg-green-light text-white hover:border-green-light hover:border hover:bg-transparent hover:text-green-light rounded-lg transition duration-200 cursor-pointer"
             >
               Retour
             </button>
 
             <Link href="/"
-              className="px-6 py-2 border border-[#D946EF] hover:bg-[#D946EF] hover:text-white text-[#D946EF] rounded-lg transition duration-200 cursor-pointer"
+              className="px-6 py-2 border border-green-light hover:bg-green-light hover:text-white text-green-light rounded-lg transition duration-200 cursor-pointer"
             >
               Accueil
             </Link>

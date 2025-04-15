@@ -29,7 +29,7 @@ export default function PodiumStep({ podium, winner }: PodiumStepProps) {
 
       {/* Barre du podium */}
       <div
-        className="flex place-content-center bg-gradient-to-t from-[#8B5CF6] to-[#D946EF] rounded-t-lg mb-[-1px] w-16"
+        className="flex place-content-center bg-gradient-to-t from-green-dark to-green-light rounded-t-lg mb-[-1px] w-16"
         style={{
           height, // Hauteur dynamique
           opacity, // Opacité dynamique

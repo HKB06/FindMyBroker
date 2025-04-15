@@ -28,7 +28,7 @@ export default async function ListArticles({
         <div className="h-max w-full">
             {articles.length > 0 ? (
                 <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
+                    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 mt-4`}>
                         {articles.map((article) => {
                             const type = types.find((cat) => cat.slug == article.type) || {
                                 name: article.type,
@@ -55,7 +55,7 @@ export default async function ListArticles({
                                                     <h3 className="text-xl md:text-3xl font-bold w-full">{article.title}</h3>
                                                     <p className="text-md md:text-xl text-gray-300 w-full">{article.excerpt}</p>
                                                 </div>
-                                                <p className="md:block hidden">Publié le {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
+                                                <p className="hidden">Publié le {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('fr-FR', {
                                                     year: 'numeric',
                                                     month: 'long',
                                                     day: 'numeric',
@@ -67,7 +67,7 @@ export default async function ListArticles({
                                             </div>
                                         </div>
 
-                                        <Link href={`/blog/category/${article.category}/article/${article.slug}`} className="flex items-center justify-center bg-teal-500 bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl md:px-4 md:py-3 px-3 py-2 md:text-base text-sm">
+                                        <Link href={`/blog/category/${article.category}/article/${article.slug}`} className="flex items-center justify-center bg-green-light bottom-0 right-0 absolute rounded-tl-3xl rounded-br-3xl md:px-4 md:py-3 px-3 py-2 md:text-base text-sm">
                                             <span className=''>Lire l'article</span>
                                             <ChevronRight className="ml-2 md:block hidden" />
                                         </Link>
@@ -83,7 +83,7 @@ export default async function ListArticles({
                                 <Link
                                     key={i}
                                     href={`?page=${i + 1}`}
-                                    className={`px-4 py-2 rounded-full border text-white ${currentPage === i + 1 ? 'bg-teal-500 border-teal-500' : 'border-gray-500'
+                                    className={`px-4 py-2 rounded-full border text-white ${currentPage === i + 1 ? 'bg-green-light border-green-light' : 'border-gray-500'
                                         }`}
                                 >
                                     {i + 1}

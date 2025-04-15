@@ -64,11 +64,11 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
                     <div className='flex! md:gap-8! w-full! justify-center! flex-col md:flex-row'>
                         <aside className="md:w-1/3! w-full!">
                             <div className="top-20 left-24 mb-10 w-full! max-w-xs rounded-3xl border bg-white px-6 py-6 shadow-md lg:sticky lg:w-full">
-                                <div className="pb-2 text-xl font-medium text-[#8B5CF6]">Table des matières</div>
-                                <hr className="h-1 w-10 bg-[#D946EF]" />
+                                <div className="pb-2 text-xl font-medium text-green-dark">Table des matières</div>
+                                <hr className="h-1 w-10 bg-green-light" />
                                 <div className="mt-4 flex flex-col gap-2">
                                     {tableOfContents.map((item) => (
-                                        <a href={`#${item.id}`} key={item.id} className={`ml-${item.level * 4} text-black hover:text-[#8B5CF6]`}>
+                                        <a href={`#${item.id}`} key={item.id} className={`ml-${item.level * 4} text-black hover:text-green-dark`}>
                                             <span
                                                 className="text-sm font-medium mb-1"
                                             >
@@ -79,8 +79,8 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content, category, tags
                                     {category !== "autre" && (
                                         <>
                                             <hr className='my-3' />
-                                            <a href="#recommandations-brokers" className='bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text font-black hover:from-[#D946EF] hover:to-[#8B5CF6]'>Recommandations brokers</a>
-                                            <a href="#meme-sujet" className='mt-1 hover:text-[#8B5CF6]'>Sur le même sujet</a>
+                                            <a href="#recommandations-brokers" className='bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text font-black hover:from-green-light hover:to-green-dark'>Recommandations brokers</a>
+                                            <a href="#meme-sujet" className='mt-1 hover:text-green-dark'>Sur le même sujet</a>
                                         </>
                                     )}
                                 </div>

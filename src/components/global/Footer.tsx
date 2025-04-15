@@ -9,8 +9,8 @@ const Footer = () => {
                 <div className="md:flex md:justify-between">
                     <div className="mb-12 md:mb-0">
                         <Link href="/" className="flex items-center gap-2 w-max text-black dark:text-white z-200 text-2xl" passHref>
-                            <ScanSearch className="text-[#8B5CF6]" />
-                            <span className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-transparent bg-clip-text">
+                            <ScanSearch className="text-green-dark" />
+                            <span className="bg-gradient-to-r from-green-dark to-green-light text-transparent bg-clip-text">
                                 FindMyBroker
                                 <span className="font-bold">.io</span>
                             </span>
