@@ -94,10 +94,8 @@ export default function QuizPage() {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="h-max w-screen flex flex-col items-center pt-24 md:pt-36 pb-16">
-      <GridLines cols={12} rows={7} />
-
-      <div className="flex justify-center w-10/12 z-10 bg-white dark:bg-[#1F2937] py-12 md:py-16 border rounded-lg border-gray-300 dark:border-gray-700">
+    <div className="h-max w-screen flex flex-col items-center pt-24 md:pt-0 pb-24">
+      <div className="flex justify-center w-10/12 z-10 bg-white dark:bg-[#1F2937] py-24 md:my-40 border rounded-lg border-gray-300 dark:border-gray-700">
         <div className="flex flex-col gap-8 w-10/12">
           {/* Logo */}
           <div className="flex items-center gap-2 text-xl md:text-2xl text-black dark:text-white">

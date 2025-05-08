@@ -144,11 +144,11 @@ const MobileNav = () => {
                     <ul className="mt-2 space-y-2">
                       <li>
                         <Link
-                          href="/"
+                          href="/quiz"
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
-                          Lien 1
+                          Répondre au quiz
                         </Link>
                       </li>
                       <li>
@@ -157,7 +157,7 @@ const MobileNav = () => {
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
-                          Lien 2
+                          Guide 2025 📋
                         </Link>
                       </li>
                       <li>
@@ -166,7 +166,16 @@ const MobileNav = () => {
                           className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
                           onClick={() => closeOnCurrent("/")}
                         >
-                          Lien 3
+                          Notre sélection 👍
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/"
+                          className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-dark dark:hover:text-green-light"
+                          onClick={() => closeOnCurrent("/")}
+                        >
+                          Vos favoris ⭐️
                         </Link>
                       </li>
                     </ul>

@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import GridLines from '../graphics/GridLines';
 import { useMediaQuery } from 'react-responsive';
 import { MousePointerClick, ScanSearch } from 'lucide-react';
+import Link from 'next/link';
 
 const ResponsiveGridLines = () => {
   const [isClient, setIsClient] = useState(false);
@@ -28,7 +29,7 @@ const ResponsiveGridLines = () => {
 };
 const HeroBanner = () => {
   return (
-    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-60">
+    <div className="h-max w-screen flex flex-col justify-center items-center gap-12 pt-36 md:pt-30">
       <ResponsiveGridLines />
       <div className="flex justify-center h-max w-10/12 items-center z-10 bg-white dark:bg-[#1F2937] py-12 md:py-24 border rounded-lg border-gray-300 dark:border-gray-700">
         <div className="flex flex-col gap-8 md:gap-16 w-10/12 h-full justify-center items-center">
@@ -55,7 +56,7 @@ const HeroBanner = () => {
           </div>
           <div className="flex flex-col gap-8 md:w-9/12">
             <span className="md:text-center md:text-xl dark:text-white">
-              En quelques questions, nous identifions les brokers qui correspondent à <b>vos attentes</b>.<br/>
+              En quelques questions, nous identifions les brokers qui correspondent à <b>vos attentes</b>.<br />
               Prêt à démarrer l'aventure ? 🚀
             </span>
           </div>
@@ -67,7 +68,9 @@ const HeroBanner = () => {
               En savoir plus
             </Button>
             <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-green-light hover:bg-green-light/70">
-              Trouver mon broker
+              <Link href='/quiz' className='flex items-center gap-2'>
+                Trouver mon broker
+              </Link>
             </Button>
           </div>
         </div>

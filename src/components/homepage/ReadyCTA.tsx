@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '../ui/button';
-
+import Link from 'next/link';
 
 const ReadyCTA = () => {
   return (
@@ -19,7 +19,9 @@ const ReadyCTA = () => {
             <p className="text-base text-white">Join thousands of satisfied investors who found their ideal broker match through our platform.</p>
           </div>
           <Button className="py-6 px-8 cursor-pointer text-md md:text-lg text-white bg-green-dark hover:bg-green-light/30">
-            Let's go ! 🚀
+            <Link href='/quiz' className='flex items-center gap-2'>
+              Let's go ! 🚀
+            </Link>
           </Button>
         </div>
       </div>

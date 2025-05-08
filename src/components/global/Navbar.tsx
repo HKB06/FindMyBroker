@@ -53,7 +53,7 @@ export default function Navbar() {
                                             <NavigationMenuLink asChild className="">
                                                 <a
                                                     className="flex h-full w-full select-none flex-col justify-end rounded-md hover:from-green-light hover:to-green-dark bg-gradient-to-b from-green-dark to-green-light p-6 no-underline outline-none focus:shadow-md"
-                                                    href="/"
+                                                    href="/quiz"
                                                 >
                                                     <span className="text-4xl">🧪</span>
                                                     <div className="mb-2 mt-4 text-lg font-bold text-white">
