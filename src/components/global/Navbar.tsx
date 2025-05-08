@@ -12,9 +12,8 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
-import { ArrowLeft, ArrowRight, ScanSearch } from "lucide-react"
+import { ArrowRight, ScanSearch } from "lucide-react"
 import { ThemeSelect } from "./ThemeSelect"
-import { Button } from "../ui/button"
 import { buttonVariants } from "@/components/ui/button"
 
 
@@ -124,7 +123,7 @@ export default function Navbar() {
                             </NavigationMenuItem>
 
                             <NavigationMenuItem>
-                                <Link href="/" legacyBehavior passHref>
+                                <Link href="/contact" legacyBehavior passHref>
                                     <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-black dark:text-white bg-transparent hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-[#1F2937] dark:hover:text-white dark:focus:bg-[#1F2937] dark:focus:text-white`}>
                                         Contact
                                     </NavigationMenuLink>

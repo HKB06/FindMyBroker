@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Menu, ScanSearch, X } from "lucide-react";
+import { ChevronDown, Menu, ScanSearch, X } from "lucide-react";
 import { ThemeSelect } from "./ThemeSelect";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
 
 const MobileNav = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -259,7 +258,7 @@ const MobileNav = () => {
                   <li>
                     <Link
                       className="flex items-center w-full font-regular text-pBrown font-title text-2xl font-semibold"
-                      href="/"
+                      href="/contact"
                       onClick={() => closeOnCurrent("/")}
                     >
                       Contact
