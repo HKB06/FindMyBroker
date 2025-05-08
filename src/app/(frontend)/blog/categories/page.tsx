@@ -16,14 +16,14 @@ const CategoriesPage = () => {
                                 <span className={`text-4xl ${category.color} rounded-full h-12 w-12 flex items-center justify-center text-xl`}>
                                     {category.emoji}
                                 </span>
-                                <h3 className="text-2xl font-bold">{category.name}</h3>
+                                <h3 className="text-xl font-bold">{category.name}</h3>
                             </div>
                             <Link
                                 key={category.slug}
                                 href={`/blog/category/${category.slug}`}
-                                className={`text-white ${category.color} rounded-lg px-4 py-2 w-max flex items-center gap-2`}>
+                                className={`text-white ${category.color} rounded-lg px-4 py-2 w-fit flex items-center gap-1 text-sm`}>
                                 Voir les articles sur {category.pres}
-                                <ArrowRight/>
+                                <ArrowRight className='h-4 w-4'/>
                             </Link>
                         </div>
                     ))}
