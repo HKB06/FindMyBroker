@@ -13,18 +13,7 @@ export default function Podium({ winners }: { winners: Winner[] }) {
 
   return (
     <div
-      style={{
-        alignContent: 'flex-end',
-        alignItems: 'flex-end',
-        borderBottom: '1px solid #e5e7eb',
-        display: 'grid',
-        gap: '.5rem',
-        gridAutoFlow: 'column dense',
-        justifyContent: 'center',
-        justifyItems: 'center',
-        height: 250,
-        marginTop: '2rem',
-      }}
+      className='flex items-end justify-center border-b border-[#e5e7eb] h-60 mt-24 gap-2 lg:gap-8'
     >
       {podium.map((winner) => (
         <PodiumStep key={winner.id} podium={podium} winner={winner} />

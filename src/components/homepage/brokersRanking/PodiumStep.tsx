@@ -18,7 +18,7 @@ export default function PodiumStep({ podium, winner }: PodiumStepProps) {
         <img
           src="https://gravatar.com/avatar/27205e5c51cb03f862138b22bcb5dc20f94a342e744ff6df1b8dc8af3c865109" // URL personnalisée pour l'image
           alt={winner.name} // Texte alternatif avec le nom du gagnant
-          className="rounded-full h-11 w-11 overflow-hidden"
+          className="rounded-full h-10 lg:h-20 w-10 lg:w-20 overflow-hidden"
         />
       </div>
 
@@ -29,7 +29,7 @@ export default function PodiumStep({ podium, winner }: PodiumStepProps) {
 
       {/* Barre du podium */}
       <div
-        className="flex place-content-center bg-gradient-to-t from-green-dark to-green-light rounded-t-lg mb-[-1px] w-16"
+        className="flex place-content-center bg-gradient-to-t from-green-dark to-green-light rounded-t-lg mb-[-1px] w-16 lg:w-40"
         style={{
           height, // Hauteur dynamique
           opacity, // Opacité dynamique
