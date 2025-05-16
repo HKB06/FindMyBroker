@@ -129,9 +129,6 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
-  /**
-   * Rôle de l’utilisateur (admin ou user)
-   */
   role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;

@@ -1,4 +1,4 @@
-import { getPayloadInstance } from './payload';
+import { getPayloadInstance } from '@/lib/payload';
 
 export async function fetchBrokers(category: string | null, numberPerPage: number, page: number) {
     const payload = await getPayloadInstance();

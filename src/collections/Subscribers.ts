@@ -2,6 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const Subscribers: CollectionConfig = {
   slug: 'subscribers',
+  access: {
+    read: () => true,                                   // public
+    create: ({ req }) => req.user?.role === 'admin',    // admin only
+    update: ({ req }) => req.user?.role === 'admin',    // admin only
+    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
+  },
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'createdAt', 'hasDetailedReport'],

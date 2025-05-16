@@ -1,20 +1,53 @@
+import { z } from 'zod';
 import type { Endpoint } from 'payload';
+import { LRUCache } from 'lru-cache';
 
+/** ----------------------------------
+ * Rate‑limit en mémoire : 10 requêtes / minute / IP
+ * ----------------------------------*/
+const RATE_LIMIT = 10;
+const WINDOW_MS = 60_000;
+const hits = new LRUCache<string, { cnt: number; ts: number }>({ max: 5000 });
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const rec = hits.get(ip);
+  if (!rec || now - rec.ts > WINDOW_MS) {
+    hits.set(ip, { cnt: 1, ts: now });
+    return false;
+  }
+  if (rec.cnt >= RATE_LIMIT) return true;
+  rec.cnt += 1;
+  hits.set(ip, rec);
+  return false;
+}
+
+/** ----------------------------------
+ * Types & validation schemas
+ * ----------------------------------*/
 interface RawAnswer {
   questionId: string;
-  selectedAnswer: string;
+  selectedAnswer: string; // Id or label of the choice selected
 }
 
-interface InitialResultsBody {
-  answers: RawAnswer[];
-}
+const answerSchema = z.object({
+  questionId: z.string().min(1),
+  selectedAnswer: z.string().min(1),
+});
 
-interface DetailedReportBody extends InitialResultsBody {
-  email: string;
-}
+const initialBodySchema = z.object({
+  answers: z.array(answerSchema).min(1),
+});
 
+const detailedBodySchema = initialBodySchema.extend({
+  email: z.string().email(),
+});
+
+/** ----------------------------------
+ * Helper types
+ * ----------------------------------*/
 type SubscriberAnswer = {
-  question: string; 
+  question: string;
   selectedAnswer: string;
 };
 
@@ -23,31 +56,39 @@ type ScoreEntry = {
   score: number;
 };
 
+interface BrokerWithScore {
+  id: string;
+  matchScore: number;
+  tradingInstruments?: string[];
+  features?: string[];
+  experienceLevel?: string;
+  [key: string]: unknown;
+}
+
+/** ----------------------------------
+ * 1. Calculate user scores
+ * ----------------------------------*/
 async function calculateScores(
   answers: RawAnswer[],
-  payload: any
+  payload: any,
 ): Promise<{ scores: ScoreEntry[]; formattedAnswers: SubscriberAnswer[] }> {
   const scoresMap: Record<string, number> = {};
   const formattedAnswers: SubscriberAnswer[] = [];
 
-  for (const answer of answers) {
+  for (const { questionId, selectedAnswer } of answers) {
     const questionDoc = await payload.findByID({
       collection: 'questions',
-      id: answer.questionId,
+      id: questionId,
     });
 
-    formattedAnswers.push({
-      question: answer.questionId,
-      selectedAnswer: answer.selectedAnswer,
-    });
+    formattedAnswers.push({ question: questionId, selectedAnswer });
 
     const choice = questionDoc.choices.find(
-      (c: any) => c.answerText === answer.selectedAnswer
+      (c: any) => c.answerText === selectedAnswer, // TODO : utiliser l'id dans une future version
     );
 
     const multiplier =
-      questionDoc.weight === 'high' ? 2 :
-      questionDoc.weight === 'low' ? 0.5 : 1;
+      questionDoc.weight === 'high' ? 2 : questionDoc.weight === 'low' ? 0.5 : 1;
 
     if (choice?.impacts) {
       choice.impacts.forEach((impact: any) => {
@@ -57,7 +98,6 @@ async function calculateScores(
     }
   }
 
-  
   const scores: ScoreEntry[] = Object.entries(scoresMap).map(([criterion, score]) => ({
     criterion,
     score,
@@ -66,27 +106,100 @@ async function calculateScores(
   return { scores, formattedAnswers };
 }
 
+/** ----------------------------------
+ * 2. Generate a small resume sentence
+ * ----------------------------------*/
 function generateProfileSummary(scores: ScoreEntry[]): string {
-  if (!scores.length) return "Profil non déterminé.";
-  return `Vous avez ${scores.length} critères analysés.`;
+  if (!scores.length) return 'Profil non déterminé.';
+
+  // On garde les 3 critères les plus marqués
+  const highlights = [...scores]
+    .sort((a, b) => Math.abs(b.score) - Math.abs(a.score))
+    .slice(0, 3)
+    .map((s) => s.criterion.replace(/_/g, ' '));
+
+  return `Votre profil met particulièrement en avant : ${highlights.join(', ')}.`;
 }
 
-async function findMatchingBrokers(scores: ScoreEntry[], payload: any, limit: number) {
-  const allBrokers = await payload.find({
+/** ----------------------------------
+ * 3. Match brokers against scores
+ * ----------------------------------*/
+async function findMatchingBrokers(
+  scores: ScoreEntry[],
+  payload: any,
+  limit = 3,
+) {
+  const { docs } = await payload.find({
     collection: 'brokers',
     where: { isActive: { equals: true } },
     limit: 100,
   });
 
-  
-  return allBrokers.docs.slice(0, limit);
+  const scoreMap = Object.fromEntries(scores.map((s) => [s.criterion, s.score]));
+
+  const ranked: BrokerWithScore[] = (docs as any[]).map((b) => {
+    const tags: string[] = [
+      ...(b.tradingInstruments ?? []),
+      ...(b.features ?? []),
+      (b.experienceLevel ?? '').toLowerCase(),
+    ];
+
+    const total = tags.reduce((sum, t) => sum + (scoreMap[t] ?? 0), 0);
+
+    return { ...b, matchScore: total };
+  });
+
+  return ranked
+    .sort((a: BrokerWithScore, b: BrokerWithScore) => b.matchScore - a.matchScore)
+    .slice(0, limit);
 }
 
+/** ----------------------------------
+ * 4. Upsert subscriber (no duplicate key)
+ * ----------------------------------*/
+async function upsertSubscriber(payload: any, email: string, data: any) {
+  const existing = await payload.find({
+    collection: 'subscribers',
+    where: { email: { equals: email } },
+    limit: 1,
+  });
+
+  if (existing.totalDocs) {
+    await payload.update({
+      collection: 'subscribers',
+      id: existing.docs[0].id,
+      data,
+    });
+  } else {
+    await payload.create({
+      collection: 'subscribers',
+      data: { email, ...data },
+    });
+  }
+}
+
+/** ----------------------------------
+ * 5. Endpoints
+ * ----------------------------------*/
 const quizEndpoints: Endpoint[] = [
+  /* ─────────────  /quiz/initial-results  ───────────── */
   {
     path: '/quiz/initial-results',
     method: 'post',
     handler: async (req) => {
+      /* ----- rate-limit ----- */
+      const ip = (req.headers.get('x-forwarded-for') as string | null)?.split(',')[0]?.trim()
+        ?? (req as any).ip
+        ?? 'unknown';
+
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: 'Trop de requêtes, réessayez plus tard.' }),
+        { status: 429, headers: { 'content-type': 'application/json' } },
+      );
+    }
+
+      /* ----- validation & logique ----- */
       if (!req.json) {
         return new Response(JSON.stringify({ error: 'Invalid request' }), {
           status: 400,
@@ -95,28 +208,44 @@ const quizEndpoints: Endpoint[] = [
       }
 
       try {
-        const body = (await req.json()) as InitialResultsBody;
-        const { scores } = await calculateScores(body.answers, req.payload);
+        const parsed = initialBodySchema.parse(await req.json());
+
+        const { scores } = await calculateScores(parsed.answers, req.payload);
         const topBrokers = await findMatchingBrokers(scores, req.payload, 3);
-        const summary = generateProfileSummary(scores);
+        const summary     = generateProfileSummary(scores);
 
         return new Response(
           JSON.stringify({ success: true, topBrokers, summary }),
-          { status: 200, headers: { 'content-type': 'application/json' } }
+          { status: 200, headers: { 'content-type': 'application/json' } },
         );
-      } catch (error) {
-        console.error(error);
-        return new Response(JSON.stringify({ error: 'Failed to process quiz' }), {
-          status: 500,
-          headers: { 'content-type': 'application/json' },
-        });
+      } catch (err: any) {
+        const status = err instanceof z.ZodError ? 422 : 500;
+        return new Response(
+          JSON.stringify({ error: err.message ?? 'Failed to process quiz' }),
+          { status, headers: { 'content-type': 'application/json' } },
+        );
       }
     },
   },
+
+  /* ─────────────  /quiz/detailed-report  ───────────── */
   {
     path: '/quiz/detailed-report',
     method: 'post',
     handler: async (req) => {
+      /* ----- rate-limit ----- */
+      const ip = (req.headers.get('x-forwarded-for') as string | null)?.split(',')[0]?.trim()
+        ?? (req as any).ip
+        ?? 'unknown';
+
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: 'Trop de requêtes, réessayez plus tard.' }),
+        { status: 429, headers: { 'content-type': 'application/json' } },
+      );
+    }
+
+      /* ----- validation & logique ----- */
       if (!req.json) {
         return new Response(JSON.stringify({ error: 'Invalid request' }), {
           status: 400,
@@ -125,44 +254,43 @@ const quizEndpoints: Endpoint[] = [
       }
 
       try {
-        const body = (await req.json()) as DetailedReportBody;
-        const { scores, formattedAnswers } = await calculateScores(body.answers, req.payload);
-        const extendedBrokers = await findMatchingBrokers(scores, req.payload, 10);
+        const parsed = detailedBodySchema.parse(await req.json());
+
+        const { scores, formattedAnswers } =
+          await calculateScores(parsed.answers, req.payload);
+
+        const extendedBrokers =
+          await findMatchingBrokers(scores, req.payload, 10);
+
         const summary = generateProfileSummary(scores);
 
-        const subscriber = await req.payload.create({
-          collection: 'subscribers',
-          data: {
-            email: body.email,
-            quizProfile: {
-              date: new Date().toISOString(),
-              answers: formattedAnswers,
-              scores,
-              topBrokers: extendedBrokers.slice(0, 3).map((b: any) => b.id),
-              extendedBrokers: extendedBrokers.map((b: any) => b.id),
-              profileSummary: summary,
-            },
-            hasDetailedReport: true,
+        /* upsert subscriber (évite duplicate-key) */
+        await upsertSubscriber(req.payload, parsed.email, {
+          quizProfile: {
+            date: new Date().toISOString(),
+            answers: formattedAnswers,
+            scores,
+            topBrokers: extendedBrokers.slice(0, 3).map((b) => b.id),
+            extendedBrokers: extendedBrokers.map((b) => b.id),
+            profileSummary: summary,
           },
+          hasDetailedReport: true,
         });
 
         return new Response(
-          JSON.stringify({
-            success: true,
-            extendedBrokers,
-            profileSummary: summary,
-          }),
-          { status: 200, headers: { 'content-type': 'application/json' } }
+          JSON.stringify({ success: true, extendedBrokers, profileSummary: summary }),
+          { status: 200, headers: { 'content-type': 'application/json' } },
         );
-      } catch (error) {
-        console.error(error);
-        return new Response(JSON.stringify({ error: 'Failed to create report' }), {
-          status: 500,
-          headers: { 'content-type': 'application/json' },
-        });
+      } catch (err: any) {
+        const status = err instanceof z.ZodError ? 422 : 500;
+        return new Response(
+          JSON.stringify({ error: err.message ?? 'Failed to create report' }),
+          { status, headers: { 'content-type': 'application/json' } },
+        );
       }
     },
   },
 ];
 
 export default quizEndpoints;
+

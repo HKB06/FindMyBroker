@@ -3,7 +3,10 @@ import type { CollectionConfig } from 'payload'
 export const Questions: CollectionConfig = {
   slug: 'questions',
   access: {
-    read: () => true,
+    read: () => true,                                   // public
+    create: ({ req }) => req.user?.role === 'admin',    // admin only
+    update: ({ req }) => req.user?.role === 'admin',    // admin only
+    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
   },
   admin: {
     useAsTitle: 'question',

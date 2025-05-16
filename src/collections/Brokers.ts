@@ -2,8 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const Brokers: CollectionConfig = {
   slug: 'brokers',
+  
   access: {
-    read: () => true,
+    read: () => true,                                   // public
+    create: ({ req }) => req.user?.role === 'admin',    // admin only
+    update: ({ req }) => req.user?.role === 'admin',    // admin only
+    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
   },
   admin: {
     useAsTitle: 'name',

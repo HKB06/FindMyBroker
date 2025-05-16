@@ -6,6 +6,12 @@ interface ValidationError {
 
 export const ResponseTemplates: CollectionConfig = {
   slug: 'response-templates',
+  access: {
+    read: () => true,                                   // public
+    create: ({ req }) => req.user?.role === 'admin',    // admin only
+    update: ({ req }) => req.user?.role === 'admin',    // admin only
+    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
+  },
   admin: {
     useAsTitle: 'name',
     description: 'Modèles de réponses pour les questions',

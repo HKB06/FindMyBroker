@@ -15,9 +15,10 @@ export const Articles: CollectionConfig = {
   slug: 'articles',
 
   access: {
-    read: () => true,
-    update: () => true,
-    create: () => true,
+    read: () => true,                                   // public
+    create: ({ req }) => req.user?.role === 'admin',    // admin only
+    update: ({ req }) => req.user?.role === 'admin',    // admin only
+    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
   },
   fields: [
     {
