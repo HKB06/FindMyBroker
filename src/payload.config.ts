@@ -1,3 +1,5 @@
+// src/payload.config.ts
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -8,7 +10,17 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
 import sharp from 'sharp';
 
-/* ─────────────  Collections  ───────────── */
+/** ─── 1) Nettoie tous les anciens modèles Mongoose */
+Object.keys(mongoose.models).forEach((model) => {
+  delete mongoose.models[model];
+});
+
+/** ─── Charge le .env */
+const filename = fileURLToPath(import.meta.url);
+const dirname  = path.dirname(filename);
+dotenv.config({ path: path.resolve(dirname, '../.env') });
+
+/** ─── Collections */
 import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { Brokers } from './collections/Brokers';
@@ -17,38 +29,27 @@ import { Subscribers } from './collections/Subscribers';
 import { Articles } from './collections/Articles';
 import { ResponseTemplates } from './collections/ResponseTemplates';
 
-/* ─────────────  Endpoints & limiter  ────── */
+/** ─── Endpoints & rate-limit middleware */
 import quizEndpoints from './endpoints/quiz';
 import { quizLimiter } from './payloadRateLimit';
 
-/* ─────────────  .env  ───────────────────── */
-const filename = fileURLToPath(import.meta.url);
-const dirname  = path.dirname(filename);
-dotenv.config({ path: path.resolve(dirname, '../.env') });
-
-/* ─────────────  Plugin rate-limit  ─────────
-   Signature attendue : (config: Config) => Config
-------------------------------------------------*/
-const rateLimitPlugin = () =>
-  (config: Config): Config => {
-    const originalOnInit = config.onInit;
-
-    return {
-      ...config,
-
-      async onInit(payload) {
-        /* Ajoute le middleware Express */
-        (payload as any).express?.use('/api/quiz', quizLimiter);
-
-        /* Conserve un éventuel onInit existant */
-        if (typeof originalOnInit === 'function') {
-          await originalOnInit(payload);
-        }
-      },
-    };
+/** ─── Plugin “inline” pour injecter le rate-limit dans Express */
+const rateLimitPlugin = () => (config: Config): Config => {
+  const originalOnInit = config.onInit;
+  return {
+    ...config,
+    async onInit(payload) {
+      // applique le rate-limit sur /api/quiz
+      (payload as any).express?.use('/api/quiz', quizLimiter);
+      // appelle l’onInit d’origine s’il existe
+      if (typeof originalOnInit === 'function') {
+        await originalOnInit(payload);
+      }
+    },
   };
+};
 
-/* ─────────────  Config principale  ───────── */
+/** ─── Configuration principale de Payload */
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -73,12 +74,14 @@ export default buildConfig({
 
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
 
-  db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
+  }),
 
   sharp,
 
   plugins: [
     payloadCloudPlugin(),
-    rateLimitPlugin(),       // ← 10 req/min/IP sur /api/quiz/*
+    rateLimitPlugin(), // 10 requêtes/min/IP sur /api/quiz/*
   ],
 });

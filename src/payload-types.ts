@@ -267,6 +267,10 @@ export interface Broker {
    * Activer/désactiver l'affichage du broker sur le site
    */
   isActive?: boolean | null;
+  /**
+   * Styles de trading supportés par le broker
+   */
+  tradingStyles?: ('Day Trading' | 'Swing Trading' | 'Long Terme' | 'Scalping')[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -643,6 +647,7 @@ export interface BrokersSelect<T extends boolean = true> {
   experienceLevel?: T;
   affiliateLink?: T;
   isActive?: T;
+  tradingStyles?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -128,31 +128,85 @@ async function findMatchingBrokers(
   scores: ScoreEntry[],
   payload: any,
   limit = 3,
-) {
-  const { docs } = await payload.find({
+): Promise<any[]> {
+  // Récupère tous les brokers actifs
+  const { docs: allBrokers } = await payload.find({
     collection: 'brokers',
     where: { isActive: { equals: true } },
     limit: 100,
   });
 
-  const scoreMap = Object.fromEntries(scores.map((s) => [s.criterion, s.score]));
+  // Transforme le tableau de scores en objet { criterion: score }
+  const scoreMap: Record<string, number> = Object.fromEntries(
+    scores.map((s) => [s.criterion, s.score])
+  );
 
-  const ranked: BrokerWithScore[] = (docs as any[]).map((b) => {
-    const tags: string[] = [
-      ...(b.tradingInstruments ?? []),
-      ...(b.features ?? []),
-      (b.experienceLevel ?? '').toLowerCase(),
-    ];
+  // Pour chaque broker, calcule un matchScore
+  const ranked = (allBrokers as any[]).map((b) => {
+    let matchScore = 0;
 
-    const total = tags.reduce((sum, t) => sum + (scoreMap[t] ?? 0), 0);
+    // 1) Niveau d’expérience
+    if (scoreMap.beginner_friendly && b.experienceLevel === 'Débutant') {
+      matchScore += scoreMap.beginner_friendly;
+    }
+    if (scoreMap.intermediate && b.experienceLevel === 'Intermédiaire') {
+      matchScore += scoreMap.intermediate;
+    }
+    if (scoreMap.advanced && b.experienceLevel === 'Expert') {
+      matchScore += scoreMap.advanced;
+    }
 
-    return { ...b, matchScore: total };
+    // 2) Instruments de trading
+    const instrumentMap: Record<string, string> = {
+      stocks: 'Actions',
+      etf:    'ETFs',
+      crypto: 'Crypto',
+      forex:  'Forex',
+      options:'Options',
+    };
+    for (const [crit, label] of Object.entries(instrumentMap)) {
+      if (scoreMap[crit] && b.tradingInstruments?.includes(label)) {
+        matchScore += scoreMap[crit];
+      }
+    }
+
+    // 3) Fonctionnalités & services
+    const featureMap: Record<string, string> = {
+      simple_interface: 'Interface Simple',
+      mobile_trading:   'Trading Mobile',
+      api_trading:      'Trading API',
+      customer_support: 'Support 24/7',
+      education:        'Formation',
+      copy_trading:     'Copy Trading',
+    };
+    for (const [crit, label] of Object.entries(featureMap)) {
+      if (scoreMap[crit] && b.features?.includes(label)) {
+        matchScore += scoreMap[crit];
+      }
+    }
+
+    // 4) Frais bas (pondération selon tradingFees)
+    if (scoreMap.low_fees && typeof b.tradingFees === 'number') {
+      const SEUIL = 1; // référence à 1%
+      matchScore += scoreMap.low_fees * (SEUIL / b.tradingFees);
+    }
+
+    // 5) Styles de trading
+    if (scoreMap.day_trading    && b.tradingStyles?.includes('Day Trading'))   matchScore += scoreMap.day_trading;
+    if (scoreMap.swing_trading  && b.tradingStyles?.includes('Swing Trading')) matchScore += scoreMap.swing_trading;
+    if (scoreMap.long_term      && b.tradingStyles?.includes('Long Terme'))    matchScore += scoreMap.long_term;
+    if (scoreMap.scalping       && b.tradingStyles?.includes('Scalping'))      matchScore += scoreMap.scalping;
+
+    return { broker: b, matchScore };
   });
 
+  // Trie par score décroissant et limite le résultat
   return ranked
-    .sort((a: BrokerWithScore, b: BrokerWithScore) => b.matchScore - a.matchScore)
-    .slice(0, limit);
+    .sort((a, b) => b.matchScore - a.matchScore)
+    .slice(0, limit)
+    .map(({ broker }) => broker);
 }
+
 
 /** ----------------------------------
  * 4. Upsert subscriber (no duplicate key)

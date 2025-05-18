@@ -165,6 +165,21 @@ export const Brokers: CollectionConfig = {
       admin: {
         description: 'Activer/désactiver l\'affichage du broker sur le site'
       }
+    },
+    {
+      name: 'tradingStyles',
+      type: 'select',
+      hasMany: true,
+      label: 'Styles de trading',
+      options: [
+        { label: 'Day Trading',   value: 'Day Trading'   },
+        { label: 'Swing Trading', value: 'Swing Trading' },
+        { label: 'Long Terme',    value: 'Long Terme'    },
+        { label: 'Scalping',      value: 'Scalping'      },
+      ],
+    admin: {
+      description: 'Styles de trading supportés par le broker',
     }
+  },
   ]
 }

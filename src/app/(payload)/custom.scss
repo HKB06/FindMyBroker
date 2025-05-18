@@ -1,0 +1,23 @@
+@import '@payloadcms/next/css';
+
+// 2) Mode sombre sur l’admin
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+// 3) Si tu veux l’animation tailwind dans l’admin
+@plugin "tailwindcss-animate";
+
+// 4) Variables inline (Payload expose ses propres --background, --foreground…)
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sidebar:    var(--sidebar);
+  --color-border:     var(--border);
+  --color-input:      var(--input);
+  --color-ring:       var(--ring);
+  --color-primary:    var(--primary);
+  --color-secondary:  var(--secondary);
+  --color-muted:      var(--muted);
+  --color-accent:     var(--accent);
+  --color-destructive: var(--destructive);
+  /* etc. : copie ici seulement les variables dont tu as besoin */
+}
