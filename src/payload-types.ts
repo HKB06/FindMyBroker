@@ -137,6 +137,8 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
@@ -188,36 +190,30 @@ export interface Media {
   };
 }
 /**
- * Gestion des brokers et leurs caractéristiques
+ * Gestion des brokers et de leurs caractéristiques
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "brokers".
  */
 export interface Broker {
   id: string;
-  /**
-   * Nom officiel du broker
-   */
   name: string;
   /**
-   * Logo officiel du broker (format recommandé : PNG)
+   * Généré automatiquement à partir du nom
    */
-  logo?: (string | null) | Media;
+  slug?: string | null;
+  logo: string | Media;
   /**
-   * Lien d'affiliation pour le suivi des inscriptions
+   * Ex. : #6AAE22 ou bg-[#6AAE22]
    */
-  referralLink?: string | null;
-  /**
-   * Couleur principale du broker (format tailwind, ex: bg-[#6AAE22])
-   */
-  color?: string | null;
-  /**
-   * Catégorie principale du broker
-   */
+  primaryColor?: string | null;
+  website?: string | null;
+  affiliateLink?: string | null;
   category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
-  /**
-   * Description détaillée du broker et ses avantages
-   */
+  experienceLevel?: ('Débutant' | 'Intermédiaire' | 'Expert') | null;
+  rating?: number | null;
+  minimumDeposit?: number | null;
+  tradingFees?: number | null;
   description?: {
     root: {
       type: string;
@@ -233,49 +229,15 @@ export interface Broker {
     };
     [k: string]: unknown;
   } | null;
-  /**
-   * Note générale du broker (de 0 à 5)
-   */
-  rating?: number | null;
-  /**
-   * Montant minimum requis pour ouvrir un compte (en €)
-   */
-  minimumDeposit?: number | null;
-  /**
-   * Frais de trading moyens par transaction (en %)
-   */
-  tradingFees?: number | null;
-  /**
-   * Types d'instruments financiers disponibles
-   */
-  tradingInstruments?: ('Actions' | 'Forex' | 'Crypto' | 'CFDs' | 'ETFs' | 'Options' | 'Futures')[] | null;
-  /**
-   * Fonctionnalités principales offertes par le broker
-   */
-  features?:
-    | ('Interface Simple' | 'Trading Mobile' | 'Copy Trading' | 'Formation' | 'Support 24/7' | 'Trading API')[]
-    | null;
-  /**
-   * Niveau d'expérience recommandé pour ce broker
-   */
-  experienceLevel?: ('Débutant' | 'Intermédiaire' | 'Expert') | null;
-  /**
-   * Lien de parrainage pour le suivi des inscriptions
-   */
-  affiliateLink?: string | null;
-  /**
-   * Activer/désactiver l'affichage du broker sur le site
-   */
+  tradingInstruments?: ('actions' | 'forex' | 'crypto' | 'cfds' | 'etfs' | 'options' | 'futures')[] | null;
+  features?: ('interface-simple' | 'mobile' | 'copy-trading' | 'education' | 'support-247' | 'api')[] | null;
+  tradingStyles?: ('day' | 'swing' | 'long' | 'scalping')[] | null;
   isActive?: boolean | null;
-  /**
-   * Styles de trading supportés par le broker
-   */
-  tradingStyles?: ('Day Trading' | 'Swing Trading' | 'Long Terme' | 'Scalping')[] | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Questions du questionnaire de recommandation de brokers
+ * Questions du questionnaire utilisées pour personnaliser les recommandations de brokers
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "questions".
@@ -291,15 +253,12 @@ export interface Question {
     | 'desired_features'
     | 'support_education';
   /**
-   * Ordre d'affichage de la question (1, 2, 3...)
+   * Plus la valeur est basse, plus la question apparaît tôt
    */
   order: number;
-  /**
-   * Sélectionnez un modèle de réponses ou créez les réponses manuellement
-   */
   responseTemplate?: (string | null) | ResponseTemplate;
   /**
-   * Les différentes réponses possibles et leurs impacts
+   * Réponses possibles et impact sur les critères
    */
   choices: {
     answerText: string;
@@ -326,7 +285,7 @@ export interface Question {
             | 'mobile_trading'
             | 'api_trading';
           /**
-           * Impact en points (-10 à +10)
+           * Impact de cette réponse sur le critère (-10 à +10)
            */
           points: number;
           id?: string | null;
@@ -334,13 +293,7 @@ export interface Question {
       | null;
     id?: string | null;
   }[];
-  /**
-   * Influence le poids de cette question dans le calcul final
-   */
   weight: 'high' | 'normal' | 'low';
-  /**
-   * Texte explicatif optionnel pour aider l'utilisateur
-   */
   helpText?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -440,14 +393,14 @@ export interface Article {
   id: string;
   title: string;
   /**
-   * URL unique de l'article (ex: meilleur-broker-2025)
+   * URL unique de l’article (ex : meilleur-broker-2025)
    */
   slug: string;
   type: 'trading-guide' | 'broker-analysis' | 'trading-news' | 'tutorials' | 'comparisons';
   category: 'assurance-vie' | 'bourse' | 'crypto-monnaies' | 'immobilier' | 'retraite' | 'trading' | 'autre';
   author: string | User;
   featuredImage: string | Media;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -461,7 +414,7 @@ export interface Article {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   /**
    * Bref résumé pour le SEO et les aperçus
    */
@@ -476,11 +429,11 @@ export interface Article {
   seoDescription?: string | null;
   status?: ('draft' | 'review' | 'published') | null;
   /**
-   * Date de publication de l'article
+   * Date de publication de l’article
    */
   publishedAt?: string | null;
   /**
-   * Brokers mentionnés dans l'article
+   * Brokers mentionnés dans l’article
    */
   relatedBrokers?: (string | Broker)[] | null;
   tags?:
@@ -582,6 +535,8 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
 }
@@ -634,20 +589,21 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface BrokersSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   logo?: T;
-  referralLink?: T;
-  color?: T;
+  primaryColor?: T;
+  website?: T;
+  affiliateLink?: T;
   category?: T;
-  description?: T;
+  experienceLevel?: T;
   rating?: T;
   minimumDeposit?: T;
   tradingFees?: T;
+  description?: T;
   tradingInstruments?: T;
   features?: T;
-  experienceLevel?: T;
-  affiliateLink?: T;
-  isActive?: T;
   tradingStyles?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }

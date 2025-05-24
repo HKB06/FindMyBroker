@@ -1,195 +1,190 @@
 import type { CollectionConfig } from 'payload'
 
+/**
+ * Questions utilisées dans le questionnaire de recommandation de brokers.
+ * Chaque question propose plusieurs choix dont les « impacts » feront varier
+ * les scores des critères côté back‑end.
+ */
 export const Questions: CollectionConfig = {
   slug: 'questions',
-  access: {
-    read: () => true,                                   // public
-    create: ({ req }) => req.user?.role === 'admin',    // admin only
-    update: ({ req }) => req.user?.role === 'admin',    // admin only
-    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
-  },
+
+  /**
+   * Interface d’admin
+   */
   admin: {
     useAsTitle: 'question',
     defaultColumns: ['question', 'category', 'order'],
-    description: 'Questions du questionnaire de recommandation de brokers',
+    description:
+      'Questions du questionnaire utilisées pour personnaliser les recommandations de brokers',
   },
+
+  /**
+   * Règles d’accès (très strictes : seule l’équipe peut modifier)
+   */
+  access: {
+    read: () => true,
+    create: ({ req }) => req.user?.role === 'admin',
+    update: ({ req }) => req.user?.role === 'admin',
+    delete: ({ req }) => req.user?.role === 'admin',
+  },
+
+  /**
+   * Champs principaux
+   */
   fields: [
+    // Texte de la question ---------------------------------------------------
     {
       name: 'question',
+      label: 'Question',
       type: 'text',
       required: true,
-      label: 'Question',
-      // Suppression de la validation qui causait l'erreur
     },
+
+    // Catégorie --------------------------------------------------------------
     {
       name: 'category',
-      type: 'select',
-      options: [
-        {
-          label: 'Niveau d\'expérience',
-          value: 'experience_level'
-        },
-        {
-          label: 'Montant d\'investissement',
-          value: 'investment_amount'
-        },
-        {
-          label: 'Style de trading',
-          value: 'trading_style'
-        },
-        {
-          label: 'Actifs préférés',
-          value: 'preferred_assets'
-        },
-        {
-          label: 'Fonctionnalités recherchées',
-          value: 'desired_features'
-        },
-        {
-          label: 'Support et Formation',
-          value: 'support_education'
-        }
-      ],
-      required: true,
       label: 'Catégorie',
+      type: 'select',
+      required: true,
+      options: [
+        { label: "Niveau d'expérience", value: 'experience_level' },
+        { label: "Montant d'investissement", value: 'investment_amount' },
+        { label: 'Style de trading', value: 'trading_style' },
+        { label: 'Actifs préférés', value: 'preferred_assets' },
+        { label: 'Fonctionnalités recherchées', value: 'desired_features' },
+        { label: 'Support et Formation', value: 'support_education' },
+      ],
     },
+
+    // Ordre d’affichage ------------------------------------------------------
     {
       name: 'order',
+      label: "Ordre d'affichage",
       type: 'number',
       required: true,
-      label: 'Ordre d\'affichage',
       admin: {
-        description: 'Ordre d\'affichage de la question (1, 2, 3...)',
-      }
+        description: 'Plus la valeur est basse, plus la question apparaît tôt',
+      },
     },
+
+    // Modèle de réponses prédéfini -----------------------------------------
     {
       name: 'responseTemplate',
+      label: 'Modèle de réponses',
       type: 'relationship',
       relationTo: 'response-templates',
-      hasMany: false,
-      label: 'Modèle de réponses',
-      admin: {
-        description: 'Sélectionnez un modèle de réponses ou créez les réponses manuellement'
-      }
     },
+
+    // Choix proposés à l’utilisateur ----------------------------------------
     {
       name: 'choices',
-      type: 'array',
       label: 'Choix de réponses',
+      type: 'array',
       required: true,
       admin: {
-        description: 'Les différentes réponses possibles et leurs impacts',
+        description: 'Réponses possibles et impact sur les critères',
       },
       fields: [
         {
           name: 'answerText',
+          label: 'Texte de la réponse',
           type: 'text',
           required: true,
-          label: 'Texte de la réponse',
         },
         {
           name: 'impacts',
+          label: 'Impacts',
           type: 'array',
-          label: 'Impact sur les critères',
           fields: [
             {
               name: 'criterion',
+              label: 'Critère',
               type: 'select',
               required: true,
-              label: 'Critère',
               options: [
-                // Niveau d'expérience
+                // — Expérience —
                 { label: 'Débutant', value: 'beginner_friendly' },
                 { label: 'Intermédiaire', value: 'intermediate' },
                 { label: 'Expert', value: 'advanced' },
-                
-                // Style de trading
+                // — Style de trading —
                 { label: 'Day Trading', value: 'day_trading' },
                 { label: 'Swing Trading', value: 'swing_trading' },
                 { label: 'Long Terme', value: 'long_term' },
                 { label: 'Scalping', value: 'scalping' },
-                
-                // Instruments
+                // — Instruments —
                 { label: 'Actions', value: 'stocks' },
                 { label: 'ETF', value: 'etf' },
                 { label: 'Crypto', value: 'crypto' },
                 { label: 'Forex', value: 'forex' },
                 { label: 'Options', value: 'options' },
-                
-                // Services
+                // — Services —
                 { label: 'Support Client', value: 'customer_support' },
                 { label: 'Formation', value: 'education' },
                 { label: 'Outils Avancés', value: 'advanced_tools' },
                 { label: 'Frais Bas', value: 'low_fees' },
-                
-                // Plateforme
+                // — Plateforme —
                 { label: 'Interface Simple', value: 'simple_interface' },
                 { label: 'Mobile Trading', value: 'mobile_trading' },
-                { label: 'API Trading', value: 'api_trading' }
-              ]
+                { label: 'API Trading', value: 'api_trading' },
+              ],
             },
             {
               name: 'points',
+              label: 'Points',
               type: 'number',
               required: true,
-              label: 'Points',
               min: -10,
               max: 10,
               admin: {
-                description: 'Impact en points (-10 à +10)',
-              }
-            }
-          ]
-        }
-      ]
+                description: 'Impact de cette réponse sur le critère (-10 à +10)',
+              },
+            },
+          ],
+        },
+      ],
     },
+
+    // Poids de la question dans le calcul final -----------------------------
     {
       name: 'weight',
+      label: 'Importance',
       type: 'select',
-      label: 'Importance de la question',
       required: true,
       defaultValue: 'normal',
       options: [
-        {
-          label: 'Très importante',
-          value: 'high'
-        },
-        {
-          label: 'Normale',
-          value: 'normal'
-        },
-        {
-          label: 'Faible',
-          value: 'low'
-        }
+        { label: 'Très importante', value: 'high' },
+        { label: 'Normale', value: 'normal' },
+        { label: 'Faible', value: 'low' },
       ],
-      admin: {
-        description: 'Influence le poids de cette question dans le calcul final',
-      }
     },
+
+    // Aide contextuelle ------------------------------------------------------
     {
       name: 'helpText',
+      label: "Texte d'aide",
       type: 'textarea',
-      label: 'Texte d\'aide',
-      admin: {
-        description: 'Texte explicatif optionnel pour aider l\'utilisateur',
-      }
-    }
+    },
   ],
+
+  /**
+   * Si l’admin sélectionne un « responseTemplate », on copie automatiquement
+   * les réponses dans le champ `choices` avant l’enregistrement.
+   */
   hooks: {
     beforeChange: [
       async ({ data, req }) => {
         if (data.responseTemplate) {
           const template = await req.payload.findByID({
             collection: 'response-templates',
-            id: data.responseTemplate as string
-          });
-          if (template && template.responses) {
-            data.choices = template.responses;
+            id: data.responseTemplate as string,
+          })
+
+          if (template?.responses) {
+            data.choices = template.responses
           }
         }
-        return data;
-      }
-    ]
-  }
+        return data
+      },
+    ],
+  },
 }

@@ -25,8 +25,7 @@ async function seed() {
 
     // Vider les collections existantes
     await payload.delete({ collection: 'brokers', where: {} });
-    await payload.delete({ collection: 'questions', where: {} });
-    console.log('🗑️  Collections brokers et questions nettoyées');
+    console.log('🗑️  Collections brokers nettoyées');
 
     // Liste des brokers avec catégories & caractéristiques
     const brokers = [

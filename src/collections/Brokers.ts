@@ -1,123 +1,168 @@
+// src/collections/Brokers.ts
 import type { CollectionConfig } from 'payload'
+import slugify from 'slugify'
+
+import {
+  lexicalEditor,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+  BoldFeature,
+  ItalicFeature,
+  UnderlineFeature,
+  LinkFeature,
+  ParagraphFeature,
+  HorizontalRuleFeature,
+} from '@payloadcms/richtext-lexical'
 
 export const Brokers: CollectionConfig = {
   slug: 'brokers',
-  
+
+  /* ─────────── 1. Accès API ─────────── */
   access: {
     read: () => true,                                   // public
     create: ({ req }) => req.user?.role === 'admin',    // admin only
     update: ({ req }) => req.user?.role === 'admin',    // admin only
-    delete: ({ req }) => req.user?.role === 'admin',    // optionnel
+    delete: ({ req }) => req.user?.role === 'admin',
   },
+
+  /* ─────────── 2. Admin UI ─────────── */
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'rating', 'minimumDeposit', 'isActive'],
-    description: 'Gestion des brokers et leurs caractéristiques'
+    defaultColumns: ['name', 'category', 'rating', 'minimumDeposit', 'isActive'],
+    description: 'Gestion des brokers et de leurs caractéristiques',
   },
+
+  /* ─────────── 3. Champs ─────────── */
   fields: [
+    /* Identité ------------------------------------------------------- */
     {
       name: 'name',
       type: 'text',
       required: true,
+      unique: true,
       label: 'Nom du broker',
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      index: true,
       admin: {
-        description: 'Nom officiel du broker'
-      }
+        readOnly: true,
+        position: 'sidebar',
+        description: 'Généré automatiquement à partir du nom',
+      },
     },
     {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-      label: 'Logo du broker',
-      admin: {
-        description: 'Logo officiel du broker (format recommandé : PNG)'
-      }
+      required: true,
+      label: 'Logo (PNG, SVG…)',
     },
     {
-      name:"referralLink",
-      type:"text",
-      label:"Lien d\'affiliation",
-      admin: {
-        description: "Lien d'affiliation pour le suivi des inscriptions"
-      }
+      name: 'primaryColor',
+      type: 'text',
+      label: 'Couleur principale',
+      admin: { description: 'Ex. : #6AAE22 ou bg-[#6AAE22]' },
+    },
+
+    /* Liens ---------------------------------------------------------- */
+    {
+      name: 'website',
+      type: 'text',
+      label: 'Site officiel',
     },
     {
-      name: "color",
-      type: "text",
-      label: "Couleur du broker",
-      admin: {
-        description: "Couleur principale du broker (format tailwind, ex: bg-[#6AAE22])"
-      }
+      name: 'affiliateLink',
+      type: 'text',
+      label: 'Lien d’affiliation',
     },
+
+    /* Catégorisation ------------------------------------------------- */
     {
       name: 'category',
       type: 'select',
       required: true,
       options: [
-        { label: 'Assurance-vie', value: 'assurance-vie' },
-        { label: 'Bourse', value: 'bourse' },
-        { label: 'Crypto-monnaies', value: 'crypto-monnaies' },
-        { label: 'Immobilier', value: 'immobilier' },
-        { label: 'Retraite', value: 'retraite' },
-        { label: 'Trading', value: 'trading' },
-        { label: 'Autre', value: 'autre' }
+        { label: 'Assurance-vie',       value: 'assurance-vie' },
+        { label: 'Bourse',              value: 'bourse' },
+        { label: 'Crypto-monnaies',     value: 'crypto-monnaies' },
+        { label: 'Immobilier',          value: 'immobilier' },
+        { label: 'Retraite',            value: 'retraite' },
+        { label: 'Trading',             value: 'trading' },
+        { label: 'Autre',               value: 'autre' },
       ],
-      admin: {
-        description: 'Catégorie principale du broker'
-      }
     },
-    
     {
-      name: 'description',
-      type: 'richText',
-      label: 'Description du broker',
-      admin: {
-        description: 'Description détaillée du broker et ses avantages'
-      }
+      name: 'experienceLevel',
+      type: 'select',
+      defaultValue: 'Débutant',
+      label: 'Niveau d’expérience',
+      options: [
+        { label: 'Débutant',      value: 'Débutant' },
+        { label: 'Intermédiaire', value: 'Intermédiaire' },
+        { label: 'Expert',        value: 'Expert' },
+      ],
     },
+
+    /* Chiffres clés -------------------------------------------------- */
     {
       name: 'rating',
       type: 'number',
+      label: 'Note (0 – 5)',
       min: 0,
       max: 5,
-      label: 'Note globale',
+      defaultValue: 0,
       admin: {
-        description: 'Note générale du broker (de 0 à 5)'
-      }
+        step: 0.1,
+      },
     },
     {
       name: 'minimumDeposit',
       type: 'number',
-      label: 'Dépôt minimum',
-      admin: {
-        description: 'Montant minimum requis pour ouvrir un compte (en €)'
-      }
+      label: 'Dépôt minimum (€)',
     },
     {
       name: 'tradingFees',
       type: 'number',
-      label: 'Frais de trading',
-      admin: {
-        description: 'Frais de trading moyens par transaction (en %)'
-      }
+      label: 'Frais de trading (%)',
     },
+
+    /* Description riche ---------------------------------------------- */
+    {
+      name: 'description',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+          BoldFeature(),
+          ItalicFeature(),
+          UnderlineFeature(),
+          LinkFeature(),
+          ParagraphFeature(),
+          HorizontalRuleFeature(),
+        ],
+      }),
+    },
+
+    /* Facettes ------------------------------------------------------- */
     {
       name: 'tradingInstruments',
       type: 'select',
       hasMany: true,
-      label: 'Instruments de trading',
+      label: 'Instruments proposés',
       options: [
-        'Actions',
-        'Forex',
-        'Crypto',
-        'CFDs',
-        'ETFs',
-        'Options',
-        'Futures'
+        { label: 'Actions',  value: 'actions' },
+        { label: 'Forex',    value: 'forex' },
+        { label: 'Crypto',   value: 'crypto' },
+        { label: 'CFDs',     value: 'cfds' },
+        { label: 'ETFs',     value: 'etfs' },
+        { label: 'Options',  value: 'options' },
+        { label: 'Futures',  value: 'futures' },
       ],
-      admin: {
-        description: 'Types d\'instruments financiers disponibles'
-      }
     },
     {
       name: 'features',
@@ -125,46 +170,13 @@ export const Brokers: CollectionConfig = {
       hasMany: true,
       label: 'Fonctionnalités',
       options: [
-        'Interface Simple',
-        'Trading Mobile',
-        'Copy Trading',
-        'Formation',
-        'Support 24/7',
-        'Trading API'
+        { label: 'Interface simple',    value: 'interface-simple' },
+        { label: 'Application mobile',  value: 'mobile' },
+        { label: 'Copy-trading',        value: 'copy-trading' },
+        { label: 'Formation incluse',   value: 'education' },
+        { label: 'Support 24/7',        value: 'support-247' },
+        { label: 'API de trading',      value: 'api' },
       ],
-      admin: {
-        description: 'Fonctionnalités principales offertes par le broker'
-      }
-    },
-    {
-      name: 'experienceLevel',
-      type: 'select',
-      label: 'Niveau d\'expérience',
-      options: [
-        'Débutant',
-        'Intermédiaire',
-        'Expert'
-      ],
-      admin: {
-        description: 'Niveau d\'expérience recommandé pour ce broker'
-      }
-    },
-    {
-      name: 'affiliateLink',
-      type: 'text',
-      label: 'Lien d\'affiliation',
-      admin: {
-        description: 'Lien de parrainage pour le suivi des inscriptions'
-      }
-    },
-    {
-      name: 'isActive',
-      type: 'checkbox',
-      defaultValue: true,
-      label: 'Broker actif',
-      admin: {
-        description: 'Activer/désactiver l\'affichage du broker sur le site'
-      }
     },
     {
       name: 'tradingStyles',
@@ -172,14 +184,35 @@ export const Brokers: CollectionConfig = {
       hasMany: true,
       label: 'Styles de trading',
       options: [
-        { label: 'Day Trading',   value: 'Day Trading'   },
-        { label: 'Swing Trading', value: 'Swing Trading' },
-        { label: 'Long Terme',    value: 'Long Terme'    },
-        { label: 'Scalping',      value: 'Scalping'      },
+        { label: 'Day-Trading',  value: 'day' },
+        { label: 'Swing-Trading',value: 'swing' },
+        { label: 'Long-terme',   value: 'long' },
+        { label: 'Scalping',     value: 'scalping' },
       ],
-    admin: {
-      description: 'Styles de trading supportés par le broker',
-    }
+    },
+
+    /* Status --------------------------------------------------------- */
+    {
+      name: 'isActive',
+      type: 'checkbox',
+      label: 'Actif (affiché sur le site)',
+      defaultValue: true,
+    },
+  ],
+
+  /* ─────────── 4. Hooks ─────────── */
+  hooks: {
+    beforeValidate: [
+      ({ data, originalDoc }) => {
+        // Slug auto → si création ou si le nom a changé
+        if (data?.name && (!originalDoc?.slug || data.name !== originalDoc.name)) {
+          return {
+            ...data,
+            slug: slugify(data.name, { lower: true, strict: true }),
+          }
+        }
+        return data
+      },
+    ],
   },
-  ]
 }
